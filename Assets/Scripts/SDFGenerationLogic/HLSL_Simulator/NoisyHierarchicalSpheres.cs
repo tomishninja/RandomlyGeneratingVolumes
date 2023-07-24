@@ -13,12 +13,13 @@ namespace hLSL_Simulator
         float NoiseMultipler = 1f;
         private ShapeHandeler shapes;
 
-        public NoisyHierarchicalSpheres(ref ShapeHandeler shapes, ref HashingMatrix hashingMatrix, float SDFTollerance = 0, int randomCoords = 8)
+        public NoisyHierarchicalSpheres(ref ShapeHandeler shapes, ref HashingMatrix hashingMatrix, float SDFTollerance = 0, int randomCoords = 8, float noiseMultipler = 1f)
         {
             this.randomCoords = randomCoords;
             this.shapes = shapes;
             this.hashingMatrix = hashingMatrix;
             this.sDFTollerance = SDFTollerance;
+            NoiseMultipler = noiseMultipler;
         }
 
         public bool CheckSDFFirstLayer(Vector3 pos)

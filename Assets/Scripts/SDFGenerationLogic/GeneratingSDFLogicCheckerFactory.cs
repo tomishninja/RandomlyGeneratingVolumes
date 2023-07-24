@@ -12,6 +12,9 @@ public class GeneratingSDFLogicCheckerFactory
     [SerializeField] ParametersForAddIngSDFs parametersForAddingSDFs;
 
     [Header("General Verification Checkers")]
+    [SerializeField] float SDFTolerance = 0.01f;
+    [SerializeField] float NoiseMultiplier = 0.001f;
+    [SerializeField] int randomCords = 8;
     hLSL_Simulator.NoisyHierarchicalSpheres shaderSimulator;
     LayerManager layerManager = null;
     [SerializeField] float cordOffset = 0.5f;
@@ -32,7 +35,7 @@ public class GeneratingSDFLogicCheckerFactory
 
     public void Init(ref profiler.AbstractProfiler dataProfiler, ref ShapeHandeler shapes, ref HashingMatrix hasingMaxtrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
     {
-        this.shaderSimulator = new hLSL_Simulator.NoisyHierarchicalSpheres(ref shapes, ref hasingMaxtrix);
+        this.shaderSimulator = new hLSL_Simulator.NoisyHierarchicalSpheres(ref shapes, ref hasingMaxtrix, SDFTolerance, randomCords, NoiseMultiplier);
         this.dataProfiler = dataProfiler;
         randomChildGeneratorFactory = new RandomChildGeneratorFactory();
         this.conditionDetails = conditionDetails;

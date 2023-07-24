@@ -710,11 +710,14 @@ MonoBehaviour:
   builder:
     factory:
       parametersForAddingSDFs:
-        sphereTollerance: 0
+        sphereTollerance: 0.01
         showOutputsOfVolumes: 0
         amountOfTimesAddingTryingToFitSDFDataBeforeHigherException: 100
         maxiumSizeThatObjectsCanAccululateWithinTheVolume: 0.3
         AmountOfRandomPointsToGenerate: 1
+      SDFTolerance: 0.01
+      NoiseMultiplier: 1
+      randomCords: 8
       cordOffset: 0.5
       radiusOfOuterSphere: 0.5
       amountToShrink: 0.05

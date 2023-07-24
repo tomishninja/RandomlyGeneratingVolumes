@@ -75,7 +75,7 @@ Material:
     - _MinRadialOfHalo: 0.15
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 0.5
+    - _NoiseSuppression: 1
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -90,7 +90,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HashLineA: {r: 319.06833, g: 6.942154, b: 280.36597, a: 0}
-    - _HashLineB: {r: 209.12543, g: 873.7899, b: 116.89438, a: 0}
-    - _HashLineC: {r: 617.18555, g: 385.8363, b: 135.25809, a: 0}
+    - _HashLineA: {r: 872.81885, g: 321.20862, b: 406.2887, a: 0}
+    - _HashLineB: {r: 269.4221, g: 682.5245, b: 905.82336, a: 0}
+    - _HashLineC: {r: 140.43797, g: 747.9131, b: 183.39111, a: 0}
   m_BuildTextureStacks: []
