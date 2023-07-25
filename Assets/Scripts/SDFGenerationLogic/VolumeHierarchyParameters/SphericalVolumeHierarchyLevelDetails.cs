@@ -49,4 +49,56 @@ public class SphericalVolumeHierarchyLevelDetails
     {
         return this.amountOfOuters + this.amountOfCountables + this.amountOfContainers + this.amountOfNotCountables;
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        SphericalVolumeHierarchyLevelDetails other = (SphericalVolumeHierarchyLevelDetails)obj;
+
+        // Compare amount fields
+        if (amountOfOuters != other.amountOfOuters ||
+            amountOfCountables != other.amountOfCountables ||
+            amountOfContainers != other.amountOfContainers ||
+            amountOfNotCountables != other.amountOfNotCountables)
+        {
+            return false;
+        }
+
+        // Compare OuterObjectInputInfo
+        if (!OuterObjectInputInfo.Equals(other.OuterObjectInputInfo))
+            return false;
+
+        // Compare CountableInputInformation
+        if (!CountableInputInformation.Equals(other.CountableInputInformation))
+            return false;
+
+        // Compare ContainableInputInformation
+        if (!ContainableInputInformation.Equals(other.ContainableInputInformation))
+            return false;
+
+        // Compare NotCountableInputInformation
+        if (!NotCountableInputInformation.Equals(other.NotCountableInputInformation))
+            return false;
+
+        return true;
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = 17;
+        hash = hash * 23 + amountOfOuters.GetHashCode();
+        hash = hash * 23 + amountOfCountables.GetHashCode();
+        hash = hash * 23 + amountOfContainers.GetHashCode();
+        hash = hash * 23 + amountOfNotCountables.GetHashCode();
+
+        // Combine the hash codes of the VolumetricSphereArtifact objects
+        hash = hash * 23 + OuterObjectInputInfo.GetHashCode();
+        hash = hash * 23 + CountableInputInformation.GetHashCode();
+        hash = hash * 23 + ContainableInputInformation.GetHashCode();
+        hash = hash * 23 + NotCountableInputInformation.GetHashCode();
+
+        return hash;
+    }
 }
