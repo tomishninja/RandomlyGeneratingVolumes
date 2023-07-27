@@ -66,6 +66,28 @@ namespace GenoratingRandomSDF
             this.currentShapeIndex = 0;
         }
 
+        /// <summary>
+        /// Removes all of the children from the currently selected element
+        /// </summary>
+        internal void RemoveChildrenFromCurrent()
+        {
+            for(int index = 0; index < CurrentShape.Children.Length; index++)
+            {
+                if (CurrentShape.Children[index] != null && !CurrentShape.Children[index].IsDefault())
+                {
+                    for(int i = 0; i < Shapes.Length; i++)
+                    {
+                        if (this.Shapes[i] != null && this.Shapes[i].Equals(CurrentShape.Children[index]))
+                        {
+                            this.Shapes[i] = null;
+                        }
+                    }
+                }
+            }
+
+            CurrentShape.Children = new HierachicalObjects[CurrentShape.Children.Length];
+        }
+
         internal void Empty()
         {
             if (this.Shapes != null && currentShapeIndex >= 0 && currentShapeIndex < Shapes.Length && Shapes[currentShapeIndex].Children != null)

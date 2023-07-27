@@ -40,10 +40,13 @@ public abstract class AbstractGeometricShape
     public override bool Equals(object obj)
     {
         if (obj == null) return false;
-        if (!(obj.GetType() == typeof(AbstractGeometricShape))) return false;
+        if (!(obj is AbstractGeometricShape)) return false;
+
         AbstractGeometricShape other = (AbstractGeometricShape)obj;
+
         if (other.positon != this.positon) return false;
         if ((int)(other.radius * 1000.0) != (int)(this.radius * 1000.0)) return false;
+
         return true;
     }
 }

@@ -30,18 +30,25 @@ namespace GenoratingRandomSDF
                 try
                 {
                     int itteration = 0;
+                    int index = 0;
 
                     for (; itteration < shapes.CurrentShape.Children.Length; itteration++)
                     {
-                        int index = 0;
 
                         // Work out where we should be in the shape array
                         if (shapes.CurrentShape.Children[itteration] == null || shapes.CurrentShape.Children[itteration].IsDefault())
                         {
                             for (; index < shapes.Length; index++)
                             {
-                                if (shapes.Get(index) == null || shapes.Get(index).IsDefault())
-                                    break;
+                                try
+                                {
+                                    if (shapes.Get(index) == null || shapes.Get(index).IsDefault())
+                                        break;
+                                }
+                                catch (System.Exception ex)
+                                {
+                                    Debug.LogError(ex.Message + "\n" + ex.StackTrace);
+                                }
                             }
                         }
                         else
@@ -65,8 +72,9 @@ namespace GenoratingRandomSDF
                         shape.color = currentLevel.CountableColor;
 
                         shape.Children = new HierachicalObjects[0];
-
+                        
                         shapes.Set(index, shape);
+                        
                     }
 
                     // make sure the volumes for this set are ok or else repete the process
@@ -77,8 +85,8 @@ namespace GenoratingRandomSDF
                 {
                     dataProfiler.Increment(DataGenerationDataProfiler.COULD_NOT_FIT_ALL_OBJECTS_IN_TIME);
 
-                    //
-                    shapes.Empty();
+
+                    shapes.RemoveChildrenFromCurrent();
 
                     // the random generator is stuggling to fit the current item
                     // this likly means a earlier one is in its road so we need to start again
@@ -100,13 +108,11 @@ namespace GenoratingRandomSDF
                     Debug.LogError(ex.Message + "\n" + ex.StackTrace);
 
                     dataProfiler.Increment(DataGenerationDataProfiler.UNEXPECTED_ERROR);
-
-                    if (shapes.CurrentShape.Children != null)
-                        shapes.CurrentShape.Children = new HierachicalObjects[shapes.CurrentShape.Children.Length];
-                    else
-                        shapes.CurrentShape.Children = new HierachicalObjects[0];
+                    
+                    shapes.RemoveChildrenFromCurrent();
 
                     // This is normally caused by a unforseen error so it it happens I want to get out of this loop as fast as possible
+                    throw new System.Exception("Found a Unexpected erorr: " + ex.Message);
                 }
             } while (failed);
 
