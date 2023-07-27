@@ -32,8 +32,7 @@ public class StudyGenerationPlanner
     // Helper Classes
     ItterationOrderHandeler<string> ConditionPermutationsHandeler = null;
     ItterationOrderHandeler<SphericalVolumeHierarchyLevelDetails> LevelPermutationsHandeler = null;
-
-    // Obsolute code that needs to be removed
+    
     [SerializeField] SphericalVolumeHierarchyLevelDetails[] levelDetails;
     SphericalVolumeHierarchyLevelDetails[] PermutatedlevelDetails;
     public SphericalVolumeHierarchyLevelDetails[] LevelDetails { get => levelDetails; }
@@ -174,5 +173,28 @@ public class StudyGenerationPlanner
 
         // Get the first set of permutated level details
         PermutatedlevelDetails = LevelPermutationsHandeler.Get(permutationrepeatIndex);
+    }
+
+    public SphericalVolumeHierarchyLevelDetails[] GetAllConditionDetailsRelatingTo(int index)
+    {
+        if (index < 0 || index >= levelDetails.Length)
+        {
+            return null;
+        }
+
+        SphericalVolumeHierarchyLevelDetails baseLevelDetails = this.levelDetails[index];
+
+        // loop though the objects until a match is found 
+        for (int i = 0; i < PermutatedlevelDetails.Length; i++)
+        {
+            if (baseLevelDetails.Equals(PermutatedlevelDetails[i]))
+            {
+                return new SphericalVolumeHierarchyLevelDetails[] { baseLevelDetails, PermutatedlevelDetails[i] };
+            }
+        }
+
+        // did not find the equalivilant so returned null
+        return null;
+
     }
 }

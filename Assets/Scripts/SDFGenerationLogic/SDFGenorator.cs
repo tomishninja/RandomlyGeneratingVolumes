@@ -101,11 +101,11 @@ namespace GenoratingRandomSDF
                     {
                         currentSubProcess = statsForErrorHandeling.AddSDFsFailed();
                     }
-                    /*catch (Exception)
+                    catch (Exception)
                     {
                         // Throws a exception to the next object on the stack
                         statsForErrorHandeling.AddSDFTriggeredAnUnknownError();
-                    }*/
+                    }
                 }
                 else if (currentSubProcess == 1)
                 {
@@ -211,6 +211,8 @@ namespace GenoratingRandomSDF
 
                     // reset the indexs for the conditions
                     this.conditionDetails.GetReadyForNextParticipant();
+
+                    this.StudyDesignOutputIndex = 0;
                 }
                 else
                 {

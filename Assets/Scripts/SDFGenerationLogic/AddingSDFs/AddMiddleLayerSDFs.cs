@@ -27,13 +27,7 @@ namespace GenoratingRandomSDF
             trackingVariables.AmountOfCountablesInsideAnother = 0;
             int AmountOfNotCountables = currentLevel.AmountOfNotCountables;
 
-            if ((currentLevel.AmountOfOuters + currentLevel.AmountOfContainers + currentLevel.AmountOfCountables) == 27)
-            {
-                Debug.Log("27");
-            }
-
-            Debug.Log("Current Level: " + (currentLevel.AmountOfOuters + currentLevel.AmountOfContainers + currentLevel.AmountOfCountables));
-
+            // set the children of the parent object
             shapes.CurrentShape.Children = new HierachicalObjects[trackingVariables.AmountOfContainers + AmountOfCountablesLeftToCount + AmountOfNotCountables];
 
             // Determine where to start in the array
@@ -83,7 +77,7 @@ namespace GenoratingRandomSDF
                         return -1;
                     }
                 }
-            } while (CompleteAmountOfChildren >= currentLevel.AmountOfCountables);
+            } while (CompleteAmountOfChildren >= currentLevel.AmountOfCountables * currentLevel.ContainableAmountOfChildren.min && CompleteAmountOfChildren < currentLevel.AmountOfCountables * currentLevel.ContainableAmountOfChildren.max);
 
             do
             {
@@ -140,6 +134,11 @@ namespace GenoratingRandomSDF
                         tempArr[i] = shapes.CurrentShape.Children[i];
                     }
                     shapes.CurrentShape.Children = tempArr;
+
+                    if (shapes.CurrentShape.Children.Length + CompleteAmountOfChildren + 1 != shapes.Length)
+                    {
+                        Debug.LogError("Wrong Amount Of Shapes" + shapes.Length);
+                    }
 
                     int endOfNextLoop = itteration + AmountOfCountablesLeftToCount;
                     // add the required amount of the rest of them with coutable values

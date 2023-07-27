@@ -28,4 +28,19 @@ public class MinAndMaxFloat
             this._min = max;
         }
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+
+        MinAndMaxFloat other = (MinAndMaxFloat)obj;
+
+        return other.min == this.min && other.max == this.max;
+    }
+
+    public override int GetHashCode()
+    {
+        return min.GetHashCode() * max.GetHashCode();
+    }
 }

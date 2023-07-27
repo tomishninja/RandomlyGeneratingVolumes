@@ -3,6 +3,11 @@ using UnityEngine;
 [System.Serializable]
 public class JSONFileReaderWriter<T> : FileReaderWriter<T>
 {
+    public JSONFileReaderWriter(string pathToFile)
+    {
+        this.pathToFile = pathToFile;
+    }
+
     public override T ReadFile()
     {
         string input = System.IO.File.ReadAllText(pathToFile);
