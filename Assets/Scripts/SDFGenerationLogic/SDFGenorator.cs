@@ -211,6 +211,8 @@ namespace GenoratingRandomSDF
 
                     // reset the indexs for the conditions
                     this.conditionDetails.GetReadyForNextParticipant();
+
+                    this.StudyDesignOutputIndex = 0;
                 }
                 else
                 {
