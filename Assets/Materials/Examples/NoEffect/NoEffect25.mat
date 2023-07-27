@@ -72,7 +72,7 @@ Material:
     - _MinDistanceForStep: 0.01
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 0.5
+    - _NoiseSuppression: 1
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -92,7 +92,7 @@ Material:
     - _GridDimentions: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceCenter: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceDimentions: {r: 0, g: 0, b: 0, a: 0}
-    - _HashLineA: {r: 466.77893, g: 288.4598, b: 987.1615, a: 0}
-    - _HashLineB: {r: 18.06927, g: 175.24792, b: 146.71994, a: 0}
-    - _HashLineC: {r: 576.7555, g: 139.3354, b: 722.3535, a: 0}
+    - _HashLineA: {r: 71.59675, g: 489.222, b: 393.71152, a: 0}
+    - _HashLineB: {r: 938.00806, g: 44.97302, b: 520.0644, a: 0}
+    - _HashLineC: {r: 589.1359, g: 267.11777, b: 911.09595, a: 0}
   m_BuildTextureStacks: []

@@ -72,7 +72,7 @@ Material:
     - _MinDistanceForStep: 0.01
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 0.5
+    - _NoiseSuppression: 1
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -90,9 +90,9 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HashLineA: {r: 949.25977, g: 245.34229, b: 9.057404, a: 0}
-    - _HashLineB: {r: 264.83563, g: 185.4334, b: 61.76532, a: 0}
-    - _HashLineC: {r: 956.0059, g: 794.00037, b: 817.4121, a: 0}
+    - _HashLineA: {r: 142.75768, g: 755.22815, b: 512.33844, a: 0}
+    - _HashLineB: {r: 407.57245, g: 240.98447, b: 392.59296, a: 0}
+    - _HashLineC: {r: 350.47916, g: 442.5549, b: 692.28845, a: 0}
     - _StippleHashLineA: {r: 127.1, g: 311.7, b: 74.7, a: 1}
     - _StippleHashLineB: {r: 269.5, g: 183.3, b: 246.1, a: 1}
     - _StippleHashLineC: {r: 113.5, g: 271.9, b: 124.6, a: 1}
