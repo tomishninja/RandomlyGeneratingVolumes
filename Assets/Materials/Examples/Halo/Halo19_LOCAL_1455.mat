@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Halo21
-  m_Shader: {fileID: 4800000, guid: 56dcbe1f2dc54c04f99fdbb70774cef2, type: 3}
+  m_Name: Halo19
+  m_Shader: {fileID: 4800000, guid: db1506dee99ed8142b1aa4906542236c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -88,13 +88,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-<<<<<<< HEAD
-    - _HashLineA: {r: 443.52585, g: 926.95856, b: 368.59204, a: 0}
-    - _HashLineB: {r: 103.86397, g: 813.6934, b: 405.24417, a: 0}
-    - _HashLineC: {r: 461.71814, g: 658.9835, b: 753.05817, a: 0}
-=======
-    - _HashLineA: {r: 219.9687, g: 321.65805, b: 454.1815, a: 0}
-    - _HashLineB: {r: 750.46466, g: 878.2947, b: 279.06708, a: 0}
-    - _HashLineC: {r: 537.39746, g: 238.89044, b: 518.67145, a: 0}
->>>>>>> 408025ad521911df5c3ff0116a83343da937415c
+    - _HashLineA: {r: 142.5046, g: 816.3407, b: 401.6127, a: 0}
+    - _HashLineB: {r: 915.6253, g: 686.2366, b: 640.16144, a: 0}
+    - _HashLineC: {r: 270.7174, g: 142.71022, b: 798.0788, a: 0}
   m_BuildTextureStacks: []

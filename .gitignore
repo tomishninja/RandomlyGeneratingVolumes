@@ -74,3 +74,23 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Materials/Examples/Halo/Halo19.mat
+Assets/Materials/Examples/Halo/Halo21.mat
+Assets/Materials/Examples/Halo/Halo23.mat
+Assets/Materials/Examples/Halo/Halo25.mat
+Assets/Materials/Examples/Halo/Halo27.mat
+Assets/Materials/Examples/Hatching/Hatching19.mat
+Assets/Materials/Examples/Hatching/Hatching21.mat
+Assets/Materials/Examples/Hatching/Hatching23.mat
+Assets/Materials/Examples/Hatching/Hatching25.mat
+Assets/Materials/Examples/Hatching/Hatching27.mat
+Assets/Materials/Examples/NoEffect/NoEffect19.mat
+Assets/Materials/Examples/NoEffect/NoEffect21.mat
+Assets/Materials/Examples/NoEffect/NoEffect23.mat
+Assets/Materials/Examples/NoEffect/NoEffect25.mat
+Assets/Materials/Examples/NoEffect/NoEffect27.mat
+Assets/Materials/Examples/Stippling/Stippling19.mat
+Assets/Materials/Examples/Stippling/Stippling21.mat
+Assets/Materials/Examples/Stippling/Stippling23.mat
+Assets/Materials/Examples/Stippling/Stippling25.mat
+Assets/Materials/Examples/Stippling/Stippling27.mat
