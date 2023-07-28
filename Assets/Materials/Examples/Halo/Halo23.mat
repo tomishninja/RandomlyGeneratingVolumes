@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Halo23
   m_Shader: {fileID: 4800000, guid: cf31372e5e8071a4a89cdf8af6c98a79, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55,6 +56,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _ColorThreshold: 1.41
@@ -73,7 +75,7 @@ Material:
     - _MinRadialOfHalo: 0.15
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 0.5
+    - _NoiseSuppression: 1
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -88,13 +90,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-<<<<<<< HEAD
-    - _HashLineA: {r: 791.9653, g: 614.54114, b: 63.57432, a: 0}
-    - _HashLineB: {r: 36.201122, g: 324.31497, b: 827.7345, a: 0}
-    - _HashLineC: {r: 573.87274, g: 286.4007, b: 419.41446, a: 0}
-=======
-    - _HashLineA: {r: 349.24545, g: 397.1073, b: 869.9268, a: 0}
-    - _HashLineB: {r: 687.0672, g: 455.66232, b: 471.19598, a: 0}
-    - _HashLineC: {r: 133.93332, g: 762.4971, b: 810.5903, a: 0}
->>>>>>> 408025ad521911df5c3ff0116a83343da937415c
+    - _HashLineA: {r: 819.32996, g: 112.70465, b: 933.6419, a: 0}
+    - _HashLineB: {r: 800.67145, g: 712.95746, b: 235.2244, a: 0}
+    - _HashLineC: {r: 85.18935, g: 540.45386, b: 60.544617, a: 0}
   m_BuildTextureStacks: []
