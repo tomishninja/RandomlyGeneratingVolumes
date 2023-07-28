@@ -46,7 +46,7 @@ namespace GenoratingRandomSDF
         public SphericalVolumeHierarchyLevelDetails CurrentLevel { get => conditionDetails.CurrentItteration; }
 
         public SDFGenorator(ref StudyGenerationPlanner conditionDetails, ref AbstractProfiler profiler, IWriteOutputFile outputFileWriter, ref CheckingStateContoller checkingTheVolumeController, ref StateControllerForAddingSDFs addingSDFController, ref HashingMatrix hashingMatrix,
-            ref ErrorHandelerFacade statsForErrorHandeling,ShapeHandeler shapes, float NoiseMultiplier, IVerification optionalFinalCheck = null, VisulizationAdapter[] visulizations = null) : base()
+            ref ErrorHandelerFacade statsForErrorHandeling, ShapeHandeler shapes, float NoiseMultiplier, IVerification optionalFinalCheck = null, VisulizationAdapter[] visulizations = null) : base()
         {
             this.conditionDetails = conditionDetails;
             this.profiler = profiler;
@@ -55,7 +55,7 @@ namespace GenoratingRandomSDF
             this.addingSDFController = addingSDFController;
             this.statsForErrorHandeling = statsForErrorHandeling;
             this.shapes = shapes;
-            this.visulizations = visulizations; 
+            this.visulizations = visulizations;
 
             this.NoiseMultiplier = NoiseMultiplier;
 
@@ -110,9 +110,9 @@ namespace GenoratingRandomSDF
                 else if (currentSubProcess == 1)
                 {
                     currentSubProcess = checkingTheVolumeController.Get().Verify(ref shapes);
-                    Debug.Log(2);
-                    Debug.Log("Current Sub Process : " + currentSubProcess);
-                    Debug.Log("Amount Of Shapes Remaining : " + shapes.AmountOfShapesRemaing);
+                    //Debug.Log(2);
+                    //Debug.Log("Current Sub Process : " + currentSubProcess);
+                    //Debug.Log("Amount Of Shapes Remaining : " + shapes.AmountOfShapesRemaing);
                 }
             }
             else if (currentSubProcess == 2)
@@ -249,8 +249,8 @@ namespace GenoratingRandomSDF
 
         private void WriteStudyDesignToFile()
         {
-            // Write json to file
-            outputFileWriter.WriteToFile(StudyDesign, this.conditionDetails.ParticipantID);
+           // Write json to file
+           outputFileWriter.WriteToFile(StudyDesign, this.conditionDetails.ParticipantID);
 
             // increment the amount of files created
             AmountOfFilesCreated++;
@@ -267,6 +267,7 @@ namespace GenoratingRandomSDF
 
             this.checkingTheVolumeController.Reset();
             this.addingSDFController.SetToOuter();
+            this.addingSDFController.SetCurrentShapeDetails(CurrentLevel);
 
             this.statsForErrorHandeling.Reset();
 

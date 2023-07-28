@@ -2,15 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NoEffect27
   m_Shader: {fileID: 4800000, guid: 3fa2d3848e2fdc846b0a44d934163f26, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,7 +55,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _ColorThreshold: 1.41
@@ -72,7 +70,7 @@ Material:
     - _MinDistanceForStep: 0.01
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 0.5
+    - _NoiseSuppression: 1
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -92,7 +90,7 @@ Material:
     - _GridDimentions: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceCenter: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceDimentions: {r: 0, g: 0, b: 0, a: 0}
-    - _HashLineA: {r: 298.1923, g: 527.2849, b: 873.4759, a: 0}
-    - _HashLineB: {r: 380.8611, g: 526.3607, b: 668.2183, a: 0}
-    - _HashLineC: {r: 978.2476, g: 181.14545, b: 750.67267, a: 0}
+    - _HashLineA: {r: 94.88298, g: 499.83377, b: 691.90985, a: 0}
+    - _HashLineB: {r: 214.24332, g: 550.0762, b: 676.09625, a: 0}
+    - _HashLineC: {r: 837.9699, g: 846.4302, b: 23.967031, a: 0}
   m_BuildTextureStacks: []

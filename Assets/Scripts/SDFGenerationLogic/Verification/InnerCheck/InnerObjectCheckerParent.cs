@@ -71,7 +71,9 @@ namespace GenoratingRandomSDF
                 {
                     // if the above dosn't work then we want to rearrange the whole volume
                     shapes.Empty();
+                    layerManager.SetToOuter();
                     profiler.Increment(DataGenerationDataProfiler.REPLACED_ALL_CHILDREN);
+                    
 
                     Debug.Log("Couldn\'t completly fix volume stucture, making a new one instead");
 
@@ -119,6 +121,7 @@ namespace GenoratingRandomSDF
 
                         // Empty the shape array where needed
                         shapes.Empty();
+                        layerManager.SetToOuter();
                         profiler.Increment(DataGenerationDataProfiler.REPLACED_ALL_CHILDREN);
 
                         errorHandeler.ItterationCheckFailedResetTasks(errorHandeler.amountOfResets);

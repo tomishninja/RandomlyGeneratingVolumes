@@ -42,10 +42,26 @@ namespace fileIO
             // create a text file of the object as a object.
             string json = JsonUtility.ToJson(output, true);
 
-            if (path == null)
+            try
+            {
+                if (path == null)
+                    System.IO.File.WriteAllText(output.participantID + FilePostFix, json);
+                else
+                    System.IO.File.WriteAllText(path + output.participantID + FilePostFix, json);
+            }
+            catch(System.IO.DirectoryNotFoundException ex)
+            {
+                // show the error
+                Debug.LogError(ex.Message + "\n" + ex.StackTrace);
+
+                // communcate what actions are going to be taken
+                Debug.LogError("Default Path is not valid saving file in local directory");
+
+                // take the actions
                 System.IO.File.WriteAllText(output.participantID + FilePostFix, json);
-            else
-                System.IO.File.WriteAllText(path + output.participantID + FilePostFix, json);
+            }
+
+
         }
     }
 }
