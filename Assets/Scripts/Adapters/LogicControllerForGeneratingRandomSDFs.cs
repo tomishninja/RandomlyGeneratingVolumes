@@ -94,6 +94,11 @@ public class LogicControllerForGeneratingRandomSDFs
         profiler.ApplicationStopped();
     }
 
+    public SphericalVolumeHierarchyLevelDetails[] GetConditionDetails()
+    {
+        return conditionDetails.LevelDetails;
+    }
+
     public void ResetSystem()
     {
         this.Init();

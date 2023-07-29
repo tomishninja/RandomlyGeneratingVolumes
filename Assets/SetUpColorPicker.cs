@@ -13,6 +13,7 @@ public class SetUpColorPicker : MonoBehaviour
     [SerializeField] int resolution = 256;
 
     [SerializeField] Vector3 pointInTheVolume = new Vector3(1, 1, 1);
+    [SerializeField] Transform ObjectToUseAsPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,8 @@ public class SetUpColorPicker : MonoBehaviour
         SphereGuideMaterial.SetColor("_Color", GetColorAtPoint(pointInTheVolume));
         VolumeMaterial.SetVector(NameOfRangeFild, pointInTheVolume);
     }
+
+    public Color CurrentColor { get => GetColorAtPoint(pointInTheVolume); }
 
     public static Color GetColorAtPoint(Vector3 point)
     {

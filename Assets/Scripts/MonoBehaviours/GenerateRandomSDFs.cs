@@ -25,6 +25,7 @@ public class GenerateRandomSDFs : MonoBehaviour
     AbstractProfiler profiler = new DataGenerationDataProfiler();
 
     int amountOfFilesCreated = 0;
+
     private int CurrentParticipant { get => startingParticipant + amountOfFilesCreated; }
 
     [SerializeField] DemoVisulizer[] DemoVisulizers;
@@ -89,6 +90,7 @@ public class GenerateRandomSDFs : MonoBehaviour
         // If the main process has finished then we can move onto the next participant
         if (outputFromMainProcess == 1)
         {
+            this.amountOfFilesCreated++;
             screenShot.AttemptToTakeScreenShot(CurrentParticipant, mainLogicOperator.StudyDesignIndex);
         }
     }

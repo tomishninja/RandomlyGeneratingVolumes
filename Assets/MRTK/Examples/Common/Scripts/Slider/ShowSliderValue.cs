@@ -14,8 +14,8 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
         [SerializeField]
         private TextMeshPro textMesh = null;
 
-        [SerializeField] float min = 0;
-        [SerializeField] float max = 1;
+        [SerializeField] public float min = 0;
+        [SerializeField] public float max = 1;
 
         public void OnSliderUpdated(SliderEventData eventData)
         {
