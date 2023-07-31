@@ -60,7 +60,8 @@ using UnityEngine;
                 shapes,
                 NoiseMultiplier,
                 builder.CreateFinalCheckLogic(),
-                DemoVisulizers
+                DemoVisulizers,
+                outputHandelers: builder.BuildOutputFileClasses()
                 );
         }
 

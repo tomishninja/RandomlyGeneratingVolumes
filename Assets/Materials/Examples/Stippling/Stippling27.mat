@@ -90,9 +90,9 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HashLineA: {r: 352.87622, g: 84.94199, b: 965.7116, a: 0}
-    - _HashLineB: {r: 434.8828, g: 23.799423, b: 40.372135, a: 0}
-    - _HashLineC: {r: 967.2549, g: 733.84875, b: 283.8532, a: 0}
+    - _HashLineA: {r: 229.91731, g: 745.4037, b: 266.91833, a: 0}
+    - _HashLineB: {r: 922.29584, g: 851.4067, b: 270.32986, a: 0}
+    - _HashLineC: {r: 986.5719, g: 129.43639, b: 769.2132, a: 0}
     - _StippleHashLineA: {r: 127.1, g: 311.7, b: 74.7, a: 1}
     - _StippleHashLineB: {r: 269.5, g: 183.3, b: 246.1, a: 1}
     - _StippleHashLineC: {r: 113.5, g: 271.9, b: 124.6, a: 1}

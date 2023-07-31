@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GenoratingRandomSDF
 {
-    [SerializeField]
+    [System.Serializable]
     public class SDFGenorator
     {
         // Logic Objects
@@ -42,11 +42,14 @@ namespace GenoratingRandomSDF
 
         VisulizationAdapter[] visulizations;
 
+        IProcess[] outputHandelers;
+        int outputHandelersCount = 0;
+
         public int StudyDesignIndex { get => StudyDesignOutputIndex; }
         public SphericalVolumeHierarchyLevelDetails CurrentLevel { get => conditionDetails.CurrentItteration; }
 
         public SDFGenorator(ref StudyGenerationPlanner conditionDetails, ref AbstractProfiler profiler, IWriteOutputFile outputFileWriter, ref CheckingStateContoller checkingTheVolumeController, ref StateControllerForAddingSDFs addingSDFController, ref HashingMatrix hashingMatrix,
-            ref ErrorHandelerFacade statsForErrorHandeling, ShapeHandeler shapes, float NoiseMultiplier, IVerification optionalFinalCheck = null, VisulizationAdapter[] visulizations = null) : base()
+            ref ErrorHandelerFacade statsForErrorHandeling, ShapeHandeler shapes, float NoiseMultiplier, IVerification optionalFinalCheck = null, VisulizationAdapter[] visulizations = null, IProcess[] outputHandelers = null) : base()
         {
             this.conditionDetails = conditionDetails;
             this.profiler = profiler;
@@ -56,6 +59,7 @@ namespace GenoratingRandomSDF
             this.statsForErrorHandeling = statsForErrorHandeling;
             this.shapes = shapes;
             this.visulizations = visulizations;
+            this.outputHandelers = outputHandelers;
 
             this.NoiseMultiplier = NoiseMultiplier;
 
@@ -123,78 +127,50 @@ namespace GenoratingRandomSDF
             }
             else if (this.currentSubProcess < 0)
             {
-                // create the final output
-                StudyDetailsForOutput output = new StudyDetailsForOutput();
-                Debug.Log(4);
-
-                if (visulizations != null)
+                if (outputHandelers != null && outputHandelersCount < outputHandelers.Length)
                 {
-                    // update the visulizations
-                    for (int index = 0; index < visulizations.Length; index++)
+                    outputHandelers[outputHandelersCount].processes();
+                }
+                else
+                {
+                    // create the final output
+                    StudyDetailsForOutput output = new StudyDetailsForOutput();
+                    Debug.Log(4);
+
+                    if (visulizations != null)
                     {
-                        // Set up the visulization
-                        visulizations[index].SetUpVisulization(shapes, this.conditionDetails.GetCurrentCondition());
+                        // update the visulizations
+                        for (int index = 0; index < visulizations.Length; index++)
+                        {
+                            // Set up the visulization
+                            visulizations[index].SetUpVisulization(shapes, this.conditionDetails.GetCurrentCondition());
 
-                        // Set up the hashing matrix
-                        hashingMatrix.SetInShader(visulizations[index].GetMaterial(), "_HashLineA", "_HashLineB", "_HashLineC");
+                            // Set up the hashing matrix
+                            hashingMatrix.SetInShader(visulizations[index].GetMaterial(), "_HashLineA", "_HashLineB", "_HashLineC");
 
-                        // Set up the noise for the visulization
-                        output.SetNoiseMultiper(visulizations[index].GetMaterial());
+                            // Set up the noise for the visulization
+                            output.SetNoiseMultiper(visulizations[index].GetMaterial());
+                        }
                     }
-                }
 
-                output.shapeDetails = this.shapes.GetShapesAsArray();
+                    output.shapeDetails = this.shapes.GetShapesAsArray();
 
-                output.answers = AnswersFromGeneration.GenerateAnswers(this.shapes.GetShapesAsArray(), this.conditionDetails.CurrentItteration, this.addingSDFController.GetTheAmountOfinners(), this.addingSDFController.GetTheAmountOfContained(), this.conditionDetails.CurrentItteration.AmountOfContainers, this.conditionDetails.CurrentItteration.AmountOfOuters, this.conditionDetails.CurrentItteration.AmountOfCountables);
+                    output.answers = AnswersFromGeneration.GenerateAnswers(this.shapes.GetShapesAsArray(), this.conditionDetails.CurrentItteration, this.addingSDFController.GetTheAmountOfinners(), this.addingSDFController.GetTheAmountOfContained(), this.conditionDetails.CurrentItteration.AmountOfContainers, this.conditionDetails.CurrentItteration.AmountOfOuters, this.conditionDetails.CurrentItteration.AmountOfCountables);
 
-                output.hash = hashingMatrix.Clone();
-                output.NoiseMulitiplier = this.NoiseMultiplier;
-                output.ConditionName = this.conditionDetails.GetCurrentCondition();
+                    output.hash = hashingMatrix.Clone();
+                    output.NoiseMulitiplier = this.NoiseMultiplier;
+                    output.ConditionName = this.conditionDetails.GetCurrentCondition();
 
-                // Printout the answers
-                Debug.Log(output.ToJSON());
-                
-                // save the logic files
-                try
-                {
-                    // Print out these answers this can be handy for allowing the system to shut down
-                    this.profiler.StopTimer();
-                    this.profiler.WriteProiferDataAsCSV(System.IO.Path.Combine(Application.dataPath, DataGenerationDataProfiler.NAME_OF_LOGIC_OUTPUT_FILE));
-                }
-                catch (DirectoryNotFoundException ex)
-                {
-                    Debug.LogError(ex.Message + "\n" + ex.StackTrace);
-                }
-                
+                    // Printout the answers
+                    Debug.Log(output.ToJSON());
 
-                // Allow for a new amount of children to end once this is successful
-                RandomChildrenAllocationSystem allocationSystem = this.randomChildGeneratorFactory.GetChildGenoratorFor(this.conditionDetails.CurrentItteration.ContainableAmountOfChildren.min, this.conditionDetails.CurrentItteration.ContainableAmountOfChildren.max, this.conditionDetails.CurrentItteration.AmountOfContainers);
-            allocationSystem.DepersistsRandomValue();
 
-                this.statsForErrorHandeling.Reset();
 
-                // 
-                this.StudyDesign[StudyDesignOutputIndex] = output;
-                this.StudyDesignOutputIndex++;
-
-                this.profiler.Increment(DataGenerationDataProfiler.SUCCESS);
-
-                // Set stuff up for the next to time the next itteration
-                //participantTimeData = this.AddEndTimesTimeDatabase(participantTimeData);
-                //WriteDictionaryToCSV<string, int>(System.IO.Path.Combine(Application.persistentDataPath, "Participant" + (startingPartcipant + AmountOfFilesCreated) + "IntputTimeData.csv"), this.logicData);
-                //participantTimeData = null;
-
-                // back up the overall time data incase of a accedent
-                //overallTimeData = this.AddEndTimesTimeDatabase(overallTimeData);
-                //WriteDictionaryToCSV<string, float>(System.IO.Path.Combine(Application.persistentDataPath, "OverallTimesTakenToProduceInputData.csv"), overallTimeData);
-
-                // Study design
-                if (this.StudyDesignOutputIndex >= this.StudyDesign.Length)
-                {
-
+                    // save the logic files
                     try
                     {
-                        // Print out these answers
+                        // Print out these answers this can be handy for allowing the system to shut down
+                        this.profiler.StopTimer();
                         this.profiler.WriteProiferDataAsCSV(System.IO.Path.Combine(Application.dataPath, DataGenerationDataProfiler.NAME_OF_LOGIC_OUTPUT_FILE));
                     }
                     catch (DirectoryNotFoundException ex)
@@ -202,32 +178,70 @@ namespace GenoratingRandomSDF
                         Debug.LogError(ex.Message + "\n" + ex.StackTrace);
                     }
 
-                    this.profiler.ClearAndInitProfiler();
 
-                    // write the old file to a file
-                    this.WriteStudyDesignToFile();
-                    // then resart the array that was writen
-                    this.InitalizeStudyDesignArray();
+                    // Allow for a new amount of children to end once this is successful
+                    RandomChildrenAllocationSystem allocationSystem = this.randomChildGeneratorFactory.GetChildGenoratorFor(this.conditionDetails.CurrentItteration.ContainableAmountOfChildren.min, this.conditionDetails.CurrentItteration.ContainableAmountOfChildren.max, this.conditionDetails.CurrentItteration.AmountOfContainers);
+                    allocationSystem.DepersistsRandomValue();
 
-                    // reset the indexs for the conditions
-                    this.conditionDetails.GetReadyForNextParticipant();
+                    this.statsForErrorHandeling.Reset();
 
-                    this.StudyDesignOutputIndex = 0;
+                    // 
+                    this.StudyDesign[StudyDesignOutputIndex] = output;
+                    this.StudyDesignOutputIndex++;
+
+                    this.profiler.Increment(DataGenerationDataProfiler.SUCCESS);
+
+                    // Set stuff up for the next to time the next itteration
+                    //participantTimeData = this.AddEndTimesTimeDatabase(participantTimeData);
+                    //WriteDictionaryToCSV<string, int>(System.IO.Path.Combine(Application.persistentDataPath, "Participant" + (startingPartcipant + AmountOfFilesCreated) + "IntputTimeData.csv"), this.logicData);
+                    //participantTimeData = null;
+
+                    // back up the overall time data incase of a accedent
+                    //overallTimeData = this.AddEndTimesTimeDatabase(overallTimeData);
+                    //WriteDictionaryToCSV<string, float>(System.IO.Path.Combine(Application.persistentDataPath, "OverallTimesTakenToProduceInputData.csv"), overallTimeData);
+
+                    // Study design
+                    if (this.StudyDesignOutputIndex >= this.StudyDesign.Length)
+                    {
+
+                        try
+                        {
+                            // Print out these answers
+                            this.profiler.WriteProiferDataAsCSV(System.IO.Path.Combine(Application.dataPath, DataGenerationDataProfiler.NAME_OF_LOGIC_OUTPUT_FILE));
+                        }
+                        catch (DirectoryNotFoundException ex)
+                        {
+                            Debug.LogError(ex.Message + "\n" + ex.StackTrace);
+                        }
+
+                        this.profiler.ClearAndInitProfiler();
+
+                        // write the old file to a file
+                        this.WriteStudyDesignToFile();
+                        // then resart the array that was writen
+                        this.InitalizeStudyDesignArray();
+
+                        // reset the indexs for the conditions
+                        this.conditionDetails.GetReadyForNextParticipant();
+
+                        this.StudyDesignOutputIndex = 0;
+                    }
+                    else
+                    {
+                        // If we are not reseting the contion details we then want to get the next value
+                        conditionDetails.GetNext();
+                        addingSDFController.SetCurrentShapeDetails(this.conditionDetails.CurrentItteration);
+                    }
+
+                    // get everything ready to do it all again
+                    Reset();
+                    Debug.Log("Reset Activated");
+                    // tells the system next frame to take a image.
+
+                    // Return one to tell the parent system that the visulization will change and to prerform post processing steps, Like phtograhy
+                    return 1;
                 }
-                else
-                {
-                    // If we are not reseting the contion details we then want to get the next value
-                    conditionDetails.GetNext();
-                    addingSDFController.SetCurrentShapeDetails(this.conditionDetails.CurrentItteration);
-                }
-
-                // get everything ready to do it all again
-                Reset();
-                Debug.Log("Reset Activated");
-                // tells the system next frame to take a image.
-
-                // Return one to tell the parent system that the visulization will change and to prerform post processing steps, Like phtograhy
-                return 1;
+                
             }
 
             return 0;
@@ -262,6 +276,7 @@ namespace GenoratingRandomSDF
             // revert all of the values back to thier orignal ones
             currentlevel = 0;
             currentSubProcess = 0;
+            outputHandelersCount = 0;
 
             this.shapes.Reset(this.CountAmountOfRegions());
 

@@ -33,12 +33,29 @@ public class GeneratingSDFLogicCheckerFactory
     [Header("Debug Options")]
     bool showOutputsOfVolumes = false;
 
+    [Header("Mesh Output")]
+    [SerializeField] MeshToUnityObject[] meshToUnityObject;
+    [SerializeField] string PathForMeshFile;
+    [SerializeField] int MeshResulition = 256;
+    private ShapeHandeler shapes;
+
     public void Init(ref profiler.AbstractProfiler dataProfiler, ref ShapeHandeler shapes, ref HashingMatrix hasingMaxtrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
     {
         this.shaderSimulator = new hLSL_Simulator.NoisyHierarchicalSpheres(ref shapes, ref hasingMaxtrix, SDFTolerance, randomCords, NoiseMultiplier);
         this.dataProfiler = dataProfiler;
         randomChildGeneratorFactory = new RandomChildGeneratorFactory();
         this.conditionDetails = conditionDetails;
+        this.shapes = shapes;
+    }
+
+    public virtual MeshOutputManager CreateMeshOutputHandlerClass()
+    {
+        if (meshToUnityObject == null)
+        {
+            meshToUnityObject = new MeshToUnityObject[0];
+        }
+
+        return new MeshOutputManager(ref this.shaderSimulator, PathForMeshFile, ref this.shapes, this.meshToUnityObject, MeshResulition);
     }
 
     public virtual AddLargeSphereToOuter GetAddLargeSphereLogic()

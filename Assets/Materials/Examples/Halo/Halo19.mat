@@ -90,7 +90,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HashLineA: {r: 716.77295, g: 359.25534, b: 229.2836, a: 0}
-    - _HashLineB: {r: 863.73676, g: 247.26692, b: 801.7858, a: 0}
-    - _HashLineC: {r: 808.4877, g: 809.0949, b: 62.834747, a: 0}
+    - _HashLineA: {r: 816.60736, g: 631.4797, b: 22.861006, a: 0}
+    - _HashLineB: {r: 407.9947, g: 690.29016, b: 831.89514, a: 0}
+    - _HashLineC: {r: 144.84848, g: 70.39035, b: 493.9788, a: 0}
   m_BuildTextureStacks: []

@@ -90,4 +90,12 @@ public class GeneratingSDFLogicBuilder
                 return factory.GetNoChecker();
         }
     }
+
+    public IProcess[] BuildOutputFileClasses()
+    {
+        return new IProcess[]
+        {
+            this.factory.CreateMeshOutputHandlerClass()
+        };
+    }
 }

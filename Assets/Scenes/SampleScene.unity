@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &33844388 stripped
@@ -159,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &59110920
@@ -627,6 +629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1001 &356162071
@@ -725,8 +728,16 @@ PrefabInstance:
       value: TouchSliderValueManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081692285079, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
-      propertyPath: useSliderStepDivisions
+      propertyPath: sliderValue
+      value: 0.082
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973523081692285079, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
+      propertyPath: sliderStepDivisions
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973523081692285079, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
+      propertyPath: useSliderStepDivisions
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081692285079, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -874,7 +885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081816255092, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: useSliderStepDivisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081816255092, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -894,7 +905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081910479156, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: useSliderStepDivisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2973523081910479156, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -966,7 +977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2973523082474757946, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: useSliderStepDivisions
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2973523082474757946, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: OnValueUpdated.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -1167,6 +1178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 1
   min: 0
   max: 40
 --- !u!4 &594128265 stripped
@@ -1202,8 +1214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 0
-  max: 40
+  isInt: 1
+  min: 1
+  max: 4
 --- !u!1 &669745333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2973523081910479147, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
@@ -1221,6 +1234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 1
   min: 0
   max: 40
 --- !u!1001 &682547322
@@ -1497,6 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &799059022 stripped
@@ -1516,6 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &860563930
@@ -1935,6 +1951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &906318028 stripped
@@ -1954,6 +1971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!4 &923742570 stripped
@@ -2089,6 +2107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &1228585495 stripped
@@ -2108,6 +2127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &1264777356 stripped
@@ -2127,6 +2147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 1
   min: 0
   max: 40
 --- !u!1 &1267330498 stripped
@@ -2329,6 +2350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &1438459480
@@ -3012,6 +3034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &1993985570 stripped
@@ -3031,6 +3054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &1998993734 stripped
@@ -3050,6 +3074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
 --- !u!1 &2062671718 stripped
@@ -3069,5 +3094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f01af914717c514191ca33e146b609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInt: 0
   min: 0
   max: 1
