@@ -6,8 +6,8 @@ public class MinAndMaxInt
     [SerializeField] private int _min;
     [SerializeField] private int _max;
 
-    public int min { get => _min; }
-    public int max { get => _max; }
+    public int min { get => _min; set => _min = value; }
+    public int max { get => _max; set => _max = value; }
 
     public MinAndMaxInt(int min, int max)
     {

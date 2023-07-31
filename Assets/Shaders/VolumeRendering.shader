@@ -3,7 +3,6 @@ Shader "Unlit/VolumeRendering"
 	Properties
 	{
 		_Volume("Volume", 3D) = "" {}
-		_Intensity("Intensity", Range(1.0, 5.0)) = 1.2
 		_Threshold("Threshold", Range(0.0, 1.0)) = 0.95
 		_min_Range("min_Range", Range(0.0, 1.0)) = 0.01
 		_max_Range("max_Range", Range(0.0, 1.0)) = 0.99
@@ -37,11 +36,8 @@ Shader "Unlit/VolumeRendering"
 					#define AmountOfSegments 6
 					#endif
 
-					//half4 _Color;
-					half4 _Colors[AmountOfSegments];
-					float _Density[AmountOfSegments];
 					sampler3D _Volume;
-					half _Intensity, _Threshold;
+					half _Threshold;
 					half _min_Range, _max_Range;
 					half3 _SliceMin, _SliceMax;
 					float4x4 _AxisRotationMatrix;
@@ -88,8 +84,6 @@ Shader "Unlit/VolumeRendering"
 						float3 axis = mul(_AxisRotationMatrix, float4(p, 0)).xyz;
 						axis = get_uv(axis);
 
-						// make sure this object should remain visible
-						//float min = step(_SliceMin.x, axis.x) + step(_SliceMin.y, axis.y) + step(_SliceMin.z, axis.z);
 						float max = step(axis.x, _SliceMax.x) + step(axis.y, _SliceMax.y) + step(axis.z, _SliceMax.z);
 
 						return (max < 1) ? 0 : tex;
@@ -103,21 +97,6 @@ Shader "Unlit/VolumeRendering"
 						return (
 								  uv.x < lower || uv.y < lower || uv.z < lower || uv.x > upper || uv.y > upper || uv.z > upper
 							  );
-					  }
-
-					  float4 map(float density) {
-						  //work out what color to use by finding the correct index
-						  int index = 0;
-
-						  [unroll]
-						  for (int iter = 0; iter < AmountOfSegments; iter++)
-						  {
-							  // increment the index if correct
-							  index += (density > _Density[iter]);
-						  }
-
-						  // return the part of the color between the two colors
-						  return lerp(_Colors[index], _Colors[index - 1], (density - _Density[index - 1]) / (_Density[index] - _Density[index - 1]));
 					  }
 
 					  struct appdata
@@ -137,6 +116,11 @@ Shader "Unlit/VolumeRendering"
 					  v2f vert(appdata v)
 					  {
 						v2f o;
+
+						UNITY_SETUP_INSTANCE_ID(v);
+						UNITY_INITIALIZE_OUTPUT(v2f, o);
+						UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
 						o.vertex = UnityObjectToClipPos(v.vertex);
 						o.uv = v.uv;
 						o.world = mul(unity_ObjectToWorld, v.vertex).xyz;

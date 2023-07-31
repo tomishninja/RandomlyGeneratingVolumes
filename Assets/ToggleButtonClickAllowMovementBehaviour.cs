@@ -16,9 +16,9 @@ public class ToggleButtonClickAllowMovementBehaviour : MonoBehaviour
             interactable = GetComponent<Interactable>();
 
         toggle = interactable.IsToggled;
-        if (manipulationHandler == null)
+        if (manipulationHandler != null)
             manipulationHandler.enabled = toggle;
-        if (boundingBox == null)
+        if (boundingBox != null)
             boundingBox.enabled = toggle;
     }
 

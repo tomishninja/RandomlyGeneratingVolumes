@@ -14,6 +14,8 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
         [SerializeField]
         private TextMeshPro textMesh = null;
 
+        [SerializeField] public bool isInt = false;
+
         [SerializeField] public float min = 0;
         [SerializeField] public float max = 1;
 
@@ -26,7 +28,10 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos
 
             if (textMesh != null)
             {
-                textMesh.text = $"{(min + (eventData.NewValue * (max - min))):F2}";
+                if (isInt)
+                    textMesh.text = $"{Mathf.RoundToInt(min + (eventData.NewValue * (max - min))):F0}";
+                else
+                    textMesh.text = $"{(min + (eventData.NewValue * (max - min))):F2}";
             }
         }
     }

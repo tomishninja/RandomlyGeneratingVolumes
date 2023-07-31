@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GenerateRandomSDFsForInterface : MonoBehaviour
 {
+    [SerializeField] InterfaceAdapterForMRTKInterface interfaceAdapter;
+
     [SerializeField] LogicControllerForGeneratingRandomSDFs system;
 
     [SerializeField] string pathToJSONFile;
@@ -56,5 +58,13 @@ public class GenerateRandomSDFsForInterface : MonoBehaviour
         JSONFileReaderWriter<LogicControllerForGeneratingRandomSDFs> fileWriter = new JSONFileReaderWriter<LogicControllerForGeneratingRandomSDFs>(pathToJSONFile);
 
         fileWriter.WriteFile(this.system);
+    }
+
+    private void LinkToInterface()
+    {
+        if (interfaceAdapter == null)
+        {
+
+        }
     }
 }

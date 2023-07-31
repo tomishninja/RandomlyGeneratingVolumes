@@ -5,8 +5,11 @@ using UnityEngine;
 public class TouchSliderValueManager : MonoBehaviour
 {
     ShowSliderValue showSliderValue;
+    PinchSlider pinchSlider;
 
     float value;
+
+    [SerializeField] bool isInt = false;
 
     [SerializeField] float min = 0;
     [SerializeField] float max = 1;
@@ -18,7 +21,17 @@ public class TouchSliderValueManager : MonoBehaviour
             HasChanged = false;
             return value;
         }
-    } 
+        set
+        {
+            pinchSlider.SliderValue = (value - min) / (max - min);
+        }
+    }
+
+    private void Awake()
+    {
+        pinchSlider = GetComponent<PinchSlider>();
+        //pinchSlider.OnValueUpdated.AddListener(OnSliderUpdated);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +53,9 @@ public class TouchSliderValueManager : MonoBehaviour
         {
             showSliderValue.min = this.min;
             showSliderValue.max = this.max;
+
+
+            showSliderValue.isInt = this.isInt;
         }
     }
 

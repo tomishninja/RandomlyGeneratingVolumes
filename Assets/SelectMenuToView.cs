@@ -13,7 +13,10 @@ public class SelectMenuToView : MonoBehaviour
         {
             for (int index = 0; index < menuList.Length; index++)
             {
-                menuList[index].SetActive(interactableToggleCollection.CurrentIndex == index);
+                if (menuList[index] != null)
+                {
+                    menuList[index].SetActive(interactableToggleCollection.CurrentIndex == index);
+                }
             }
         }
     }

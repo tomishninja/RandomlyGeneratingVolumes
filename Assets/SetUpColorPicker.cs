@@ -15,6 +15,8 @@ public class SetUpColorPicker : MonoBehaviour
     [SerializeField] Vector3 pointInTheVolume = new Vector3(1, 1, 1);
     [SerializeField] Transform ObjectToUseAsPoint;
 
+    [SerializeField] bool AllowColorToChange = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,11 @@ public class SetUpColorPicker : MonoBehaviour
     {
         SphereGuideMaterial.SetColor("_Color", GetColorAtPoint(pointInTheVolume));
         VolumeMaterial.SetVector(NameOfRangeFild, pointInTheVolume);
+        
+        if (AllowColorToChange)
+        {
+            pointInTheVolume = new Vector3(1+ObjectToUseAsPoint.localPosition.x, 1+ObjectToUseAsPoint.localPosition.y, 1+ObjectToUseAsPoint.localPosition.z);
+        }
     }
 
     public Color CurrentColor { get => GetColorAtPoint(pointInTheVolume); }
@@ -61,5 +68,15 @@ public class SetUpColorPicker : MonoBehaviour
         texture.Apply();
 
         return texture;
+    }
+
+    public void UserIsChangingColor()
+    {
+        AllowColorToChange = true;
+    }
+
+    public void UserHasFinishedChangingColor()
+    {
+        AllowColorToChange = false;
     }
 }
