@@ -149,7 +149,7 @@ namespace GenoratingRandomSDF
                             hashingMatrix.SetInShader(visulizations[index].GetMaterial(), "_HashLineA", "_HashLineB", "_HashLineC");
 
                             // Set up the noise for the visulization
-                            output.SetNoiseMultiper(visulizations[index].GetMaterial());
+                            //output.SetNoiseMultiper(visulizations[index].GetMaterial());
                         }
                     }
 
