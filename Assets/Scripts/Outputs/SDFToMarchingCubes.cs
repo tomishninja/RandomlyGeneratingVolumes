@@ -38,20 +38,18 @@ namespace GenoratingRandomSDF
 
         public void Reset()
         {
+            buffer = new float[resolution, resolution, resolution];
             mesh = null;
             verts = new List<Vector3>();
             indices = new List<int>();
             normals = new List<Vector3>();
         }
 
-        public float CreateBufferForMarchingCubes(int zIndex, ShapeHandeler shapes)
+        public float CreateBufferForMarchingCubes(int zIndex, ShapeHandeler shapes, int targetLayer)
         {
-            float xPercenatge = 0;
-            float yPercenatge = 0;
+            float xPercenatge;
+            float yPercenatge;
             float zPercenatge = ((float)zIndex / (float)resolution);
-            Vector3 currentPosition = Vector3.zero;
-
-            float highestImportance = -1;
 
             for (int y = 0; y < resolution; y++)
             {
@@ -59,6 +57,8 @@ namespace GenoratingRandomSDF
 
                 for (int x = 0; x < resolution; x++)
                 {
+
+                    buffer[x, y, zIndex] = 0;
                     xPercenatge = ((float)x / (float)resolution);
 
                     Vector3 pos = new Vector3(xPercenatge, yPercenatge, zPercenatge) - offset;
@@ -69,38 +69,89 @@ namespace GenoratingRandomSDF
                     if (d < 0)
                     {
                         Stack<int> sdfs = ShaderVerification.GetAllValidSDFs(pos);
-                        float importance = float.MinValue;
 
                         while (sdfs.Count > 0)
                         {
                             int sdfIndex = sdfs.Pop();
+                            float importance = shapes.Get(sdfIndex).importance;
 
-                            if (shapes.Get(index).importance > importance)
+                            if (importance >= (targetLayer-0.01) && importance <= (targetLayer + 0.01))
                             {
-                                importance = shapes.Get(index).importance;
-
-                                if (importance > highestImportance)
-                                {
-                                    highestImportance = importance;
-                                }
+                                buffer[x, y, zIndex] = 1;
+                                break;
                             }
                         }
 
-                        buffer[x, y, zIndex] = importance + 1;
-                    }
-                    else
-                    {
-                        buffer[x, y, zIndex] = 0;
+                        /*float importance = shapes.Get(index).importance;
+
+                        if (importance >= targetLayer)
+                        {
+                            buffer[x, y, zIndex] = 1;
+                        }*/
                     }
                 }
             }
 
-            return highestImportance;
+            return targetLayer;
         }
 
-        public bool CreateMarchingCubesMesh(float surface = 0)
+        /*public float CreateBufferForMarchingCubes(int zIndex, ShapeHandeler shapes)
+         {
+             float xPercenatge = 0;
+             float yPercenatge = 0;
+             float zPercenatge = ((float)zIndex / (float)resolution);
+             Vector3 currentPosition = Vector3.zero;
+
+             float highestImportance = -1;
+
+             for (int y = 0; y < resolution; y++)
+             {
+                 yPercenatge = ((float)y / (float)resolution);
+
+                 for (int x = 0; x < resolution; x++)
+                 {
+                     xPercenatge = ((float)x / (float)resolution);
+
+                     Vector3 pos = new Vector3(xPercenatge, yPercenatge, zPercenatge) - offset;
+
+                     int index = -1;
+                     float d = ShaderVerification.SDF(pos, out index);
+
+                     if (d < 0)
+                     {
+                         Stack<int> sdfs = ShaderVerification.GetAllValidSDFs(pos);
+                         float importance = float.MinValue;
+
+                         while (sdfs.Count > 0)
+                         {
+                             int sdfIndex = sdfs.Pop();
+
+                             if (shapes.Get(index).importance > importance)
+                             {
+                                 importance = shapes.Get(index).importance;
+
+                                 if (importance > highestImportance)
+                                 {
+                                     highestImportance = importance;
+                                 }
+                             }
+                         }
+
+                         buffer[x, y, zIndex] = importance + 1;
+                     }
+                     else
+                     {
+                         buffer[x, y, zIndex] = 0;
+                     }
+                 }
+             }
+
+             return highestImportance;
+         }*/
+
+        public bool CreateMarchingCubesMesh(float surfaceMin = 0)
         {
-            Marching marching = new MarchingCubes(surface);
+            Marching marching = new MarchingCubes(surfaceMin);
             marching.Generate(buffer, verts, indices);
             return true;
         }
@@ -119,11 +170,11 @@ namespace GenoratingRandomSDF
 
             _mesh.RecalculateBounds();
 
-            for(int index = 0; index < ObjectsToHouseMeshes.Length; index++)
+            for (int index = 0; index < ObjectsToHouseMeshes.Length; index++)
             {
                 ObjectsToHouseMeshes[index].SetUp(_mesh);
             }
-            
+
             this.mesh = _mesh;
             return _mesh;
         }

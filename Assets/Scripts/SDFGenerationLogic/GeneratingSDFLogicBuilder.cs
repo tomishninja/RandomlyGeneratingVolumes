@@ -22,6 +22,9 @@ public class GeneratingSDFLogicBuilder
     [SerializeField] private TypeOfContatiner collidertype = TypeOfContatiner.Cube;
     [SerializeField] private TypeOfInnerCheck innerCheckType = TypeOfInnerCheck.LiniarOptimised;
 
+    [Header("Outputs Types")]
+    [SerializeField] bool ProduceObjFiles = false;
+
     public void Init(ref profiler.AbstractProfiler profiler, ref ShapeHandeler shapes, ref HashingMatrix hashingMatrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
     {
         factory.Init(ref profiler, ref shapes, ref hashingMatrix, conditionDetails);
@@ -93,9 +96,11 @@ public class GeneratingSDFLogicBuilder
 
     public IProcess[] BuildOutputFileClasses()
     {
-        return new IProcess[]
-        {
-            this.factory.CreateMeshOutputHandlerClass()
-        };
+        System.Collections.Generic.List<IProcess> outputClasses = new System.Collections.Generic.List<IProcess>();
+
+        if (ProduceObjFiles)
+            outputClasses.Add(this.factory.CreateMeshOutputHandlerClass());
+
+        return outputClasses.ToArray();
     }
 }

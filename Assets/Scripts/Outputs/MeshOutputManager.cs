@@ -14,7 +14,7 @@ namespace GenoratingRandomSDF
 
         string fileDir = string.Empty;
 
-        float highestImportance = -1;
+        float highestImportance = 3;
 
         ShapeHandeler shapes;
 
@@ -31,13 +31,14 @@ namespace GenoratingRandomSDF
 
         Process currentProcess = Process.NotStarted;
 
-        public MeshOutputManager(ref hLSL_Simulator.NoisyHierarchicalSpheres ShaderVerification, string fileDir, ref ShapeHandeler shapes, MeshToUnityObject[] objectsToHouseMeshes, int resolution = 256)
+        public MeshOutputManager(ref hLSL_Simulator.NoisyHierarchicalSpheres ShaderVerification, string fileDir, ref ShapeHandeler shapes, MeshToUnityObject[] objectsToHouseMeshes, int resolution = 256, float highestImportance = 3f)
         {
             marchingCubes = new SDFToMarchingCubes(ref ShaderVerification, objectsToHouseMeshes, resolution);
             this.resolution = resolution;
             zIndex = 0;
             this.fileDir = fileDir;
             this.shapes = shapes;
+            this.highestImportance = highestImportance;
         }
 
         public int CreateMesh()
@@ -46,12 +47,12 @@ namespace GenoratingRandomSDF
             {
                 case Process.NotStarted:
                 case Process.CreatingBuffer:
-                    float importance = marchingCubes.CreateBufferForMarchingCubes(zIndex, shapes);
+                    float importance = marchingCubes.CreateBufferForMarchingCubes(zIndex, shapes, layerCounter);
                     
-                    if (importance > highestImportance)
+                    /*if (importance > highestImportance)
                     {
                         highestImportance = importance;
-                    }
+                    }*/
 
                     zIndex++;
                     currentProcess = Process.CreatingBuffer;
@@ -63,7 +64,7 @@ namespace GenoratingRandomSDF
                     return 0;
 
                 case Process.CreatingMesh:
-                    marchingCubes.CreateMarchingCubesMesh(layerCounter);
+                    marchingCubes.CreateMarchingCubesMesh(0);
                     currentProcess = Process.ConvertToUnityMesh;
                     return 0;
 
@@ -76,14 +77,16 @@ namespace GenoratingRandomSDF
                     if (marchingCubes.ConvertToOBJ(fileDir))
                     {
                         layerCounter++;
-                        if (layerCounter >= highestImportance)
+                        if (layerCounter > highestImportance)
                         {
                             Reset();
                             return 1;
                         }
                         else
                         {
-                            currentProcess = Process.CreatingMesh;
+                            currentProcess = Process.CreatingBuffer;
+                            this.zIndex = 0;
+                            marchingCubes.Reset();
                             return 0;
                         }
                     }
