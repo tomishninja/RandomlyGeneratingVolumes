@@ -1815,8 +1815,12 @@ MonoBehaviour:
           parentsNewAmountOfVoxelsWithin: 0
           OctTreeMaxDepth: 3
           OctTreeStartingDepth: 1
+        meshToUnityObject: []
+        PathForMeshFile: 
+        MeshResulition: 256
       collidertype: 1
       innerCheckType: 3
+      ProduceObjFiles: 1
     fileWriter:
       defaultParticipantIDPrepend: Pilot
       defaultPathToOutputDirectory: Assets/Output/
@@ -2632,8 +2636,12 @@ MonoBehaviour:
         parentsNewAmountOfVoxelsWithin: 0
         OctTreeMaxDepth: 3
         OctTreeStartingDepth: 1
+      meshToUnityObject: []
+      PathForMeshFile: 
+      MeshResulition: 256
     collidertype: 1
     innerCheckType: 3
+    ProduceObjFiles: 0
   fileWriter:
     defaultParticipantIDPrepend: Pilot
     defaultPathToOutputDirectory: Assets/Output/
