@@ -2,14 +2,15 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Halo21
   m_Shader: {fileID: 4800000, guid: 56dcbe1f2dc54c04f99fdbb70774cef2, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -55,6 +56,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _ColorThreshold: 1.41
@@ -88,7 +90,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EffectColor: {r: 1, g: 1, b: 1, a: 0.56078434}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _HashLineA: {r: 532.8001, g: 972.04675, b: 632.26697, a: 0}
-    - _HashLineB: {r: 222.09158, g: 517.6312, b: 688.1122, a: 0}
-    - _HashLineC: {r: 798.0726, g: 639.2588, b: 274.7733, a: 0}
+    - _HashLineA: {r: 801.27856, g: 658.85455, b: 748.03143, a: 0}
+    - _HashLineB: {r: 843.12317, g: 307.05777, b: 962.1948, a: 0}
+    - _HashLineC: {r: 408.47928, g: 75.57059, b: 26.49534, a: 0}
   m_BuildTextureStacks: []

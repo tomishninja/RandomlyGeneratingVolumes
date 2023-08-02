@@ -9,17 +9,14 @@ Shader "Unlit/VolumeRendering"
 		_SliceMin("Slice min", Vector) = (0.0, 0.0, 0.0, -1.0)
 		_SliceMax("Slice max", Vector) = (1.0, 1.0, 1.0, -1.0)
 	}
-		CGINCLUDE
-
-			ENDCG
 
 			SubShader{
-				Cull Back
-				Blend SrcAlpha OneMinusSrcAlpha
-				ZTest Always
+				Tags { "Queue" = "Transparent" }
+				LOD 100
 
 				Pass
 				{
+					Blend SrcAlpha OneMinusSrcAlpha
 					CGPROGRAM
 
 					#ifndef __VOLUME_RENDERING_INCLUDED__
@@ -103,6 +100,7 @@ Shader "Unlit/VolumeRendering"
 					  {
 						float4 vertex : POSITION;
 						float2 uv : TEXCOORD0;
+						UNITY_VERTEX_INPUT_INSTANCE_ID
 					  };
 
 					  struct v2f
@@ -111,6 +109,7 @@ Shader "Unlit/VolumeRendering"
 						float2 uv : TEXCOORD0;
 						float3 world : TEXCOORD1;
 						float3 local : TEXCOORD2;
+						UNITY_VERTEX_OUTPUT_STEREO
 					  };
 
 					  v2f vert(appdata v)
