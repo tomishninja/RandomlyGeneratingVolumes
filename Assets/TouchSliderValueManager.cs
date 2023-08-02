@@ -31,11 +31,7 @@ public class TouchSliderValueManager : MonoBehaviour
     {
         pinchSlider = GetComponent<PinchSlider>();
         //pinchSlider.OnValueUpdated.AddListener(OnSliderUpdated);
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         if (showSliderValue == null)
         {
             // Check if the class exists in children
