@@ -48,7 +48,7 @@ namespace hLSL_Simulator
 
             for (int i = 0; i < shapeArray.Length; i++)
             {
-                if (shapeArray[i] != null && !shapeArray[i].IsDefault() && shapeArray[i].radius > 0.01)
+                if (shapeArray[i] != null && !shapeArray[i].IsDefault() && shapeArray[i].radius > 0.001)
                 {
                     float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
                     if (d < sDFTollerance)

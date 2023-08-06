@@ -24,7 +24,7 @@ public class ScreenShot
 
     public void AttemptToTakeScreenShot(int participantID, int currentItteration)
     {
-        if (takeImages && takeImageThisFrame)
+        if (takeImages)
         {
             TakeScreenShot(participantID, currentItteration);
             takeImageThisFrame = false;
@@ -33,6 +33,8 @@ public class ScreenShot
 
     private void TakeScreenShot(int currentParticipant, int currentItteration)
     {
+        Debug.Log("ScreenShot");
+
         string fileNameForImage = pathForImages;
 
         // Add the folder for the participant if required
@@ -63,6 +65,8 @@ public class ScreenShot
             // take the image
             ScreenCapture.CaptureScreenshot(fileNameForImage, ScreenShotUpresScaling);
             takeImageThisFrame = false;
+
+            Debug.Log(fileNameForImage);
         }
         catch (System.IO.DirectoryNotFoundException)
         {

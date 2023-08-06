@@ -17,7 +17,8 @@ public class SelectConditionToApply : MonoBehaviour
 
         if (interfaceAdapterForMRTKInterface == null)
         {
-            interfaceAdapterForMRTKInterface = FindAnyObjectByType<InterfaceAdapterForMRTKInterface>();
+            interfaceAdapterForMRTKInterface = FindObjectOfType<InterfaceAdapterForMRTKInterface>();
+            //interfaceAdapterForMRTKInterface = FindAnyObjectByType<InterfaceAdapterForMRTKInterface>();
         }
     }
 
