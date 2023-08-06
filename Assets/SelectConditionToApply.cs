@@ -20,6 +20,9 @@ public class SelectConditionToApply : MonoBehaviour
             interfaceAdapterForMRTKInterface = FindObjectOfType<InterfaceAdapterForMRTKInterface>();
             //interfaceAdapterForMRTKInterface = FindAnyObjectByType<InterfaceAdapterForMRTKInterface>();
         }
+
+        // Set the current parameters required
+        SelectCondition();
     }
 
     public void SelectCondition()
@@ -27,5 +30,6 @@ public class SelectConditionToApply : MonoBehaviour
         interfaceAdapterForMRTKInterface.ObjectValueIndex = interactableToggleCollection.CurrentIndex;
 
         interfaceAdapterForMRTKInterface.SetNewValuesBasedOnCurrent();
+        interfaceAdapterForMRTKInterface.UpdateColorPicker(interactableToggleCollection.CurrentIndex);
     }
 }

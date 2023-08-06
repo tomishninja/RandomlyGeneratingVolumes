@@ -30,7 +30,7 @@ using UnityEngine;
 
         [SerializeField] DemoVisulizer[] DemoVisulizers;
 
-        public void Init()
+        public void Init(InterfaceAdapterForMRTKInterface interfaceAdapter = null)
         {
             screenShot.Init();
             profiler.ClearAndInitProfiler();
@@ -63,6 +63,12 @@ using UnityEngine;
                 DemoVisulizers,
                 outputHandelers: builder.BuildOutputFileClasses()
                 );
+
+            // Set set up the interface if enabled
+            if (interfaceAdapter != null)
+            {
+                interfaceAdapter.Init(this);
+            }
         }
 
         public void RunProcess()

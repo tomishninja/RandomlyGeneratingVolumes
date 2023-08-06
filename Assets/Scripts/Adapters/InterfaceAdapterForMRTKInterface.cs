@@ -1,142 +1,184 @@
+using JetBrains.Annotations;
+using System.Drawing;
 using UnityEngine;
 
-    public class InterfaceAdapterForMRTKInterface : MonoBehaviour
+public class InterfaceAdapterForMRTKInterface : MonoBehaviour
+{
+    public int ObjectValueIndex = -1;
+
+    enum CurrentLayer
     {
-        public int ObjectValueIndex = -1;
+        None,
+        Outer,
+        Composite,
+        Leaf,
+        Misc
+    }
 
-        [Header("Objects to save Values to")]
-        LogicControllerForGeneratingRandomSDFs logicController;
-        SphericalVolumeHierarchyLevelDetails[] ObjectValues;
+    [Header("Objects to save Values to")]
+    LogicControllerForGeneratingRandomSDFs logicController;
+    SphericalVolumeHierarchyLevelDetails[] ObjectValues;
 
-        [Header("Amounts Of Objects")]
-        [SerializeField] TouchSliderValueManager SliderForAmountOfOuterObjects;
-        [SerializeField] TouchSliderValueManager SliderForAmountOfCompositeObjects;
-        [SerializeField] TouchSliderValueManager SliderForAmountOfLeafObjects;
-        [SerializeField] TouchSliderValueManager SliderForAmountOfMiscObjects;
+    [Header("Amounts Of Objects")]
+    [SerializeField] TouchSliderValueManager SliderForAmountOfOuterObjects;
+    [SerializeField] TouchSliderValueManager SliderForAmountOfCompositeObjects;
+    [SerializeField] TouchSliderValueManager SliderForAmountOfLeafObjects;
+    [SerializeField] TouchSliderValueManager SliderForAmountOfMiscObjects;
 
-        [Header("Outer Object Paramters")]
+    [Header("Outer Object Paramters")]
 
-        [Header("Sliders for composite objects")]
-        [SerializeField] TouchSliderValueManager SliderForMinSizeOfCompositeObjects;
-        [SerializeField] TouchSliderValueManager SliderForMaxSizeOfCompositeObjects;
-        [SerializeField] TouchSliderValueManager SliderForMinAmountOfChildrenForCompositeObjects;
-        [SerializeField] TouchSliderValueManager SliderForMaxAmountOfChildrenForCompositeObjects;
+    [Header("Sliders for composite objects")]
+    [SerializeField] TouchSliderValueManager SliderForMinSizeOfCompositeObjects;
+    [SerializeField] TouchSliderValueManager SliderForMaxSizeOfCompositeObjects;
+    [SerializeField] TouchSliderValueManager SliderForMinAmountOfChildrenForCompositeObjects;
+    [SerializeField] TouchSliderValueManager SliderForMaxAmountOfChildrenForCompositeObjects;
 
-        [Header("Sliders for single Objects")]
-        [SerializeField] TouchSliderValueManager SliderForMinSizeOfLeafObjects;
-        [SerializeField] TouchSliderValueManager SliderForMaxSizeOfLeafObjects;
+    [Header("Sliders for single Objects")]
+    [SerializeField] TouchSliderValueManager SliderForMinSizeOfLeafObjects;
+    [SerializeField] TouchSliderValueManager SliderForMaxSizeOfLeafObjects;
 
-        [Header("Sliders for the misc Objects")]
-        [SerializeField] TouchSliderValueManager SliderForMinSizeOfMiscObjects;
-        [SerializeField] TouchSliderValueManager SliderForMaxSizeOfMiscObjects;
-        [SerializeField] TouchSliderValueManager SliderForMinAmountOfChildrenForMiscObjects;
-        [SerializeField] TouchSliderValueManager SliderForMaxAmountOfChildrenForMiscObjects;
+    [Header("Sliders for the misc Objects")]
+    [SerializeField] TouchSliderValueManager SliderForMinSizeOfMiscObjects;
+    [SerializeField] TouchSliderValueManager SliderForMaxSizeOfMiscObjects;
+    [SerializeField] TouchSliderValueManager SliderForMinAmountOfChildrenForMiscObjects;
+    [SerializeField] TouchSliderValueManager SliderForMaxAmountOfChildrenForMiscObjects;
 
-        [Header("Color Picker Object")]
-        [SerializeField] SetUpColorPicker ColorPicker;
+    [Header("Color Picker Object")]
+    [SerializeField] SetUpColorPicker ColorPicker;
+    [SerializeField] CurrentLayer[] orderOfLayers;
 
+    public void Init(LogicControllerForGeneratingRandomSDFs logicController)
+    {
+        this.logicController = logicController;
+        ObjectValues = logicController.GetConditionDetails();
+        SetNewValuesBasedOnCurrent();
+    }
 
+    public void UpdateColorPicker(int index)
+    {
+        bool isRequired = false;
 
-    private void Awake()
+        if (ColorPicker != null)
         {
-            ObjectValues = logicController.GetConditionDetails();
+            switch (orderOfLayers[index])
+            {
+                case CurrentLayer.Outer:
+                    ColorPicker.SetColor(ObjectValues[ObjectValueIndex].OuterColor);
+                    isRequired = true;
+                    break;
+                case CurrentLayer.Composite:
+                    ColorPicker.SetColor(ObjectValues[ObjectValueIndex].ContainableColor);
+                    isRequired = true;
+                    break;
+                case CurrentLayer.Leaf:
+                    ColorPicker.SetColor(ObjectValues[ObjectValueIndex].CountableColor);
+                    isRequired = true;
+                    break;
+                case CurrentLayer.Misc:
+                    ColorPicker.SetColor(ObjectValues[ObjectValueIndex].NotCountableColor);
+                    isRequired = true;
+                    break;
+            }
         }
 
-        private void Update()
+        ColorPicker.gameObject.SetActive(isRequired);
+    }
+
+    private void Update()
+    {
+        //Sliders
+
+        // If you required to update the values of the objects
+        if (SliderForAmountOfOuterObjects != null && SliderForAmountOfOuterObjects.HasChanged)
         {
-            //Sliders
-
-            // If you required to update the values of the objects
-            if (SliderForAmountOfOuterObjects != null && SliderForAmountOfOuterObjects.HasChanged)
+            if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
             {
-                if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
+                // Set the amount of outer objects;
+                ObjectValues[ObjectValueIndex].AmountOfOuters = Mathf.RoundToInt(SliderForAmountOfOuterObjects.Value);
+            }
+            else if (ObjectValueIndex < 0)
+            {
+                int newValue = Mathf.RoundToInt(SliderForAmountOfOuterObjects.Value);
+                for (int index = 0; index < ObjectValues.Length; index++)
                 {
-                    // Set the amount of outer objects;
-                    ObjectValues[ObjectValueIndex].AmountOfOuters = Mathf.RoundToInt(SliderForAmountOfOuterObjects.Value);
-                }
-                else if (ObjectValueIndex < 0)
-                {
-                    int newValue = Mathf.RoundToInt(SliderForAmountOfOuterObjects.Value);
-                    for (int index = 0; index < ObjectValues.Length; index++)
-                    {
-                        ObjectValues[index].AmountOfOuters = newValue;
-                    }
+                    ObjectValues[index].AmountOfOuters = newValue;
                 }
             }
+        }
 
-            // If you required to update the values of the objects
-            if (SliderForAmountOfCompositeObjects != null && SliderForAmountOfCompositeObjects.HasChanged)
+        // If you required to update the values of the objects
+        if (SliderForAmountOfCompositeObjects != null && SliderForAmountOfCompositeObjects.HasChanged)
+        {
+            if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
             {
-                if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
+                // Set the amount of outer objects;
+                ObjectValues[ObjectValueIndex].amountOfContainers = Mathf.RoundToInt(SliderForAmountOfCompositeObjects.Value);
+            }
+            else if (ObjectValueIndex < 0)
+            {
+                int newValue = Mathf.RoundToInt(SliderForAmountOfCompositeObjects.Value);
+                for (int index = 0; index < ObjectValues.Length; index++)
                 {
-                    // Set the amount of outer objects;
-                    ObjectValues[ObjectValueIndex].amountOfContainers = Mathf.RoundToInt(SliderForAmountOfCompositeObjects.Value);
-                }
-                else if (ObjectValueIndex < 0)
-                {
-                    int newValue = Mathf.RoundToInt(SliderForAmountOfCompositeObjects.Value);
-                    for (int index = 0; index < ObjectValues.Length; index++)
-                    {
-                        ObjectValues[index].amountOfContainers = newValue;
-                    }
+                    ObjectValues[index].amountOfContainers = newValue;
                 }
             }
+        }
 
-            // If you required to update the values of the objects
-            if (SliderForAmountOfLeafObjects != null && SliderForAmountOfLeafObjects.HasChanged)
+        // If you required to update the values of the objects
+        if (SliderForAmountOfLeafObjects != null && SliderForAmountOfLeafObjects.HasChanged)
+        {
+            if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
             {
-                if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
+                // Set the amount of outer objects;
+                ObjectValues[ObjectValueIndex].AmountOfCountables = Mathf.RoundToInt(SliderForAmountOfLeafObjects.Value);
+            }
+            else if (ObjectValueIndex < 0)
+            {
+                int newValue = Mathf.RoundToInt(SliderForAmountOfLeafObjects.Value);
+                for (int index = 0; index < ObjectValues.Length; index++)
                 {
-                    // Set the amount of outer objects;
-                    ObjectValues[ObjectValueIndex].AmountOfCountables = Mathf.RoundToInt(SliderForAmountOfLeafObjects.Value);
-                }
-                else if (ObjectValueIndex < 0)
-                {
-                    int newValue = Mathf.RoundToInt(SliderForAmountOfLeafObjects.Value);
-                    for (int index = 0; index < ObjectValues.Length; index++)
-                    {
-                        ObjectValues[index].AmountOfCountables = newValue;
-                    }
+                    ObjectValues[index].AmountOfCountables = newValue;
                 }
             }
+        }
 
-            // If you required to update the values of the objects
-            if (SliderForAmountOfMiscObjects != null && SliderForAmountOfMiscObjects.HasChanged)
+        // If you required to update the values of the objects
+        if (SliderForAmountOfMiscObjects != null && SliderForAmountOfMiscObjects.HasChanged)
+        {
+            if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
             {
-                if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
+                // Set the amount of outer objects;
+                ObjectValues[ObjectValueIndex].AmountOfNotCountables = Mathf.RoundToInt(SliderForAmountOfMiscObjects.Value);
+            }
+            else if (ObjectValueIndex < 0)
+            {
+                int newValue = Mathf.RoundToInt(SliderForAmountOfMiscObjects.Value);
+                for (int index = 0; index < ObjectValues.Length; index++)
                 {
-                    // Set the amount of outer objects;
-                    ObjectValues[ObjectValueIndex].AmountOfNotCountables = Mathf.RoundToInt(SliderForAmountOfMiscObjects.Value);
-                }
-                else if (ObjectValueIndex < 0)
-                {
-                    int newValue = Mathf.RoundToInt(SliderForAmountOfMiscObjects.Value);
-                    for (int index = 0; index < ObjectValues.Length; index++)
-                    {
-                        ObjectValues[index].AmountOfNotCountables = newValue;
-                    }
+                    ObjectValues[index].AmountOfNotCountables = newValue;
                 }
             }
+        }
 
-            ///
-            /// Compiste Objects Sliders
-            /// 
+        ///
+        /// Compiste Objects Sliders
+        /// 
 
-            // If you required to update the values of the objects
-            if (SliderForMinSizeOfCompositeObjects != null && SliderForMinSizeOfCompositeObjects.HasChanged)
+        // If you required to update the values of the objects
+        if (SliderForMinSizeOfCompositeObjects != null && SliderForMinSizeOfCompositeObjects.HasChanged)
+        {
+            if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
             {
-                if (ObjectValueIndex >= 0 && ObjectValueIndex < ObjectValues.Length)
+                // Set the amount of outer objects;
+                ObjectValues[ObjectValueIndex].ContainableRadiusRange.min = SliderForMinSizeOfCompositeObjects.Value;
+            }
+            else if (ObjectValueIndex < 0)
+            {
+                for (int index = 0; index < ObjectValues.Length; index++)
                 {
-                    // Set the amount of outer objects;
-                    ObjectValues[ObjectValueIndex].ContainableRadiusRange.min = SliderForMinSizeOfCompositeObjects.Value;
+                    ObjectValues[index].ContainableRadiusRange.min = SliderForMinSizeOfCompositeObjects.Value;
                 }
-                else if (ObjectValueIndex < 0)
-                {
-                    for (int index = 0; index < ObjectValues.Length; index++)
-                    {
-                        ObjectValues[index].ContainableRadiusRange.min = SliderForMinSizeOfCompositeObjects.Value;
-                    }
-                }
+            }
         }
 
         // If you required to update the values of the objects

@@ -23,13 +23,25 @@ public class TouchSliderValueManager : MonoBehaviour
         }
         set
         {
+            // if pinch slider was not set on awake or if this is before awake then get it now.
+            if (pinchSlider == null)
+            {
+                pinchSlider = GetComponent<PinchSlider>();
+            }
+            // Set the value in the object
             pinchSlider.SliderValue = (value - min) / (max - min);
+            // Set the value in this class
+            this.value = value;
         }
     }
 
     private void Awake()
     {
-        pinchSlider = GetComponent<PinchSlider>();
+        // Make sure has changed defaults to false at the start of the application causing it to update
+        HasChanged = true;
+
+        if (pinchSlider == null)
+            pinchSlider = GetComponent<PinchSlider>();
         //pinchSlider.OnValueUpdated.AddListener(OnSliderUpdated);
 
         if (showSliderValue == null)
@@ -58,6 +70,7 @@ public class TouchSliderValueManager : MonoBehaviour
     public void OnSliderUpdated(SliderEventData eventData)
     {
         value = (min + (eventData.NewValue * (max - min)));
+        HasChanged = true;
     }
 
     // Boolean flag to indicate if the class is found in children

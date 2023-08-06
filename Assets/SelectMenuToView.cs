@@ -7,6 +7,8 @@ public class SelectMenuToView : MonoBehaviour
 
     [SerializeField] GameObject[] menuList;
 
+    [SerializeField] InterfaceAdapterForMRTKInterface interfaceAdapterForMRTKInterface;
+
     public void SelectMenu()
     {
         if (menuList != null)
@@ -19,5 +21,7 @@ public class SelectMenuToView : MonoBehaviour
                 }
             }
         }
+
+        interfaceAdapterForMRTKInterface.UpdateColorPicker(interactableToggleCollection.CurrentIndex);
     }
 }

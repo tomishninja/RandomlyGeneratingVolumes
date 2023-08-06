@@ -13,13 +13,13 @@ public class GenerateRandomSDFsForInterface : MonoBehaviour
     bool shouldResetSystem = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // Overwrite the current logic data if requested
         if (updateFromFileOnStartup)
             UpdateParametersBasedOnInputFiles();
 
-        system.Init();
+        system.Init(interfaceAdapter);
     }
 
     // Update is called once per frame
@@ -58,13 +58,5 @@ public class GenerateRandomSDFsForInterface : MonoBehaviour
         JSONFileReaderWriter<LogicControllerForGeneratingRandomSDFs> fileWriter = new JSONFileReaderWriter<LogicControllerForGeneratingRandomSDFs>(pathToJSONFile);
 
         fileWriter.WriteFile(this.system);
-    }
-
-    private void LinkToInterface()
-    {
-        if (interfaceAdapter == null)
-        {
-
-        }
     }
 }
