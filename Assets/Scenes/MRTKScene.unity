@@ -226,6 +226,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: LayoutForUIMenus
       objectReference: {fileID: 0}
+    - target: {fileID: 2973523082010928906, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
+      propertyPath: m_Name
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973523082010928916, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
+      propertyPath: m_text
+      value: Leaf Node Parameters
+      objectReference: {fileID: 0}
+    - target: {fileID: 2973523082716159259, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4368776790324452004, guid: 8a930e2134bcf5848be75d224a52b032, type: 3}
       propertyPath: m_Mesh
       value: 
