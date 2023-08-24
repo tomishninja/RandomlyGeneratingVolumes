@@ -47,6 +47,11 @@ public class InterfaceAdapterForMRTKInterface : MonoBehaviour
     [SerializeField] SetUpColorPicker ColorPicker;
     [SerializeField] CurrentLayer[] orderOfLayers;
 
+    [Header("Volumetric Visulization")]
+    [SerializeField]
+    [Tooltip("Optional Field")]
+    DemoVisulizer visulizer = null;
+
     public void Init(LogicControllerForGeneratingRandomSDFs logicController)
     {
         this.logicController = logicController;
@@ -64,18 +69,26 @@ public class InterfaceAdapterForMRTKInterface : MonoBehaviour
             {
                 case CurrentLayer.Outer:
                     ColorPicker.SetColor(ObjectValues[ObjectValueIndex].OuterColor);
+                    if (visulizer != null)
+                        visulizer.SetDefaultVisuliziationsSelectionTo(ObjectValues[ObjectValueIndex].OuterImportance);
                     isRequired = true;
                     break;
                 case CurrentLayer.Composite:
                     ColorPicker.SetColor(ObjectValues[ObjectValueIndex].ContainableColor);
+                    if (visulizer != null)
+                        visulizer.SetDefaultVisuliziationsSelectionTo(ObjectValues[ObjectValueIndex].ContainableImportance);
                     isRequired = true;
                     break;
                 case CurrentLayer.Leaf:
                     ColorPicker.SetColor(ObjectValues[ObjectValueIndex].CountableColor);
+                    if (visulizer != null)
+                        visulizer.SetDefaultVisuliziationsSelectionTo(ObjectValues[ObjectValueIndex].CountableImportance);
                     isRequired = true;
                     break;
                 case CurrentLayer.Misc:
                     ColorPicker.SetColor(ObjectValues[ObjectValueIndex].NotCountableColor);
+                    if (visulizer != null)
+                        visulizer.SetDefaultVisuliziationsSelectionTo(ObjectValues[ObjectValueIndex].NotCountableImportance);
                     isRequired = true;
                     break;
             }

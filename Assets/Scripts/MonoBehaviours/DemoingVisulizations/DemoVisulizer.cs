@@ -10,6 +10,9 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
     /// Needs to be updated for final study
     [SerializeField] VisulizationHandeler[] visulizations;
 
+    public bool useDefaultVisuliziations = false;
+    [SerializeField] MaterialHandler[] defaultVisuliziations;
+
     // the object used to render this shape
     [SerializeField] public MeshRenderer renderer;
 
@@ -54,10 +57,28 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
         this.volumeParameters = shapes.GetShapesAsArray();
 
         // Set the material
-        if (CurrentCondition == null)
-            this.SetMat(this.volumeParameters.Length, Condition);
+        if (useDefaultVisuliziations)
+        {
+            // loop though the array (which should be sorted until this can find a array that will fit these items)
+            for (int index = 0; index < defaultVisuliziations.Length; index++)
+            {
+                // if the visulziations is the lowest one found that will fit this then use that one to render this.
+                if (defaultVisuliziations[index].AmountOfRegions <= this.volumeParameters.Length)
+                {
+                    this.mat = defaultVisuliziations[index].mat;
+                    renderer.material = this.mat;
+                }
+            }
+        }
         else
-            this.SetMat(this.volumeParameters.Length, CurrentCondition);
+        {
+            if (CurrentCondition == null)
+                this.SetMat(this.volumeParameters.Length, Condition);
+            else
+                this.SetMat(this.volumeParameters.Length, CurrentCondition);
+        }
+        
+        
 
         // Set up the hash
         //itterationDetails.hash.SetInShader(this.mat, "_HashLineA", "_HashLineB", "_HashLineC");
@@ -67,6 +88,25 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
         mat.SetColorArray("_Colors", this.getColorArray());
         mat.SetFloatArray("_Importance", this.getImportanceArray());
     }
+
+    /// <summary>
+    /// Sets the selection index for visualization materials in the 'defaultVisuliziations' array.
+    /// </summary>
+    /// <param name="layer">The selection index value to set for the materials.</param>
+    public void SetDefaultVisuliziationsSelectionTo(int layer)
+    {
+        // Iterate through each element in the 'defaultVisuliziations' array.
+        for (int index = 0; index < defaultVisuliziations.Length; index++)
+        {
+            // Check if the current element and its 'mat' field are not null.
+            if (defaultVisuliziations[index] != null && defaultVisuliziations[index].mat != null)
+            {
+                // Set the '_SelectionIndex' float parameter of the material to the provided 'layer' value.
+                defaultVisuliziations[index].mat.SetFloat("_SelectionIndex", layer);
+            }
+        }
+    }
+
 
     /// <summary>
     /// This function should set the material based on a selection of materials that meet the required critia
