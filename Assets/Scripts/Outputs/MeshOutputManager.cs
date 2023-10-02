@@ -47,11 +47,14 @@ namespace GenoratingRandomSDF
                 case Process.NotStarted:
                 case Process.CreatingBuffer:
                     float importance = marchingCubes.CreateBufferForMarchingCubes(zIndex, shapes, layerCounter);
-                    
+
                     /*if (importance > highestImportance)
                     {
                         highestImportance = importance;
                     }*/
+
+                    // write out the current volume data
+                    marchingCubes.WriteVolumetricDataAsJSONFile(fileDir, "f" + layerCounter + "h" + marchingCubes.GetHashAsString());
 
                     zIndex++;
                     currentProcess = Process.CreatingBuffer;
@@ -73,7 +76,7 @@ namespace GenoratingRandomSDF
                     return 0;
 
                 case Process.WriteToFile:
-                    if (marchingCubes.ConvertToOBJ(fileDir))
+                    if (marchingCubes.ConvertToOBJ(fileDir, "f" + layerCounter + "h" + marchingCubes.GetHashAsString()))
                     {
                         layerCounter++;
                         if (layerCounter > highestImportance)

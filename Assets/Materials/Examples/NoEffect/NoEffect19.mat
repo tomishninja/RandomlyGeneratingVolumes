@@ -90,7 +90,7 @@ Material:
     - _GridDimentions: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceCenter: {r: 0, g: 0, b: 0, a: 0}
     - _GridSpaceDimentions: {r: 0, g: 0, b: 0, a: 0}
-    - _HashLineA: {r: 371.50958, g: 324.05725, b: 711.852, a: 0}
-    - _HashLineB: {r: 518.7419, g: 278.6626, b: 793.0609, a: 0}
-    - _HashLineC: {r: 718.85046, g: 356.15985, b: 940.8995, a: 0}
+    - _HashLineA: {r: 985.15594, g: 62.417633, b: 519.46014, a: 0}
+    - _HashLineB: {r: 98.49049, g: 801.2344, b: 386.3426, a: 0}
+    - _HashLineC: {r: 910.02716, g: 399.20132, b: 455.87247, a: 0}
   m_BuildTextureStacks: []

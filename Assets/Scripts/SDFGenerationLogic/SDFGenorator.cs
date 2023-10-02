@@ -63,8 +63,10 @@ namespace GenoratingRandomSDF
 
             this.NoiseMultiplier = NoiseMultiplier;
 
-            if (hashingMatrix == null)
+            if (hashingMatrix == null || hashingMatrix.IsModifiable)
+            {
                 this.hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
+            }
             else
                 this.hashingMatrix = hashingMatrix;
 
@@ -164,7 +166,7 @@ namespace GenoratingRandomSDF
                     // Printout the answers
                     Debug.Log(output.ToJSON());
 
-
+                    
 
                     // save the logic files
                     try
@@ -287,7 +289,10 @@ namespace GenoratingRandomSDF
             this.statsForErrorHandeling.Reset();
 
             // create a random hash to start with
-            hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
+            if (hashingMatrix == null || hashingMatrix.IsModifiable)
+            {
+                hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
+            }
 
             try
             {

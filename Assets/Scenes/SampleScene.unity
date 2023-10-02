@@ -204,6 +204,8 @@ MonoBehaviour:
       AmountOfRegions: 25
     - mat: {fileID: 2100000, guid: 3746ca069d5b4f6478eaa330ac55a89e, type: 2}
       AmountOfRegions: 27
+  useDefaultVisuliziations: 0
+  defaultVisuliziations: []
   renderer: {fileID: 59110923}
 --- !u!4 &59110922
 Transform:
@@ -215,7 +217,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 674280538}
   m_RootOrder: 0
@@ -231,7 +232,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -441,7 +441,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 59110922}
   - {fileID: 1267330501}
@@ -537,7 +536,6 @@ Transform:
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -840,9 +838,9 @@ MonoBehaviour:
       amountOfTimesVolumetriclyVerifingCanFailBeforeReseting: 500
       amountOfTimesVolumetriclyVerifingCanResetBeforeHardReset: 20
     hashingMatrix:
-      lineA: {x: 0, y: 0, z: 0}
-      lineB: {x: 0, y: 0, z: 0}
-      lineC: {x: 0, y: 0, z: 0}
+      lineA: {x: 709.585, y: 287.81, z: 84.384}
+      lineB: {x: 893.145, y: 289.185, z: 294.954}
+      lineC: {x: 313.623, y: 77.37, z: 761.035}
     NoiseMultiplier: 1
     DemoVisulizers:
     - {fileID: 59110921}
@@ -858,7 +856,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -943,7 +940,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1280,7 +1276,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2

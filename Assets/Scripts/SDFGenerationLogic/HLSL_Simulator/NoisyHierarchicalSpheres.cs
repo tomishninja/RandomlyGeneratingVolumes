@@ -7,7 +7,6 @@ namespace hLSL_Simulator
     public class NoisyHierarchicalSpheres
     {
         readonly int randomCoords;
-        //AbstractGeometricShape[] Shapes;
         HashingMatrix hashingMatrix;
         readonly float sDFTollerance;
         float NoiseMultipler = 1f;
@@ -140,7 +139,7 @@ namespace hLSL_Simulator
                 {
                     float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
 
-                    bool isBest = d < sDFTollerance && d > bestDistance;
+                    bool isBest = d < 0 && d > bestDistance;
 
                     index = isBest ? i : index;
                     bestDistance = isBest ? d : bestDistance;
@@ -217,6 +216,11 @@ namespace hLSL_Simulator
                           Mathf.Sin(Vector3.Dot(p, hashingMatrix.lineC)));
 
             return BasicFuncitonalty.Add(BasicFuncitonalty.Mutliply(BasicFuncitonalty.Frac(BasicFuncitonalty.Mutliply(p, 43758.5453123f)), 2.0f), -1.0f);
+        }
+
+        public string GetHashAsString()
+        {
+            return this.hashingMatrix.ToString();
         }
     }
 }

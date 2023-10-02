@@ -138,6 +138,7 @@ namespace GenoratingRandomSDF
                     if (shapes.CurrentShape.Children.Length + CompleteAmountOfChildren + 1 != shapes.Length)
                     {
                         Debug.LogError("Wrong Amount Of Shapes" + shapes.Length);
+                        throw new System.Exception("The wrong amount of Shapes was found");
                     }
 
                     int endOfNextLoop = itteration + AmountOfCountablesLeftToCount;

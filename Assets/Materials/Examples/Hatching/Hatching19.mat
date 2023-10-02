@@ -2,15 +2,14 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 8
+  serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hatching19
   m_Shader: {fileID: 4800000, guid: 0042f7dd177944646a5f4f23eadda58f, type: 3}
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -56,7 +55,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _ColorThreshold: 1.41
@@ -73,7 +71,7 @@ Material:
     - _MinDistanceForStep: 0.01
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 1
+    - _NoiseSuppression: 1.5
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02

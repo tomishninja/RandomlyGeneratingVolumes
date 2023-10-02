@@ -35,7 +35,10 @@ using UnityEngine;
             screenShot.Init();
             profiler.ClearAndInitProfiler();
             shapes = new ShapeHandeler();
-            hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
+            if (hashingMatrix == null || hashingMatrix.IsModifiable)
+            {
+                hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
+            }
 
             // Set the condition details to the intial values
             conditionDetails.Init(CurrentParticipant);

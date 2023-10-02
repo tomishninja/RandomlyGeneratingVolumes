@@ -8,6 +8,8 @@ public class HashingMatrix
     public Vector3 lineB;
     public Vector3 lineC;
 
+    public bool IsModifiable = true;
+
     /// <summary>
     /// Returns a new HashingMatrix with the same values as this one.   
     /// </summary>
@@ -37,11 +39,11 @@ public class HashingMatrix
     /// </returns>
     public static HashingMatrix InitalizeRandomHashingMatrix(float min = 0f, float max = 1000f)
     {
-        HashingMatrix output = new HashingMatrix();
-        output.lineA = RandomLine(min, max);
-        output.lineB = RandomLine(min, max);
-        output.lineC = RandomLine(min, max);
-        return output;
+            HashingMatrix output = new HashingMatrix();
+            output.lineA = RandomLine(min, max);
+            output.lineB = RandomLine(min, max);
+            output.lineC = RandomLine(min, max);
+            return output;
     }
 
     /// <summary>
@@ -86,5 +88,15 @@ public class HashingMatrix
         mat.SetVector(lineA, this.lineA);
         mat.SetVector(lineB, this.lineB);
         mat.SetVector(lineC, this.lineC);
+    }
+
+    public override string ToString()
+    {
+        string output = this.lineA.ToString("F5");
+        output += ",";
+        output += this.lineB.ToString("F5");
+        output += ",";
+        output += this.lineC.ToString("F5");
+        return output;
     }
 }

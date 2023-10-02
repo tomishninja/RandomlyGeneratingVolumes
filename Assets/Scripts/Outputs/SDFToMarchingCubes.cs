@@ -1,10 +1,7 @@
-using GenoratingRandomSDF;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UIElements;
 
 namespace GenoratingRandomSDF
 {
@@ -80,13 +77,6 @@ namespace GenoratingRandomSDF
                                 break;
                             }
                         }
-
-                        /*float importance = shapes.Get(index).importance;
-
-                        if (importance >= targetLayer)
-                        {
-                            buffer[x, y, zIndex] = 1;
-                        }*/
                     }
                 }
             }
@@ -257,7 +247,7 @@ namespace GenoratingRandomSDF
             return new int[0];
         }
 
-        public bool ConvertToOBJ(string savePath)
+        public bool ConvertToOBJ(string savePath, string fileName = null)
         {
             if (mesh == null)
             {
@@ -274,8 +264,13 @@ namespace GenoratingRandomSDF
             StreamWriter writer;
             if (savePath == null || savePath.Length == 0)
             {
-                writer = new StreamWriter(Application.dataPath + "MeshData" + Time.frameCount + ".obj");
-                Debug.Log("Saved Instead to: " + Application.dataPath);
+                if (fileName == null)
+                    writer = new StreamWriter(Application.dataPath + "MeshData" + Time.frameCount + ".obj");
+                else
+                    writer = new StreamWriter(Application.dataPath + fileName + ".obj");
+
+                //
+                Debug.Log("Saved Instead to: " + Application.dataPath + fileName == null ? "" : fileName);
             }
             else
             {
@@ -312,6 +307,38 @@ namespace GenoratingRandomSDF
             Debug.Log("Mesh converted to OBJ and saved to: " + savePath);
 
             return true;
+        }
+
+        public string GetHashAsString()
+        {
+            return this.ShaderVerification.GetHashAsString();
+        }
+
+        public void WriteVolumetricDataAsJSONFile(string savePath, string fileName = null)
+        {
+            VolumeDetails details = new VolumeDetails()
+            {
+                resolution = this.resolution,
+                buffer = this.buffer
+            };
+
+            string json = JsonUtility.ToJson(details);
+
+            StreamWriter writer;
+            if (savePath == null || savePath.Length == 0)
+            {
+                if (fileName == null)
+                    writer = new StreamWriter(Application.dataPath + "MeshData" + Time.frameCount + ".json");
+                else
+                    writer = new StreamWriter(Application.dataPath + fileName + ".json");
+            }
+            else
+            {
+                writer = new StreamWriter(savePath);
+            }
+
+            writer.WriteLine(details);
+            writer.Close();
         }
     }
 }
