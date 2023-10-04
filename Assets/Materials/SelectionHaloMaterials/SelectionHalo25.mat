@@ -80,7 +80,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ResulitionForGradient: 8
-    - _SelectionIndex: 1
+    - _SelectionIndex: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
