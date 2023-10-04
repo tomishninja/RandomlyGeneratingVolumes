@@ -16,8 +16,8 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
 
     #region volume
 
-    [SerializeField] protected Shader shader;
-    protected Material material;
+    [SerializeField] protected Shader[] shaders;
+    protected Material[] materials;
 
     //[SerializeField] VolumetricColorPicker color;
     // this just exists for an easy way to navigate the editor 
@@ -99,6 +99,11 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
 
     #endregion
 
+    [Header("Multiple Material Behavious")]
+    public float TimeBetweenIntervals = 20;
+    private float LastTimeChanged = 0;
+    private int materialIndex = 0;
+
     [Header("Optional Settings")]
     [SerializeField] phongLightingHelper _phonglightingHelper;
     [SerializeField] UserTrackingSystemForHatchingScript _hatchingTrackingScript;
@@ -174,19 +179,37 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
         {
             this.StartMethod();
 
-            if (_phonglightingHelper != null)
+            for(int index = 0; index < materials.Length; index++)
             {
-                _phonglightingHelper.AddMaterial(material);
-            }
+                if (_phonglightingHelper != null)
+                {
+                    _phonglightingHelper.AddMaterial(materials[index]);
+                }
 
-            if (_hatchingTrackingScript != null)
-            {
-                _hatchingTrackingScript.AddMat(material);
-            }
+                if (_hatchingTrackingScript != null)
+                {
+                    _hatchingTrackingScript.AddMat(materials[index]);
+                }
 
-            if (StipplingHelper != null)
+                if (StipplingHelper != null)
+                {
+                    StipplingHelper.SetUpMat(materials[index]);
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Time.time - this.LastTimeChanged > this.TimeBetweenIntervals)
+        {
+            this.LastTimeChanged = Time.time;
+
+            this.materialIndex = (this.materialIndex + 1) % this.materials.Length;
+
+            if (materials.Length > 0)
             {
-                StipplingHelper.SetUpMat(material);
+                GetComponent<MeshRenderer>().sharedMaterial = materials[this.materialIndex];
             }
         }
     }
@@ -216,8 +239,6 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
             int x = Random.Range(0, dataObject.width);
             int y = Random.Range(0, dataObject.height);
             int z = Random.Range(0, dataObject.breath);
-
-            UnityEngine.Debug.Log("Computed Gradient : " + ComputeGradient(x, y, z).normalized);
         }
 
         Texture3D output = new Texture3D(dataObject.width, dataObject.height, dataObject.breath, TextureFormat.RGBA32, false)
@@ -346,11 +367,23 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
 
     private void StartMethod()
     {
-        material = new Material(shader);
-        material.renderQueue = RenderQueue;
-        GetComponent<MeshFilter>().sharedMesh = Build();
-        GetComponent<MeshRenderer>().sharedMaterial = material;
-        hasStarted = true;
+        if (shaders != null)
+        {
+            materials = new Material[shaders.Length];
+
+            for (int index = 0; index < shaders.Length; index++)
+            {
+                materials[index] = new Material(shaders[index]);
+                materials[index].renderQueue = RenderQueue;
+                hasStarted = true;
+            }
+
+            if (materials.Length > 0)
+            {
+                GetComponent<MeshFilter>().sharedMesh = Build();
+                GetComponent<MeshRenderer>().sharedMaterial = materials[this.materialIndex];
+            }
+        }
     }
 
     private void SetColorArray()
@@ -398,20 +431,24 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
         // set the colors in the array
         SetColorArray();
 
-        // get going on with the normal stuff for each frame
-        material.SetTexture("_Volume", volume);
-        material.SetTexture("_NormalMap", normalMap);
-        material.SetColorArray("_Colors", _colors);
-        material.SetFloatArray("_Density", _density);
-        material.SetFloatArray("_Intensity", _intensity);
-        material.SetFloat("_Threshold", threshold);
-        material.SetVector("_SliceMin", new Vector3(sliceXMin, sliceYMin, sliceZMin));
-        material.SetVector("_SliceMax", new Vector3(sliceXMax, sliceYMax, sliceZMax));
-        material.SetMatrix("_AxisRotationMatrix", Matrix4x4.Rotate(axis));
-        material.SetVector("aabbMin", this.volumeInfo.minAABB);
-        material.SetVector("aabbMax", this.volumeInfo.maxAABB);
-        material.SetFloat("_MaxDimention", this.volumeInfo.width * 2); // TODO change this
-        material.SetFloat("_EdgeThreshold", this.EdgeThreashold);
+        for(int index = 0; index < materials.Length; index++)
+        {
+            // get going on with the normal stuff for each frame
+            materials[index].SetTexture("_Volume", volume);
+            materials[index].SetTexture("_NormalMap", normalMap);
+            materials[index].SetColorArray("_Colors", _colors);
+            materials[index].SetFloatArray("_Density", _density);
+            materials[index].SetFloatArray("_Intensity", _intensity);
+            materials[index].SetFloat("_Threshold", threshold);
+            materials[index].SetVector("_SliceMin", new Vector3(sliceXMin, sliceYMin, sliceZMin));
+            materials[index].SetVector("_SliceMax", new Vector3(sliceXMax, sliceYMax, sliceZMax));
+            materials[index].SetMatrix("_AxisRotationMatrix", Matrix4x4.Rotate(axis));
+            materials[index].SetVector("aabbMin", this.volumeInfo.minAABB);
+            materials[index].SetVector("aabbMax", this.volumeInfo.maxAABB);
+            materials[index].SetFloat("_MaxDimention", this.volumeInfo.width * 2); // TODO change this
+            materials[index].SetFloat("_EdgeThreshold", this.EdgeThreashold);
+        }
+        
 
         // program in the SDF's
         SDFEclipeData[] sdfData;
@@ -430,12 +467,15 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
                 colors[index] = sdfData[index].Color;
             }
 
-            material.SetVectorArray("_SpherePos", positions);
-            material.SetColorArray("_SphereColors", colors);
-            material.SetVectorArray("_SphereRadius", radius);
+            for (int index = 0; index < materials.Length; index++)
+            {
+                materials[index].SetVectorArray("_SpherePos", positions);
+                materials[index].SetColorArray("_SphereColors", colors);
+                materials[index].SetVectorArray("_SphereRadius", radius);
 
-            material.SetColor("_CylinderColor", sdfInfo.CylinderColor);
-            material.SetFloat("_CylinderRadius", sdfInfo.cylinderRadius);
+                materials[index].SetColor("_CylinderColor", sdfInfo.CylinderColor);
+                materials[index].SetFloat("_CylinderRadius", sdfInfo.cylinderRadius);
+            }
         }
         else
         {
@@ -453,26 +493,34 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
                 radius[index] = r;
                 colors[index] = Color.clear;
             }
+            for (int index = 0; index < materials.Length; index++)
+            {
+                materials[index].SetVectorArray("_SpherePos", positions);
+                materials[index].SetColorArray("_SphereColors", colors);
+                materials[index].SetVectorArray("_SphereRadius", radius);
 
-            material.SetVectorArray("_SpherePos", positions);
-            material.SetColorArray("_SphereColors", colors);
-            material.SetVectorArray("_SphereRadius", radius);
-
-            material.SetColor("_CylinderColor", Color.clear);
-            material.SetFloat("_CylinderRadius", 0);
+                materials[index].SetColor("_CylinderColor", Color.clear);
+                materials[index].SetFloat("_CylinderRadius", 0);
+            }
         }
 
 
 
         if (renderClyinder)
         {
-            material.SetInt("_StartIndexOfCylinder", 1);
-            material.SetInt("_EndIndexOfCylinder", 0); // not working
+            for (int index = 0; index < materials.Length; index++)
+            {
+                materials[index].SetInt("_StartIndexOfCylinder", 1);
+                materials[index].SetInt("_EndIndexOfCylinder", 0); // not working
+            }
         }
         else
         {
-            material.SetInt("_StartIndexOfCylinder", -1);
-            material.SetInt("_EndIndexOfCylinder", -1);
+            for (int index = 0; index < materials.Length; index++)
+            {
+                materials[index].SetInt("_StartIndexOfCylinder", -1);
+                materials[index].SetInt("_EndIndexOfCylinder", -1);
+            }
         }
 
     }
@@ -656,6 +704,9 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
 
     void OnDestroy()
     {
-        Destroy(material);
+        for (int index = 0; index < materials.Length; index++)
+        {
+            Destroy(materials[index]);
+        }
     }
 }
