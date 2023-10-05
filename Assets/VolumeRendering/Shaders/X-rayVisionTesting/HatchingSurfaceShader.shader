@@ -204,6 +204,7 @@
 					struct appdata {
 						float4 vertex : POSITION;
 						float2 uv : TEXCOORD0;    //模型纹理，，，这玩意儿居然还有纹理？
+						UNITY_VERTEX_INPUT_INSTANCE_ID
 					};
 
 					struct v2f {
@@ -211,6 +212,7 @@
 						float2 uv : TEXCOORD0;
 						float3 world : TEXCOORD1;   // 世界空间坐标值
 						float3 local : TEXCOORD2;   // 模型空间坐标的xyz值
+						UNITY_VERTEX_OUTPUT_STEREO
 					};
 
 					// calculate the color's luminance
@@ -310,6 +312,12 @@
 					v2f vert(appdata v) {
 
 						v2f o;
+
+						UNITY_SETUP_INSTANCE_ID(v);
+						UNITY_INITIALIZE_OUTPUT(v2f, o);
+						UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
+
 						o.vertex = UnityObjectToClipPos(v.vertex);
 						o.uv = v.uv;
 						o.world = mul(unity_ObjectToWorld, v.vertex).xyz;
