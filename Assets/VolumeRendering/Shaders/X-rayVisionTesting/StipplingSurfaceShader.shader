@@ -395,7 +395,7 @@
 
 							float v = sample_volume(currentValue, p);
 							//normalize(mul(unity_WorldToObject, dir))
-							float normal = dot(normalize((p - aabb.max) - _WorldSpaceCameraPos), normalize(tex3D(_NormalMap, uv).rgb));
+							float normal = dot(normalize((p - aabb.max)), tex3D(_NormalMap, uv).rgb);
 
 							float stipple = BlueNoise(p, distanceFromCenter, 1 - (lerp(tnear, tfar, p) / 3));
 							bool hasEffect = stipple > _StippleThreashold &&
@@ -413,7 +413,7 @@
 							// create the new color
 							float4 src = map(index, currentDensity * inRange);
 
-							src = wasTouched && (touched < _StepsToEffect && hasEffect) ? float4 (abs(_EffectColor).rgb, abs(_EffectColor).a * -normal) : src;
+        src = wasTouched && (touched < _StepsToEffect && hasEffect) ? float4(abs(_EffectColor).rgb, abs(_EffectColor).a * (-normal / 4)) : src;
 							//src = wasTouched && (touched < _StepsToEffect) ? abs(_EffectColor) * abs(normal) : src;
 
 							float power = _Intensity[index];

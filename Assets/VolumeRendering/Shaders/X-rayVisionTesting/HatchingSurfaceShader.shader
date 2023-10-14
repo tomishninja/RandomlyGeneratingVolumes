@@ -375,7 +375,7 @@
 
 							float v = sample_volume(currentValue, p);
 							//normalize(mul(unity_WorldToObject, dir))
-							float normal = dot(normalize((p - aabb.max) - _WorldSpaceCameraPos), normalize(mul(unity_WorldToObject, tex3D(_NormalMap, uv).rgb)));
+							float normal = dot(normalize((p - aabb.max)), tex3D(_NormalMap, uv).rgb);
 
 							float hatching = SDFHashing(p, 1, 0, normal);
 
@@ -390,7 +390,7 @@
 							// create the new color
 							float4 src = map(index, currentDensity * inRange);
 
-							src = wasTouched && (touched < _StepsToEffect && hatching > 0) ? float4 (abs(_EffectColor).rgb, abs(_EffectColor).a * -normal) : src;
+        src = wasTouched && (touched < _StepsToEffect && hatching > 0) ? float4(abs(_EffectColor).rgb, abs(_EffectColor).a * (-normal / 2)) : src;
 							//src = wasTouched && (touched < _StepsToEffect) ? abs(_EffectColor) * abs(normal) : src;
 
 							float power = _Intensity[index];
