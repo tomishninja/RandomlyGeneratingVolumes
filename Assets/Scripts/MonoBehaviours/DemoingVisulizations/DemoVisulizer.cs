@@ -47,7 +47,7 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
         mat.SetVectorArray("_SphereDetails", this.getShapeDetailsArray());
         mat.SetColorArray("_Colors", this.getColorArray());
         mat.SetFloatArray("_Importance", this.getImportanceArray());
-        mat.SetFloat("_NoiseSuppression", 1f);
+        mat.SetFloat("_NoiseSuppression", 1.5f);
     }
 
     // Sets up the varibles for the ittal condition

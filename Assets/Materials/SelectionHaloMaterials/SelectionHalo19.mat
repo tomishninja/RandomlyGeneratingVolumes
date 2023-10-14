@@ -75,7 +75,7 @@ Material:
     - _MinRadialOfHalo: 0.15
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 1
+    - _NoiseSuppression: 1.5
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02

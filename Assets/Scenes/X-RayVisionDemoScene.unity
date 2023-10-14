@@ -5814,6 +5814,10 @@ PrefabInstance:
       propertyPath: shaders.Array.data[1]
       value: 
       objectReference: {fileID: 4800000, guid: 48255c9706f56b249bb3af4923dd36f3, type: 3}
+    - target: {fileID: 5722239941985046959, guid: f07145df78b52f34f9cd8e3b407111c5, type: 3}
+      propertyPath: colors.Array.data[0].color.rgba
+      value: 7077632
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f07145df78b52f34f9cd8e3b407111c5, type: 3}
 --- !u!114 &2100569853

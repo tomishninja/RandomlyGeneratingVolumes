@@ -75,12 +75,12 @@ Material:
     - _MinRadialOfHalo: 0.15
     - _Mode: 0
     - _NewColorIntensity: 0
-    - _NoiseSuppression: 1
+    - _NoiseSuppression: 1.5
     - _NormalApproxStep: 0.01
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ResulitionForGradient: 8
-    - _SelectionIndex: 0
+    - _SelectionIndex: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
