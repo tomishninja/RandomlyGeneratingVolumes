@@ -1277,9 +1277,14 @@ MonoBehaviour:
   ItemToSet: {fileID: 1402979026}
   boundingBox: {fileID: 620456261}
   maniputionObject: {fileID: 1402979027}
+  bounds: {fileID: 0}
   anchoredButtonIconIndex: 10
   MoveableButtonIconIndex: 8
   IconSet: {fileID: 11400000, guid: 8b386ef895f7c924f8c4b03d1d3ed683, type: 2}
+  AnchoredLabel: 
+  MovableLabel: 
+  MovableObjects: []
+  AnchoredObjects: []
   ObjectIsMovable: 0
 --- !u!114 &620456261
 MonoBehaviour:
