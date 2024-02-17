@@ -1,17 +1,18 @@
 # Randomly Generating Volumes for HCI Research
-A system designed to generate randomly based volumes for research, the paper describing can be found at 10.1109/ISMAR-Adjunct60411.2023.00061 and was presented at ISMAR as Generating Pseudo Random Volumes for Volumetric Research.
+A system designed to generate volumes randomly for research purposes. The paper describing it can be found at [10.1109/ISMAR-Adjunct60411.2023.00061](https://doi.org/10.1109/ISMAR-Adjunct60411.2023.00061) and was presented at ISMAR under the title "Generating Pseudo Random Volumes for Volumetric Research."
 
-This system presents a modular system to create volumes randomly designed for Human User Interaction Studies, specifically designed for AR and VR HCI research but not limited to it. Example code to render these objects is provided.
+This system presents a modular approach to creating volumes randomly, tailored for Human-Computer Interaction (HCI) studies, particularly in Augmented Reality (AR) and Virtual Reality (VR) research, although it is not limited to these domains. Example code for rendering these objects is provided.
 
 ## Outputs
-- Various outputs are achievable using this system. You can directly create some JSON code that will allow you to create a user study that will be able to use both the visualization data and various answer data provided. 
-- The system also contains two interfaces (desktop and Mixed Reality) designed to create a template for a given study.
-- The entire system has been designed to be as modular as possible. 
+- **JSON Data**: Various outputs are achievable using this system. You can directly generate JSON code that facilitates user studies creation, incorporating visualization data and various answer data.
+- **Interfaces**: The system includes two interfaces (desktop and Mixed Reality) intended to provide a template for conducting studies.
+- **Modularity**: The entire system is designed with modularity in mind, providing flexibility for different research needs.
 
 ## Citing
-If you use or modify this document, please either cite or link to the relivent research paper (which can be found here: 10.1109/ISMAR-Adjunct60411.2023.00061), the BibTeX below or by linking this repository.
+If you use or modify this system, please cite or link to the relevant research paper (10.1109/ISMAR-Adjunct60411.2023.00061), the BibTeX entry provided below, or link to this repository.
 
 ### Bibtex
+```
 @INPROCEEDINGS{10322203,
   author={Clarke, Thomas J. and Mayer, Wolfgang and Zucco, Joanne E. and Smith, Ross T.},
   booktitle={2023 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)}, 
@@ -22,3 +23,4 @@ If you use or modify this document, please either cite or link to the relivent r
   pages={266-270},
   keywords={Headphones;Three-dimensional displays;Design methodology;Mixed reality;User interfaces;Augmented reality;Meteorology;Human-centered computing;Visualization;Visualization techniques;Treemaps;Visualization design and evaluation methods},
   doi={10.1109/ISMAR-Adjunct60411.2023.00061}}
+```
