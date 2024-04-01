@@ -8,6 +8,10 @@ This system presents a modular approach to creating volumes randomly, tailored f
 - **Interfaces**: The system includes two interfaces (desktop and Mixed Reality) intended to provide a template for conducting studies.
 - **Modularity**: The entire system is designed with modularity in mind, providing flexibility for different research needs.
 
+## System Design
+This system utilizes a highly modular and adaptable modular system. Using an array of Design Patterns with a lot of inheritance. Below is an image of the main functioning class diagram showing the parts of the system that persist throughout iterations of the system.
+![A class Diagram of the System Should be Here](ImagesForReadMe/DefaultClassDiagram.png)
+
 ## Citing
 If you use or modify this system, please cite or link to the relevant research paper (10.1109/ISMAR-Adjunct60411.2023.00061), the BibTeX entry provided below, or link to this repository.
 
