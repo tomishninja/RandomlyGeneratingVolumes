@@ -27,9 +27,6 @@ public class GeneratingSDFLogicCheckerFactory
     [SerializeField] int Resolution = 128;
     [SerializeField] int ResultionMulitiplierForSmallerTolerance = 4;
 
-    [Header("Oct Tree Parameters")]
-    [SerializeField] InnerOctTreeCheck octTreeObject;
-
     [Header("Debug Options")]
     bool showOutputsOfVolumes = false;
 

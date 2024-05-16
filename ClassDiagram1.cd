@@ -1,0 +1,989 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="GenerateRandomSDFsForInterface" Collapsed="true">
+    <Position X="35.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAgAAgAAAACAAAAAAAAAAAIAAAAAgAgAAIAAAEA=</HashCode>
+      <FileName>Assets\GenerateRandomSDFsForInterface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LogicControllerForGeneratingRandomSDFs" Collapsed="true">
+    <Position X="33.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABBAEgAAABAAAAYAEAIAAIAEBAQQECAAgARAA=</HashCode>
+      <FileName>Assets\Scripts\Adapters\LogicControllerForGeneratingRandomSDFs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RanForTooLongException" Collapsed="true">
+    <Position X="33.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Exceptions\RanForTooLongException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileReaderWriter&lt;T&gt;">
+    <Position X="23.25" Y="10.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAACAAAAAg=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\FileReaderWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="JSONFileReaderWriter&lt;T&gt;">
+    <Position X="23.25" Y="13" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\JSONFileReaderWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinAndMaxFloat" Collapsed="true">
+    <Position X="35.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAQAQAAgAAAAAAAAAAAAIAAEABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\MinAndMaxClasses\MinAndMaxFloat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MinAndMaxInt" Collapsed="true">
+    <Position X="35.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAQAQAAAAAAAAAAAAAAAAAAEABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\MinAndMaxClasses\MinAndMaxInt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Marching">
+    <Position X="5.25" Y="28.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQAAAgAgAAAAAAgAAAAAAAAEAAAAAAAAAAAAAUAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MarchingCubes\Marching.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarchingCubes">
+    <Position X="5.25" Y="32.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgQAAAAAAAAAAAAAAAAAAAQACAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MarchingCubes\MarchingCubes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CountingSutdySDFManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIEEAAACCAAAAACgABAAEAAACAAAAACBAAAAAAhAE=</HashCode>
+      <FileName>Assets\Scripts\MonoBehaviours\CountingSutdySDFManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DemoVisulizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQMEEIAACCAAAQACAABAAEAAACAAAAACBAAAAAAgAE=</HashCode>
+      <FileName>Assets\Scripts\MonoBehaviours\DemoingVisulizations\DemoVisulizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GenerateRandomSDFs">
+    <Position X="16" Y="20" Width="3.5" />
+    <Members>
+      <Field Name="DemoVisulizers" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQBABABBCEgAAABAAAAYAEAIAAIAEAIAAEAAAgAREA=</HashCode>
+      <FileName>Assets\Scripts\MonoBehaviours\GenerateRandomSDFs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mainLogicOperator" />
+      <Field Name="AddingShapeparameters" />
+      <Field Name="builder" />
+      <Field Name="conditionDetails" />
+      <Field Name="hashingMatrix" />
+      <Field Name="profiler" />
+      <Field Name="shapes" />
+      <Field Name="fileWriter" />
+      <Field Name="errorHandelerStats" />
+      <Field Name="screenShot" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DataConverter" Collapsed="true">
+    <Position X="33.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAgAEQCAIAAAAAAAAAAAACAAAAAACAAAABABAAAA=</HashCode>
+      <FileName>Assets\Scripts\MonoBehaviours\UIHelpers\DataConverter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshToUnityObject">
+    <Position X="4.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Outputs\MeshToUnityObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomChildGeneratorFactory">
+    <Position X="29.75" Y="31" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\RandomChildGeneratorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RandomChildrenAllocationSystem" Collapsed="true">
+    <Position X="31.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAABAQAAIAAAAAAAEQAACAAAgIAQRIAAgQ=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\RandomChildrenAllocationSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CheckingStateContoller">
+    <Position X="30" Y="37.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAKAAABABABAAAAAAEAAgACAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\CheckingStateContoller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="container" />
+      <Field Name="current" />
+      <Field Name="inner" />
+      <Field Name="outer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GeneratingSDFLogicBuilder">
+    <Position X="26.25" Y="9.25" Width="5" />
+    <NestedTypes>
+      <Enum Name="GeneratingSDFLogicBuilder.TypeOfContatiner" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\GeneratingSDFLogicBuilder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="GeneratingSDFLogicBuilder.TypeOfInnerCheck" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\GeneratingSDFLogicBuilder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAgAABAAAAAAAACQAEgAAAAAQACCAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeneratingSDFLogicBuilder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="factory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GeneratingSDFLogicCheckerFactory">
+    <Position X="2.25" Y="3.5" Width="7" />
+    <TypeIdentifier>
+      <HashCode>ggQCAtAgAgAgBBAAABAABAAACIQwAAAgIABCQVhgBAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeneratingSDFLogicCheckerFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="conditionDetails" />
+      <Field Name="dataProfiler" />
+      <Field Name="layerManager" />
+      <Field Name="randomChildGeneratorFactory" />
+      <Field Name="shaderSimulator" />
+      <Field Name="meshToUnityObject" />
+      <Field Name="parametersForAddingSDFs" />
+      <Field Name="shapes" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AbstractGeometricShape">
+    <Position X="7.25" Y="16.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAACCEAIAABgAAAAAAAAAAACACAAAgACAAEAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeometricShapes\AbstractGeometricShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DepthPerceptionSuperClass">
+    <Position X="8.75" Y="21.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeometricShapes\DepthPerceptionSuperClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HierachicalObjects">
+    <Position X="5.75" Y="21.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAIAAAAAAAEQABAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeometricShapes\HierachicalObjects.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Children" />
+      <Field Name="Parent" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NoisySphereShapeGenerationHelper">
+    <Position X="5.25" Y="24.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAACAIIAAAAAAAAAAAAgAAKACAAIhAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\GeometricShapes\NoisySphereShapeGenerationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HashingMatrix" Collapsed="true">
+    <Position X="21" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAgEQACAABAAAAAAAAAAAAAAAgBAABA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Hatching\HashingMatrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnswersFromGeneration" Collapsed="true">
+    <Position X="22.25" Y="5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="AnswersFromGeneration.HierarchyDetails" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\AnswersFromGeneration.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="AnswersFromGeneration.ColorDetails" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\AnswersFromGeneration.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="AnswersFromGeneration.DepthInformation" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\AnswersFromGeneration.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAIAQAACAAAAAGAgAggAEAAAAAAAABBIAAgA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\AnswersFromGeneration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudyDetailsForOutput">
+    <Position X="21.5" Y="6.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACAABAAAAAAAAAACAAAACAAEAABCAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\StudyDetailsForOutput.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="answers" />
+      <Field Name="hash" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="shapeDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ItterationOrderHandeler&lt;T&gt;">
+    <Position X="19.25" Y="15.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\ItterationOrderHandeler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LatinBallanceSquareHandeler&lt;T&gt;">
+    <Position X="19" Y="17.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\LatinBallanceSquareHandeler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PermutationFactory&lt;T&gt;" Collapsed="true">
+    <Position X="31.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\PermutationFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PermutationGenerator&lt;T&gt;" Collapsed="true">
+    <Position X="33.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAABAAgAAAAAABAAEAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\PermutationGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PermutationsHandeler&lt;T&gt;">
+    <Position X="22.25" Y="17.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\PermutationsHandeler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShufflingHandeler&lt;T&gt;">
+    <Position X="16.5" Y="17.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\ShufflingHandeler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StudyGenerationPlanner">
+    <Position X="25" Y="15.25" Width="4.25" />
+    <NestedTypes>
+      <Enum Name="StudyGenerationPlanner.Filebehaviour" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\StudyGenerationPlanner.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIABBBACIIBAliCAEAAAgAgAAhBAhAIYAIACEAACAIA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\StudyGenerationPlanner.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ConditionPermutationsHandeler" />
+      <Field Name="fileReaderWriter" />
+      <Field Name="LevelPermutationsHandeler" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="levelDetails" />
+      <Field Name="PermutatedlevelDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ScreenShot" Collapsed="true">
+    <Position X="17" Y="24.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAQgAAACBAAAAAQQAAQAgAAAAgAEAAAACAIAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\TakingAScreenShot\ScreenShot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NoCheck" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAABQAAAAAAAAAAAAgAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\NoCheck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SphericalVolumeHierarchyLevelDetails">
+    <Position X="16.25" Y="3" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>BACAABBABpEQGwAQhAAAACAAgJAEAIAAABAAABACAkA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\VolumeHierarchyParameters\SphericalVolumeHierarchyLevelDetails.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ContainableInputInformation" />
+      <Field Name="CountableInputInformation" />
+      <Field Name="NotCountableInputInformation" />
+      <Field Name="OuterObjectInputInfo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="VolumetricArtifact">
+    <Position X="16.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEACACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\VolumeHierarchyParameters\VolumetricArtifact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VolumetricSphereArtifact">
+    <Position X="16.25" Y="12.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAABAAAAgAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\VolumeHierarchyParameters\VolumetricSphereArtifact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaterialHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\VizulizationHelpers\MaterialHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SetUpColorPicker" Collapsed="true">
+    <Position X="33.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAACCAAABCAACACCAAAEAAAICgAAgAAUAAAAA=</HashCode>
+      <FileName>Assets\SetUpColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnvMapAnimator" Collapsed="true">
+    <Position X="33.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAAAAAAgAAAAAAQAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CollectDataForSDFInfo" Collapsed="true">
+    <Position X="35.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBEFAAAAgAAAAAAAAAAACBAgBAAAAAAAAAAAAAkAAw=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\CollectDataForSDFInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SDFLinkingCylinderData" Collapsed="true">
+    <Position X="31.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAACAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\CollectDataForSDFInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SDFSphereData" Collapsed="true">
+    <Position X="33.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\CollectDataForSDFInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SDFEclipeData" Collapsed="true">
+    <Position X="35.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\CollectDataForSDFInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RotationSelectionBehaviour" Collapsed="true">
+    <Position X="35.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAQAAAAAAAAAAAAAQAAAgEIFAAAMAAAAAACAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\CollisionDetection\RotationSelectionBehaviour.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataCounterDataBase" Collapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAABBAAAAAAAAAAAAAEAAAQAACAABIAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Data_Gathering\DataCounterDataBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileWriterManager" Collapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAgAAIAAAAAABAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Data_Gathering\FileWriterManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DataItem" Collapsed="true">
+    <Position X="33.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DataItem.TypeofData" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\VolumeRendering\Scripts\Data_Gathering\GenericDataItem.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAIAAAAAAAAAAAAAACAAAAAAAAAAAAAABQA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Data_Gathering\GenericDataItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimerDataRows" Collapsed="true">
+    <Position X="33.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKAAAAAAAAAACAAgAAAAAAAIAAgEAEAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Data_Gathering\TimerDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicTexture" Collapsed="true">
+    <Position X="31.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAQABARAQAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\DetermineMeshIntersection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenerateARandomPointInsideOfThisObject" Collapsed="true">
+    <Position X="35.5" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACAAAAAAAAAgACAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\GenerateARandomPointInsideOfThisObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenerateStudyDesign" Collapsed="true">
+    <Position X="35.75" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="GenerateStudyDesign.Task" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\VolumeRendering\Scripts\GenerateStudyDesign.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAUAAAAAACACAARAAAAAACAEAAAAAEAAAEIEFAABAgA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\GenerateStudyDesign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IsInsideOfObjectCheck" Collapsed="true">
+    <Position X="31.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAABAAAAAAAgAABAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\IsInsideOfObjectCheck.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewBehaviourScript" Collapsed="true">
+    <Position X="35.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\NewBehaviourScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DynamicMovementTextureFromDicom" Collapsed="true">
+    <Position X="35.75" Y="1.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DynamicMovementTextureFromDicom.Orientation" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\DynamicMovementTextureFromDicom.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAiAIAAAAAAAAAAAAAAggAEAAQAAAAgKAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\DynamicMovementTextureFromDicom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RGBVolumeRendering" Collapsed="true">
+    <Position X="35.5" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEIAAABAAgAAAACGAIAAAAAAAiCCAAAAAAEBCAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\RGBVolumeRendering.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TargetPositionData" Collapsed="true">
+    <Position X="31.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAACAQAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\TargetPositionData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TargetPosition" Collapsed="true">
+    <Position X="33.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\TargetPositionData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octTree.OctreeNode" Collapsed="true">
+    <Position X="33.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAEAAAABAQgAwAECAEEAAAAAAAAAAAAAAAaAAYiAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\DataStuctures\OctTree\OctreeNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octTree.OctTree" Collapsed="true">
+    <Position X="31.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAACAAAAAgAAEAAAAgAAAAAAAAAAAAiAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\DataStuctures\OctTree\OctTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octTree.OctTreeInt" Collapsed="true">
+    <Position X="33.75" Y="3.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="octTree.OctTreeInt.OctTreeNodeInt" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\VolumeRendering\Scripts\DataStuctures\OctTree\OctTree.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\DataStuctures\OctTree\OctTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="octTree.DistanceValue" Collapsed="true">
+    <Position X="35.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\DataStuctures\OctTree\OctTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.MeshOutputManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="33.75" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="GenoratingRandomSDF.MeshOutputManager.Process" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Outputs\MeshOutputManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAQAABAAAEAAAACAAIAEAAAAAAAAAAAEgBAA=</HashCode>
+      <FileName>Assets\Scripts\Outputs\MeshOutputManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GenoratingRandomSDF.SDFToMarchingCubes" Collapsed="true">
+    <Position X="31.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAQQAAAIAABBAQIACAAKAAAABBAAAAAABIAEEAAAA=</HashCode>
+      <FileName>Assets\Scripts\Outputs\SDFToMarchingCubes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.AbstractAddSDFLogic">
+    <Position X="7.75" Y="10.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AgQCAAAAQIAAAAAAAAAAIAAAAAAQAAAgBAAAAACAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\AbstractAddSDFLogic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="currentLevel" />
+      <Field Name="randomChildGeneratorFactory" />
+      <Field Name="trackingVariables" />
+      <Field Name="parameters" />
+      <Field Name="dataProfiler" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.AddLargeSphereToOuter">
+    <Position X="8" Y="13.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\AddLargeSphereToOuter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.AddMiddleLayerSDFs">
+    <Position X="5.5" Y="13.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\AddMiddleLayerSDFs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.AddSDFsToContainingItem">
+    <Position X="10.75" Y="13.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\AddSDFsToContainingItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.ParametersForAddIngSDFs">
+    <Position X="0.75" Y="15.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAABAAAAgBAAAAAAAABA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\ParametersForAddIngSDFs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.StateControllerForAddingSDFs">
+    <Position X="10.75" Y="1.5" Width="4.5" />
+    <NestedTypes>
+      <Enum Name="GenoratingRandomSDF.StateControllerForAddingSDFs.Level" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\StateControllerForAddingSDFs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BgAAAAAAAIBAAABAABAAAAgAgACACBAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AddingSDFs\StateControllerForAddingSDFs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="container" />
+      <Field Name="current" />
+      <Field Name="inner" />
+      <Field Name="outer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.AmountTrackingParameters">
+    <Position X="12" Y="9.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAABAAAAAAAAAAAAoAAAAAAAAAAABIAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\AmountTrackingParameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.ErrorHandelerFacade">
+    <Position X="21.5" Y="33.25" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>CgACAAAAAAAABAAAEAACAAYIAAFWIAAAIBACAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ErrorHandelerFacade.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="randomChildGeneratorFactory" />
+      <Field Name="mainObject" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.LayerManager">
+    <Position X="26" Y="4.75" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAACAAAAAgIAAAACBAAIAAAAAAABAE=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\LayerManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="stateController" />
+      <Field Name="stateControllerForAddingSDFs" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.SDFGenorator">
+    <Position X="25" Y="23.25" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AkEACAQAJAlgBEgAMgAAIABAACAEAIACABAAAIgABAQ=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\SDFGenorator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="valuesToTrackVariousAmountsOfThings" />
+      <Field Name="randomChildGeneratorFactory" />
+      <Field Name="outputFileWriter" />
+      <Field Name="addingSDFController" />
+      <Field Name="checkingTheVolumeController" />
+      <Field Name="conditionDetails" />
+      <Field Name="hashingMatrix" />
+      <Field Name="optionalFinalCheck" />
+      <Field Name="statsForErrorHandeling" />
+      <Field Name="profiler" />
+      <Field Name="shapes" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="outputHandelers" />
+      <Field Name="StudyDesign" />
+      <Field Name="visulizations" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.ShapeArrayFriendlyFunctions" Collapsed="true">
+    <Position X="35.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ShapeArrayFriendlyFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.ShapeHandeler">
+    <Position X="14.75" Y="31.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AIAUEgAABAAABABAAAIIAABBAAAIBAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ShapeHandeler.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="profiler" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="Shapes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="GenoratingRandomSDF.InnerLayerParrellelFinalChecker">
+    <Position X="24.25" Y="29.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\InnerLayerParrellelFinalChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.InnerObjectCheckerParent">
+    <Position X="20.75" Y="20.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAAoAQAFAAAgAAAACAACAAAAACAQAACIABCABAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\InnerObjectCheckerParent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.InnerOctTreeCheck">
+    <Position X="16.5" Y="26" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="GenoratingRandomSDF.InnerOctTreeCheck.OctTreeResolution" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\InnerOctTreeCheck.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAACAAAACBQAAAAAAAAACEAABAAIAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\InnerOctTreeCheck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GenoratingRandomSDF.LinniarInnerChecker">
+    <Position X="22" Y="26" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BACAAACAAAAABQAAICAAAAAAAAAAAAAAAAACAAgEAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\LinniarInnerChecker.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GenoratingRandomSDF.OctTreeVerificationMethods" Collapsed="true">
+    <Position X="35.5" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAABAAAAAAAAAAAAAAAAAAAEAAABAAAAIBAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\OctTreeVerificationMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.ParrellInnerChecker">
+    <Position X="19" Y="29.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\ParrellInnerChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.UnoptimiseLinearSearch">
+    <Position X="21.5" Y="29.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\InnerCheck\UnoptimiseLinearSearch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenoratingRandomSDF.OuterBoxCheck" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACAAAAABQAAIAAAAAAAAAAAAAAAIABAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\OuterCheck\OuterBoxCheck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GenoratingRandomSDF.OuterSphereCheck" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAACACAAABQAAIAAAAAAAAAAAAAAAIABAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\OuterCheck\OuterSphereCheck.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="hLSL_Simulator.NoisyHierarchicalSpheres">
+    <Position X="2.25" Y="19.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAAMgAAAAQAQAAAAQAABAAAAAAABAAAgABEA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\HLSL_Simulator\NoisyHierarchicalSpheres.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="hashingMatrix" />
+      <Field Name="shapes" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="profiler.AbstractProfiler">
+    <Position X="12.25" Y="16.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAASAIAIAAAAAAIAAAAAABAAAAAAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Profiler\AbstractProfiler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="profiler.DataGenerationDataProfiler">
+    <Position X="12.5" Y="20" Width="2.25" />
+    <Members>
+      <Field Name="AMOUNT_OF_SUCCESSFUL_LAYERS" Hidden="true" />
+      <Field Name="COULD_NOT_FIT_ALL_OBJECTS_IN_TIME" Hidden="true" />
+      <Field Name="ENDTIME" Hidden="true" />
+      <Field Name="ITTERATION" Hidden="true" />
+      <Field Name="MOVED_A_REGION" Hidden="true" />
+      <Field Name="NAME_OF_LOGIC_OUTPUT_FILE" Hidden="true" />
+      <Field Name="OUTSIDE_OF_MINIMAL_AABB" Hidden="true" />
+      <Field Name="OUTSIDE_OF_PARENT" Hidden="true" />
+      <Field Name="REPLACED_ALL_CHILDREN" Hidden="true" />
+      <Field Name="STARTTIME" Hidden="true" />
+      <Field Name="SUCCESS" Hidden="true" />
+      <Field Name="TIMETAKEN" Hidden="true" />
+      <Field Name="TOO_FAILED_SECOND_CHECK" Hidden="true" />
+      <Field Name="TOO_MANY_LARGE_ARTIFICATS" Hidden="true" />
+      <Field Name="UNEXPECTED_ERROR" Hidden="true" />
+      <Field Name="WITHIN_ANOTHER_SDF" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAABAMSAAAgACAIAIBAiAAAIAQAAAABIAIAABgQMAQA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Profiler\DataGenerationDataProfiler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fileIO.StudyDataSet" Collapsed="true">
+    <Position X="31.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\StudyDataSet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="fileIO.WriteStudyDesignToFile" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="32.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAEAACQAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\WriteStudyDesignToFile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TMPro.Examples.ShaderPropAnimator" Collapsed="true">
+    <Position X="35.5" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAAAAAAAAAgAEAAAAAAAAAAAAAAAQAgAEA=</HashCode>
+      <FileName>Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GaussianKernel.GaussianKernelGenerator" Collapsed="true">
+    <Position X="33.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\DataStuctures\GaussianKernal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sobel.SobelKernal" Collapsed="true">
+    <Position X="35.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\DataStuctures\SobelKernal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarchingCubesProject.Marching">
+    <Position X="10.75" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQAAAgAgAAAAAAgAAAAAAAAAAAAAAAACgAAAAEAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Marching\Marching.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarchingCubesProject.MarchingCubes">
+    <Position X="9.25" Y="27.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAgQAAAAAAAAAAAAAAAAAAAQACAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Marching\MarchingCubes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MarchingCubesProject.MarchingTertrahedron">
+    <Position X="11.5" Y="27.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgSAAAAAAAEIAASAAAAAAAAAAAAABAgAAACAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Marching\MarchingTertahedron.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="RangeBasedVolumetricColorPicker" Collapsed="true">
+    <Position X="29.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAQAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\VolumetricColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="VolumetricColorAndIntensityPicker" Collapsed="true">
+    <Position X="29.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACQCAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\VolumetricColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="StippllingColorPicker" Collapsed="true">
+    <Position X="29.25" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="StippllingColorPicker.Style" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\VolumetricColorPicker.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAACQCAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\OldVolumetricRender\VolumetricColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IFloatListener" Collapsed="true">
+    <Position X="16" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GeneralHelperClasses\IFloatListener.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IProcess">
+    <Position X="27.75" Y="28.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Outputs\IProcess.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IWriteOutputFile" Collapsed="true">
+    <Position X="26.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\ResultsFromGeneration\IWriteOutputFile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IVerification">
+    <Position X="31.75" Y="27.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\Verification\IVerification.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VisulizationAdapter">
+    <Position X="31.75" Y="24.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\VisulizationHelpers\VisulizationAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MarchingCubesProject.IMarching" Collapsed="true">
+    <Position X="17.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\VolumeRendering\Scripts\Marching\IMarching.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DataType" Collapsed="true">
+    <Position X="22.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\MonoBehaviours\UIHelpers\DataConverter.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PermutationType" Collapsed="true">
+    <Position X="24.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\SDFGenerationLogic\StudyOrganisation\PermutationFactory.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
