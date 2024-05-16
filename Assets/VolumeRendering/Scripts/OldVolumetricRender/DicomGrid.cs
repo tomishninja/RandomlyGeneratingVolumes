@@ -2962,8 +2962,8 @@ public class DicomGrid
             {
                 for (int k = 0; k < 3; k++)
                 {
-                    Vector3 offset = new Vector3(i, j, k);
-                    if (this.Exists(new Vector3(i, j, k)))
+                    Vector3Int offset = new Vector3Int(i, j, k);
+                    if (this.Exists(new Vector3Int(i, j, k) - offset))
                     {
                         gradientX += this.Get(location - offset) * sobelX[i, j, k];
                         gradientY += this.Get(location - offset) * sobelY[i, j, k];

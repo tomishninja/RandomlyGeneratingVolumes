@@ -153,6 +153,7 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
         switch(currentRun)
         {
             case TypeOfNormalsToRender.depthBased:
+            case TypeOfNormalsToRender.convoluationalSobel:
                 volumeInfo.SegmentDicom(minSegmention);
                 break;
         }
@@ -655,7 +656,8 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
             else if (threasholdValue >= byte.MaxValue)
                 threasholdValue = byte.MaxValue;
 
-            if (currentRun == TypeOfNormalsToRender.depthBased)
+            if (currentRun == TypeOfNormalsToRender.depthBased ||
+                currentRun == TypeOfNormalsToRender.convoluationalSobel)
             {
                 float distanceToSkip = 0;
                 if (dataObject.definition[index] == DicomGrid.TypeOfVoxel.outside)
@@ -666,7 +668,8 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
                 // Set the current values to the output texture for the min based check. 
                 try
                 {
-                    colors[index] = new Color32(System.Convert.ToByte(distanceToSkip * 256f), 
+                    colors[index] = new Color32(
+                        System.Convert.ToByte(distanceToSkip * 256f), 
                         0, 
                         0, 
                         System.Convert.ToByte(threasholdValue));
