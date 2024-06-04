@@ -32,7 +32,7 @@ public class UserTrackingSystemForHatchingScript : MonoBehaviour
         for (int index = 0; index < angleOffSet.Length; index++)
         {
             array[index] = Matrix4x4.TRS(Vector3.zero, transform.localRotation * Quaternion.Euler(angleOffSet[index]), Vector3.one).inverse;
-            Debug.Log("NewTransform" + array[index]);
+            //Debug.Log("NewTransform" + array[index]);
         }
 
         for (int index = 0; index < mat.Length; index++)

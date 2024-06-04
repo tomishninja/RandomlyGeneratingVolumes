@@ -28,7 +28,7 @@ namespace GenoratingRandomSDF
         OctTreeVerificationMethods OctTreeMethodBehaviour = null;
 
         // Testing how the contrustors work on serilized objects
-        InnerOctTreeCheck() : base(0) { }
+        public InnerOctTreeCheck() : base(0) { }
 
         Vector3 offset;
 

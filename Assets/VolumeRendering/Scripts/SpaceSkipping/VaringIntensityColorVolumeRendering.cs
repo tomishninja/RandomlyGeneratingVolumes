@@ -1,10 +1,12 @@
-﻿using System.Diagnostics;
-using System.Reflection;
+﻿using System;
 using UnityEngine;
 
 public class VaringIntensityColorVolumeRendering : MonoBehaviour
 {
     const int MaxAmountOfColors = 4;
+
+    [SerializeField] bool ReadSerializableInput = false;
+    [SerializeField] string inputSerializationFileName = "WritePathToFileNameHere";
 
     enum TypeOfNormalsToRender
     {
@@ -109,57 +111,114 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
     [SerializeField] UserTrackingSystemForHatchingScript _hatchingTrackingScript;
     [SerializeField] SetUpStipplingMat StipplingHelper;
 
+    // Stuff for the segmentation
+    public int MaxAmountOfItterations = 0;
+    SegmentionFunctor segmentionFunctor;
+    bool isRunningSegmentation = false;
+
     // Start is called before the first frame update
     void Awake()
     {
-        TextAsset mytxtData = (TextAsset)Resources.Load(file);
-        
-        if (mytxtData == null)
+        if (ReadSerializableInput)
         {
-            UnityEngine.Debug.Log("No Text Asset Found");
+            System.IO.StreamReader reader = new System.IO.StreamReader(inputSerializationFileName);
+            string json = reader.ReadToEnd();
+            dataObject = JsonUtility.FromJson<DicomGrid>(json);
         }
-        if (typeofVolume == TypeofVolume.DCM)
+        else
         {
-            // logic for a dicom
-            dataObject = JsonUtility.FromJson<DicomGrid>(mytxtData.text);
-        }
-        else if (typeofVolume == TypeofVolume.PVM)
-        {
-            PVMData temp = JsonUtility.FromJson<PVMData>(mytxtData.text);
+            TextAsset mytxtData = (TextAsset)Resources.Load(file);
 
-            dataObject.buffer = temp.data;
-            dataObject.width = temp.width;
-            dataObject.height = temp.height;
-            dataObject.breath = temp.breath;
-        }
+            if (mytxtData == null)
+            {
+                UnityEngine.Debug.Log("No Text Asset Found");
+            }
+            if (typeofVolume == TypeofVolume.DCM)
+            {
+                // logic for a dicom
+                dataObject = JsonUtility.FromJson<DicomGrid>(mytxtData.text);
+            }
+            else if (typeofVolume == TypeofVolume.PVM)
+            {
+                PVMData temp = JsonUtility.FromJson<PVMData>(mytxtData.text);
 
-        // make sure the kernal size is uneven
-        if (this.kernalSize % 2 == 0) this.kernalSize++;
-        switch (typeOfSmoothingToApply)
-        {
-            case TypeOfSmoothingToApply.Average:
-                // smooth this object
-                this.dataObject.AverageSmoothing(this.kernalSize);
-                break;
-            case TypeOfSmoothingToApply.Gaussian:
-                // smooth object
-                this.dataObject.GaussianSmoothing(this.kernalSize, sigma);
-                break;
-            default:
-                break;
-        }
+                dataObject.buffer = temp.data;
+                dataObject.width = temp.width;
+                dataObject.height = temp.height;
+                dataObject.breath = temp.breath;
+            }
 
-        //if (this.RunDepthBasedCheck && !volumeInfo.Segmented)
-        switch(currentRun)
-        {
-            case TypeOfNormalsToRender.depthBased:
-            case TypeOfNormalsToRender.convoluationalSobel:
-                volumeInfo.SegmentDicom(minSegmention);
-                break;
+            // make sure the kernal size is uneven
+            if (this.kernalSize % 2 == 0) this.kernalSize++;
+            switch (typeOfSmoothingToApply)
+            {
+                case TypeOfSmoothingToApply.Average:
+                    // smooth this object
+                    this.dataObject.AverageSmoothing(this.kernalSize);
+                    break;
+                case TypeOfSmoothingToApply.Gaussian:
+                    // smooth object
+                    this.dataObject.GaussianSmoothing(this.kernalSize, sigma);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     protected virtual void Start()
+    {
+        if (!ReadSerializableInput)
+        {
+            if (currentRun == TypeOfNormalsToRender.depthBased || currentRun == TypeOfNormalsToRender.convoluationalSobel)
+            {
+                if (MaxAmountOfItterations == 0)
+                {
+                    volumeInfo.SegmentDicom(minSegmention);
+                }
+                else
+                {
+                    segmentionFunctor = new SegmentionFunctor(volumeInfo, minSegmention);
+                    isRunningSegmentation = true;
+                }
+            }
+            else
+            {
+                setUpVolume();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (isRunningSegmentation)
+        {
+            for (int index = 0; index < MaxAmountOfItterations; index++)
+            {
+                if (segmentionFunctor.processes() < 0)
+                {
+                    isRunningSegmentation = false;
+                    setUpVolume();
+                }
+            }
+        }
+        else
+        {
+            if (Time.time - this.LastTimeChanged > this.TimeBetweenIntervals)
+            {
+                this.LastTimeChanged = Time.time;
+
+                this.materialIndex = (this.materialIndex + 1) % this.materials.Length;
+
+                if (materials.Length > 0)
+                {
+                    GetComponent<MeshRenderer>().sharedMaterial = materials[this.materialIndex];
+                }
+            }
+        }
+    }
+
+    private void setUpVolume()
     {
         volume = GetAsTexture3DOneByte(low, high);
         switch (currentRun)
@@ -180,7 +239,7 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
         {
             this.StartMethod();
 
-            for(int index = 0; index < materials.Length; index++)
+            for (int index = 0; index < materials.Length; index++)
             {
                 if (_phonglightingHelper != null)
                 {
@@ -196,21 +255,6 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
                 {
                     StipplingHelper.SetUpMat(materials[index]);
                 }
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (Time.time - this.LastTimeChanged > this.TimeBetweenIntervals)
-        {
-            this.LastTimeChanged = Time.time;
-
-            this.materialIndex = (this.materialIndex + 1) % this.materials.Length;
-
-            if (materials.Length > 0)
-            {
-                GetComponent<MeshRenderer>().sharedMaterial = materials[this.materialIndex];
             }
         }
     }
@@ -237,9 +281,9 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
         for (int i = 0; i < 100; i++)
         {
             // find a random object to slelect
-            int x = Random.Range(0, dataObject.width);
-            int y = Random.Range(0, dataObject.height);
-            int z = Random.Range(0, dataObject.breath);
+            int x = UnityEngine.Random.Range(0, dataObject.width);
+            int y = UnityEngine.Random.Range(0, dataObject.height);
+            int z = UnityEngine.Random.Range(0, dataObject.breath);
         }
 
         Texture3D output = new Texture3D(dataObject.width, dataObject.height, dataObject.breath, TextureFormat.RGBA32, false)
@@ -707,6 +751,16 @@ public class VaringIntensityColorVolumeRendering : MonoBehaviour
 
     void OnDestroy()
     {
+        // Write this file to a file
+        string fileOutput = JsonUtility.ToJson(dataObject);
+
+        string path = Application.persistentDataPath + System.DateTime.Now.ToString() + "/DataObject.json";
+
+        UnityEngine.Debug.Log("Saving to " + path);
+
+        System.IO.File.WriteAllText(path, fileOutput);
+
+        // Destroy the materials
         for (int index = 0; index < materials.Length; index++)
         {
             Destroy(materials[index]);

@@ -1425,7 +1425,8 @@ public class DicomGrid
 
     public int sizeOfLargestSegment;
 
-    private bool segmented = false;
+    // this should be changed but it makes it easy for the functor - todo create a name space so this can be protected at least
+    public bool segmented = false;
     public bool Segmented { get => segmented; }
 
     // used to create a mininmum bounding volume hyeriacty

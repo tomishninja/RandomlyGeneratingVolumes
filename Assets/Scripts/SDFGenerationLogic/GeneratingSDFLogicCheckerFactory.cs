@@ -117,9 +117,11 @@ public class GeneratingSDFLogicCheckerFactory
 
     public virtual InnerOctTreeCheck GetInnerOctTreeChecker()
     {
-        this.octTreeObject.Init(ref shaderSimulator, ref dataProfiler, 8, cordOffset);
+        InnerOctTreeCheck octTreeObject = new InnerOctTreeCheck();
 
-        return this.octTreeObject;
+        octTreeObject.Init(ref shaderSimulator, ref dataProfiler, 8, cordOffset);
+
+        return octTreeObject;
     }
 
     public virtual NoCheck GetNoChecker()
