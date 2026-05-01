@@ -100,7 +100,8 @@ namespace GeneratingRandomSDF
 
                         // fill in the information that was missed before
                         shape.importance = currentLevel.ContainableImportance;
-                        shape.color = currentLevel.ContainableColor;shape.Children = new HierarchicalObjects[amountOfChildrenForEachContainer[iteration]];
+                        shape.color = currentLevel.ContainableColor;
+                        shape.Children = new HierarchicalObjects[amountOfChildrenForEachContainer[iteration]];
 
                         shapes.Set(index, shape);
                         index++;
