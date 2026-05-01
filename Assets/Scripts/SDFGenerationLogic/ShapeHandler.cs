@@ -2,22 +2,28 @@ using profiler;
 using UnityEngine;
 
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
+    /// <summary>
+    /// Flat array that holds all <see cref="HierarchicalObjects"/> across the entire three-layer
+    /// hierarchy (outer, container, inner) for a single generation cycle.
+    /// Provides a cursor (<see cref="CurrentShape"/>) that drives sequential adding and
+    /// verification passes over each shape.
+    /// </summary>
     [System.Serializable]
-    public class ShapeHandeler
+    public class ShapeHandler
     {
         private int currentShapeIndex = 0;
-        [SerializeField] HierachicalObjects[] Shapes;
+        [SerializeField] HierarchicalObjects[] Shapes;
         profiler.AbstractProfiler profiler;
 
-        internal HierachicalObjects CurrentShape { get => Shapes[currentShapeIndex]; }
+        internal HierarchicalObjects CurrentShape { get => Shapes[currentShapeIndex]; }
 
         public int Length { get => Shapes.Length; }
 
         internal bool ShapesAreRemainingToVerify { get => currentShapeIndex < (this.Shapes.Length - 1); }
 
-        internal int AmountOfShapesRemaing { get => (this.Shapes.Length - currentShapeIndex); }    
+        internal int AmountOfShapesRemaining { get => (this.Shapes.Length - currentShapeIndex); }    
 
         /// <summary>
         /// Move the interal incremenor to the next shape
@@ -35,7 +41,7 @@ namespace GenoratingRandomSDF
             return false; 
         }
 
-        internal void Set(int index, HierachicalObjects shape)
+        internal void Set(int index, HierarchicalObjects shape)
         {
               if (index < 0 || index >= Shapes.Length) throw new System.ArgumentException("The index " + index + " is out of range");
               //if (shape == null) throw new System.NullReferenceException("The shape at " + index + " is null");
@@ -43,26 +49,26 @@ namespace GenoratingRandomSDF
             Shapes[index] = shape;
         }
 
-        internal void SetCurrent(HierachicalObjects shape)
+        internal void SetCurrent(HierarchicalObjects shape)
         {
             if (shape == null) throw new System.ArgumentException("The Provided Shape is null");
 
             Shapes[currentShapeIndex] = shape;
         }
 
-        internal HierachicalObjects Get(int index)
+        internal HierarchicalObjects Get(int index)
         {
             return this.Shapes[index];
         }
 
-        public HierachicalObjects[] GetShapesAsArray()
+        public HierarchicalObjects[] GetShapesAsArray()
         {
             return Shapes;
         }
 
         public void Reset(int amountOfShapesRequired)
         {
-            this.Shapes = new HierachicalObjects[amountOfShapesRequired];
+            this.Shapes = new HierarchicalObjects[amountOfShapesRequired];
             this.currentShapeIndex = 0;
         }
 
@@ -85,13 +91,13 @@ namespace GenoratingRandomSDF
 
                 // Clear the parent array
                 if (this.Shapes[currentShapeIndex].Children != null)
-                    this.Shapes[currentShapeIndex].Children = new HierachicalObjects[this.Shapes[currentShapeIndex].Children.Length];
+                    this.Shapes[currentShapeIndex].Children = new HierarchicalObjects[this.Shapes[currentShapeIndex].Children.Length];
                 else
-                    this.Shapes[currentShapeIndex].Children = new HierachicalObjects[0];
+                    this.Shapes[currentShapeIndex].Children = new HierarchicalObjects[0];
             }
         }
 
-        internal void MoveSDF(HierachicalObjects parent, int index)
+        internal void MoveSDF(HierarchicalObjects parent, int index)
         {
             // Run though the various sets of illigal parameters that can be thrown and thrown expections accordingly
             if (parent == null) throw new System.ArgumentException("A parent Volume is require to move this sdf");
@@ -128,7 +134,7 @@ namespace GenoratingRandomSDF
                 try
                 {
                     // create the shape we are trying to create
-                    HierachicalObjects shape = null;
+                    HierarchicalObjects shape = null;
 
                     // create the new child and take a guess of some maybe appropriate parameters
                     shape = parent.MoveChild(parentIndex);
@@ -163,9 +169,9 @@ namespace GenoratingRandomSDF
                     profiler.Increment(DataGenerationDataProfiler.UNEXPECTED_ERROR);
 
                     if (parent.Children != null)
-                        parent.Children = new HierachicalObjects[parent.Children.Length];
+                        parent.Children = new HierarchicalObjects[parent.Children.Length];
                     else
-                        parent.Children = new HierachicalObjects[0];
+                        parent.Children = new HierarchicalObjects[0];
 
                     // This is normally caused by a unforseen error so it it happens I want to get out of this loop as fast as possible
                 }

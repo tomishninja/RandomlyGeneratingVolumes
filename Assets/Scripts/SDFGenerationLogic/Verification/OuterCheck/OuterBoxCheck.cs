@@ -1,7 +1,7 @@
 using hLSL_Simulator;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public class OuterBoxCheck : IVerification
     {
@@ -28,7 +28,7 @@ namespace GenoratingRandomSDF
             this.layerManager = layerManager;
         }
 
-        public int Verify(ref ShapeHandeler shapes)
+        public int Verify(ref ShapeHandler shapes)
         {
             float xPercenatge;
             float yPercenatge;

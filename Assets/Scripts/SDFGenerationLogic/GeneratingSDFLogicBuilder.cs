@@ -1,6 +1,12 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using UnityEngine;
 
+/// <summary>
+/// Builder that constructs the full generation pipeline for one study session.
+/// Instantiates and wires together the <see cref="StateControllerForAddingSDFs"/>,
+/// <see cref="CheckingStateController"/>, and <see cref="LayerManager"/> objects
+/// from Inspector-configured parameters.
+/// </summary>
 [System.Serializable]
 public class GeneratingSDFLogicBuilder
 {
@@ -22,7 +28,7 @@ public class GeneratingSDFLogicBuilder
     [SerializeField] private TypeOfContatiner collidertype = TypeOfContatiner.Cube;
     [SerializeField] private TypeOfInnerCheck innerCheckType = TypeOfInnerCheck.LiniarOptimised;
 
-    public void Init(ref profiler.AbstractProfiler profiler, ref ShapeHandeler shapes, ref HashingMatrix hashingMatrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
+    public void Init(ref profiler.AbstractProfiler profiler, ref ShapeHandler shapes, ref HashingMatrix hashingMatrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
     {
         factory.Init(ref profiler, ref shapes, ref hashingMatrix, conditionDetails);
     }
@@ -36,7 +42,7 @@ public class GeneratingSDFLogicBuilder
             );
     }
 
-    public CheckingStateContoller BuildControllerForCheckingVolumes()
+    public CheckingStateController BuildControllerForCheckingVolumes()
     {
         IVerification outer = null;
         switch (collidertype)
@@ -54,11 +60,11 @@ public class GeneratingSDFLogicBuilder
         switch (innerCheckType)
         {
             case TypeOfInnerCheck.LiniarOptimised:
-                inner = factory.GetLinniarInnerChecker();
+                inner = factory.GetLinearInnerChecker();
                 contained = inner;
                 break;
             case TypeOfInnerCheck.ParrellUnoptimised:
-                inner = factory.GetParrellInnerChecker();
+                inner = factory.GetParallelInnerChecker();
                 contained = inner;
                 break;
             case TypeOfInnerCheck.LiniarOctTree:
@@ -68,10 +74,10 @@ public class GeneratingSDFLogicBuilder
                 break;
         }
 
-        return new CheckingStateContoller(ref outer, ref contained, ref inner);
+        return new CheckingStateController(ref outer, ref contained, ref inner);
     }
 
-    public LayerManager CreateAndSetLayerMangerFor(ref CheckingStateContoller controllerA, ref StateControllerForAddingSDFs controllerB)
+    public LayerManager CreateAndSetLayerMangerFor(ref CheckingStateController controllerA, ref StateControllerForAddingSDFs controllerB)
     {
         LayerManager layermanager = new LayerManager(ref controllerA, ref controllerB);
 

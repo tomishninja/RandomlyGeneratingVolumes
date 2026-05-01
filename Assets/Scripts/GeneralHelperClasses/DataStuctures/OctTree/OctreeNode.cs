@@ -1,4 +1,4 @@
-﻿using GenoratingRandomSDF;
+﻿using GeneratingRandomSDF;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -111,7 +111,7 @@ namespace octTree
             return null;
         }
 
-        public int SearchBranch(Func<OctreeNode, ShapeHandeler, int, int> spatialCheck, ShapeHandeler shapes, int expectedAnswer = int.MinValue)
+        public int SearchBranch(Func<OctreeNode, ShapeHandler, int, int> spatialCheck, ShapeHandler shapes, int expectedAnswer = int.MinValue)
         {
             int result = spatialCheck(this, shapes, expectedAnswer);
             // if the result is the expected answer than this branch is ok and we can prune it
@@ -167,7 +167,7 @@ namespace octTree
             return nodes;
         }
 
-        internal int SearchBranch(object linearVerifyInnerAtPositionForOctTree, ShapeHandeler shapes)
+        internal int SearchBranch(object linearVerifyInnerAtPositionForOctTree, ShapeHandler shapes)
         {
             throw new NotImplementedException();
         }

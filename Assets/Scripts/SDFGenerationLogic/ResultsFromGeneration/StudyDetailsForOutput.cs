@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StudyDetailsForOutput
 {
-    public float NoiseMulitiplier = 0.5f;
+    public float NoiseMultiplier = 0.5f;
 
     public string ConditionName;
 
@@ -14,9 +14,9 @@ public class StudyDetailsForOutput
 
     public AnswersFromGeneration answers;
 
-    public void SetNoiseMultiper(Material mat)
+    public void SetNoiseMultiplier(Material mat)
     {
-        mat.SetFloat("_NoiseSuppression", NoiseMulitiplier);
+        mat.SetFloat("_NoiseSuppression", NoiseMultiplier);
     }
 
     public string ToJSON()

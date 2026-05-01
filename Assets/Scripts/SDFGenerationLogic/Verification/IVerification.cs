@@ -1,8 +1,8 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 
 public interface IVerification
 {
-    public abstract int Verify(ref ShapeHandeler shapes);
+    public abstract int Verify(ref ShapeHandler shapes);
 
     public abstract void Reset();
 

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [System.Serializable]
-public class NoisySphereShapeGenerationHelper : HierachicalObjects
+public class NoisySphereShapeGenerationHelper : HierarchicalObjects
 {
     /// <summary>
     /// The children of this shape
@@ -10,7 +10,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
     /// <param name="childIndex"></param>
     /// <returns></returns>
     /// <exception cref="RanForTooLongException"></exception>
-    public override HierachicalObjects MoveChild(int childIndex)
+    public override HierarchicalObjects MoveChild(int childIndex)
     {
         Vector3 pos = Vector3.positiveInfinity;
         //float radius = -1f;
@@ -38,12 +38,12 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
         } while (IsNotInBounds(pos, radius, childIndex));
 
         // create the shape we are trying to create
-        Children[childIndex].positon = pos;
+        Children[childIndex].position = pos;
         //shape.radius = radius;
         return Children[childIndex];
     }
 
-    public override HierachicalObjects DraftNewChild(int childIndex, MinAndMaxFloat minAndMaxRadiusMultipler)
+    public override HierarchicalObjects DraftNewChild(int childIndex, MinAndMaxFloat minAndMaxRadiusMultipler)
     {
         Vector3 pos = Vector3.positiveInfinity;
         float radius = -1f;
@@ -72,26 +72,26 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
 
         // create the shape we are trying to create
         NoisySphereShapeGenerationHelper shape = new NoisySphereShapeGenerationHelper();
-        shape.positon = pos;
+        shape.position = pos;
         shape.radius = radius;
         shape.Parent = this;
         Children[childIndex] = shape;
         return Children[childIndex];
     }
 
-    public override HierachicalObjects DraftNewChild(int childIndex, MinAndMaxFloat containableRadiusRange, 
+    public override HierarchicalObjects DraftNewChild(int childIndex, MinAndMaxFloat containableRadiusRange, 
         int AmountOfTimesToLookForABetterObject = 50, int StartingIndexToLookForBestRandomlyGeneratedPoint = 1, 
         int StartingIndexToLookCheckForBestPositionAgainst = 0, float SphereTolerance = 0)
     {
         Vector3 pos = Vector3.positiveInfinity;
         float radius = -1f;
 
-        int amountOfItterations = childIndex < StartingIndexToLookForBestRandomlyGeneratedPoint ? 1 : AmountOfTimesToLookForABetterObject;
+        int amountOfIterations = childIndex < StartingIndexToLookForBestRandomlyGeneratedPoint ? 1 : AmountOfTimesToLookForABetterObject;
 
         Vector3 bestPos = Vector3.positiveInfinity;
         float bestRadius = -1f;
 
-        for (int index = 0; index < amountOfItterations; index++)
+        for (int index = 0; index < amountOfIterations; index++)
         {
             int counter = 0;
             do
@@ -136,7 +136,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
 
         // create the shape we are trying to create
         NoisySphereShapeGenerationHelper shape = new NoisySphereShapeGenerationHelper();
-        shape.positon = bestPos;
+        shape.position = bestPos;
         shape.radius = bestRadius;
         shape.Parent = this;
         Children[childIndex] = shape;
@@ -169,14 +169,13 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
 
     public override float GetVolume()
     {
-        return CacluateVolume(this.radius);
+        return CalculateVolume(this.radius);
     }
 
     private bool IsNotInBounds(Vector3 position, float radius, int CurrentChildIndex)
     {
-        // TODO Not sure if this logic works
-        // See if this object is within the radius of this the parent as well as the AABB
-        float dist = Vector3.Distance(this.positon, position); // up here for deugging
+        // The position must be inside the parent sphere: distance from parent centre + child radius ≤ parent radius
+        float dist = Vector3.Distance(this.position, position);
         if (dist > Mathf.Abs(this.radius - radius)) return true;
 
         // Look at all the valid children and if they are valid check if they are too close to add
@@ -186,7 +185,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
             {
                 if (Children[index] != null)
                 {
-                    float distanceAway = Vector3.Distance(Children[index].positon, position);
+                    float distanceAway = Vector3.Distance(Children[index].position, position);
                     if (distanceAway < (radius + Children[index].radius)) return true;
                 }
             }
@@ -197,8 +196,8 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
 
     private bool IsBetterThanBest(Vector3 position, float radius, Vector3 bestPos, float BestRadius, int CurrentChildIndex, int startingIndex = 0)
     {
-        float minDistanceToAnObject = this.radius - Vector3.Distance(position, this.positon);
-        float minDistanceToBestObject = this.radius - Vector3.Distance(bestPos, this.positon);
+        float minDistanceToAnObject = this.radius - Vector3.Distance(position, this.position);
+        float minDistanceToBestObject = this.radius - Vector3.Distance(bestPos, this.position);
         float totalDistanceOfCurrent = minDistanceToAnObject;
         float totalDistanceOfBest = minDistanceToBestObject;
 
@@ -209,8 +208,8 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
             {
                 if (Children[index] != null)
                 {
-                    float distanceAwayCurrent = Vector3.Distance(Children[index].positon, position);
-                    float distanceAwayBest = Vector3.Distance(Children[index].positon, bestPos);
+                    float distanceAwayCurrent = Vector3.Distance(Children[index].position, position);
+                    float distanceAwayBest = Vector3.Distance(Children[index].position, bestPos);
                     totalDistanceOfCurrent += distanceAwayCurrent;// - (radius + Children[index].radius);
                     totalDistanceOfBest += distanceAwayBest;// - (BestRadius + Children[index].radius);
 
@@ -230,7 +229,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
         if (this.Parent == null) return 0;
 
         int index = 0;
-        HierachicalObjects p = this.Parent;
+        HierarchicalObjects p = this.Parent;
         while (p != null)
         {
             index++;
@@ -239,7 +238,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
         return index;
     }
 
-    public override bool HasAncestor(HierachicalObjects possibleAncestor)
+    public override bool HasAncestor(HierarchicalObjects possibleAncestor)
     {
         if (possibleAncestor == null || this.Parent == null)
         {
@@ -272,7 +271,7 @@ public class NoisySphereShapeGenerationHelper : HierachicalObjects
         return this.Equals(new NoisySphereShapeGenerationHelper());
     }
 
-    public static float CacluateVolume(float radius)
+    public static float CalculateVolume(float radius)
     {
         return System.Convert.ToSingle(4.0 / 3 * Math.PI * System.Math.Pow(radius, 3));
     }

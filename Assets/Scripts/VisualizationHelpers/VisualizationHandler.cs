@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [System.Serializable]
-public class VisulizationHandeler
+public class VisualizationHandler
 {
     [SerializeField] string name;
     public string Name { get => this.name; }

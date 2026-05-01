@@ -1,52 +1,47 @@
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
+    /// <summary>
+    /// Synchronises the two state machines (<see cref="CheckingStateController"/> and
+    /// <see cref="StateControllerForAddingSDFs"/>) so both always agree on which
+    /// hierarchy layer (Outer → Container → Inner) is currently being processed.
+    /// </summary>
     public class LayerManager
     {
-        CheckingStateContoller stateController;
+        CheckingStateController stateController;
         StateControllerForAddingSDFs stateControllerForAddingSDFs;
-        int currentLayer = 0;
 
-        public LayerManager(ref CheckingStateContoller stateController, ref StateControllerForAddingSDFs stateControllerForAddingSDFs)
+        private enum Layer { Outer = 0, Container = 1, Inner = 2 }
+        private Layer currentLayer = Layer.Outer;
+
+        public LayerManager(ref CheckingStateController stateController, ref StateControllerForAddingSDFs stateControllerForAddingSDFs)
         {
             this.stateController = stateController;
             this.stateControllerForAddingSDFs = stateControllerForAddingSDFs;
-            this.currentLayer = 0;
         }
 
-        public bool IsInner()
-        {
-            return this.currentLayer == 2;
-        }
-
-        public bool IsOuter()
-        {
-            return this.currentLayer == 0;
-        }
-
-        public bool IsContainer()
-        {
-            return this.currentLayer == 1;
-        }
+        public bool IsInner()     => this.currentLayer == Layer.Inner;
+        public bool IsOuter()     => this.currentLayer == Layer.Outer;
+        public bool IsContainer() => this.currentLayer == Layer.Container;
 
         public void SetToInner()
         {
             this.stateController.SetInner();
             this.stateControllerForAddingSDFs.SetToInner();
-            this.currentLayer = 2;
+            this.currentLayer = Layer.Inner;
         }
 
         public void SetToContainer()
         {
             this.stateController.SetContainer();
             this.stateControllerForAddingSDFs.SetToContainer();
-            this.currentLayer = 2;
+            this.currentLayer = Layer.Container;  // was incorrectly set to 2 (Inner) before
         }
 
         public void SetToOuter()
         {
             this.stateController.SetOuter();
             this.stateControllerForAddingSDFs.SetToOuter();
-            this.currentLayer = 0;
+            this.currentLayer = Layer.Outer;
         }
     }
 }

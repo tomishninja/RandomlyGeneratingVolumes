@@ -3,7 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public class VolumeHierarachyLevelDetails
 {
-    // input feilds for amounts
+    // input fields for amounts
     [SerializeField] int amountOfOuters = 1;
     [SerializeField] int amountOfCountables = 0;
     [SerializeField] int amountOfContainers = 0;

@@ -1,5 +1,10 @@
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
+    /// <summary>
+    /// State-machine controller that tracks which <see cref="AbstractAddSDFLogic"/> strategy
+    /// (outer, container, or inner) is currently active for shape-placement, and switches
+    /// between them as the <see cref="LayerManager"/> signals layer transitions.
+    /// </summary>
     public class StateControllerForAddingSDFs
     {
         private enum Level

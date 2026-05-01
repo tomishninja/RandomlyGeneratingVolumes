@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public class AmountTrackingParameters
     {

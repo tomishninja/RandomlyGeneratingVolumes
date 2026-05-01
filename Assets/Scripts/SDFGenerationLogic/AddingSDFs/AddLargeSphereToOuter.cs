@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public class AddLargeSphereToOuter : AbstractAddSDFLogic
     {
@@ -14,20 +14,14 @@ namespace GenoratingRandomSDF
             this.parameters = null;
         }
 
-        public override int AddSDFs(ref ShapeHandeler shapes)
+        public override int AddSDFs(ref ShapeHandler shapes)
         {
-            HierachicalObjects shape = new NoisySphereShapeGenerationHelper();
+            HierarchicalObjects shape = new NoisySphereShapeGenerationHelper();
 
-            shape.positon = Vector3.zero;
+            shape.position = Vector3.zero;
             shape.radius = currentLevel.OuterRadius;
             shape.importance = currentLevel.OuterImportance;
             shape.color = currentLevel.OuterColor;
-            /*int amountOfChildren = randomChildGeneratorFactory.GetChildGenoratorFor(
-                currentLevel..min,
-                currentLevel.ContainableAmountOfChildren.max,
-                1).GenerateARadomAmountOfChildren();
-            Debug.Log("Amount of children: " + amountOfChildren);
-            shape.Children = new HierachicalObjects[amountOfChildren];*/
             trackingVariables.AmountOfOuters = 1;
 
             shapes.Set(0, shape);

@@ -23,6 +23,7 @@ public class DropDownManager : MonoBehaviour
 
         // Store the original positions of the buttons
         originalButtonPositions = new Vector2[buttonsToMove.Length];
+        targetButtonPositions = new Vector2[buttonsToMove.Length];
         for (int i = 0; i < buttonsToMove.Length; i++)
         {
             originalButtonPositions[i] = buttonsToMove[i].anchoredPosition;

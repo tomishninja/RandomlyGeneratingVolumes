@@ -3,14 +3,14 @@ using profiler;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public class InnerObjectCheckerParent
     {
         protected NoisyHierarchicalSpheres shaderSimulator;
         protected LayerManager layerManager;
         protected profiler.AbstractProfiler profiler;
-        protected ErrorHandelerFacade errorHandeler;
+        protected ErrorHandlerFacade errorHandler;
         int endOfCheck;
 
         protected int incrementor = 0;
@@ -33,27 +33,27 @@ namespace GenoratingRandomSDF
             this.shaderSimulator = shaderSimulator;
             this.profiler = profiler;
             this.endOfCheck = endOfCheck;
-            this.errorHandeler = new ErrorHandelerFacade();
+            this.errorHandler = new ErrorHandlerFacade();
         }
 
-        protected virtual int ItterationCheckFailed(int innerLayerResult, ref ShapeHandeler shapes, bool doingDoubleCheck = false, bool willMove = true)
+        protected virtual int IterationCheckFailed(int innerLayerResult, ref ShapeHandler shapes, bool doingDoubleCheck = false, bool willMove = true)
         {
             // Change the pixels and set the z index to zero so this can start again
             //currentSubProcess = 0;
             incrementor = 0;
-            errorHandeler.IncrementFailsInARow();
+            errorHandler.IncrementFailsInARow();
 
-            if (errorHandeler.ShouldChangeRandomSeed)
+            if (errorHandler.ShouldChangeRandomSeed)
             {
                 UnityEngine.Random.InitState((int)(Time.time * 7919));
 
-                if (errorHandeler.ShouldReset)
+                if (errorHandler.ShouldReset)
                 {
                     // Empty the shape array where needed
                     shapes.Empty();
                     profiler.Increment(DataGenerationDataProfiler.REPLACED_ALL_CHILDREN);
 
-                    errorHandeler.ItterationCheckFailedResetTasks(errorHandeler.amountOfResets);
+                    errorHandler.IterationCheckFailedResetTasks(errorHandler.amountOfResets);
                 }
                 return 0;
             }
@@ -87,7 +87,7 @@ namespace GenoratingRandomSDF
             }
         }
 
-        protected virtual int ItterationCheckWasSuccessful(ref ShapeHandeler shapes, bool doingDoubleCheck = false)
+        protected virtual int IterationCheckWasSuccessful(ref ShapeHandler shapes, bool doingDoubleCheck = false)
         {
             // increment z for the next frame version
             incrementor++;
@@ -99,9 +99,9 @@ namespace GenoratingRandomSDF
             if (incrementor >= endOfCheck)
             {
 
-                // Set everthing up for the next itteration
+                // Set everthing up for the next iteration
                 incrementor = 0;
-                errorHandeler.Reset();
+                errorHandler.Reset();
 
                 // increment to the next shape
                 if (!shapes.IncrementCurrentShapeToNextShape())
@@ -121,7 +121,7 @@ namespace GenoratingRandomSDF
                         shapes.Empty();
                         profiler.Increment(DataGenerationDataProfiler.REPLACED_ALL_CHILDREN);
 
-                        errorHandeler.ItterationCheckFailedResetTasks(errorHandeler.amountOfResets);
+                        errorHandler.IterationCheckFailedResetTasks(errorHandler.amountOfResets);
                         return 0;
                     }
                 }
@@ -164,7 +164,7 @@ namespace GenoratingRandomSDF
             return max;
         }
 
-        public bool IsChild(HierachicalObjects parent, int indexOfShape, ref ShapeHandeler shapes)
+        public bool IsChild(HierarchicalObjects parent, int indexOfShape, ref ShapeHandler shapes)
         {
             if (parent.Children == null) return false;
             for (int i = 0; i < parent.Children.Length; i++)
@@ -180,7 +180,7 @@ namespace GenoratingRandomSDF
             return x == 0 || y == 0 || y == 0 || x == AmountOfChecks - 1 || x == AmountOfChecks - 1 || x == AmountOfChecks - 1;
         }
 
-        public int CountChildrenInStack(HierachicalObjects parent, Stack<int> indexs, ref ShapeHandeler shapes)
+        public int CountChildrenInStack(HierarchicalObjects parent, Stack<int> indexs, ref ShapeHandler shapes)
         {
             int childrenInVoxel = 0;
             while (indexs.Count > 0)
@@ -193,7 +193,7 @@ namespace GenoratingRandomSDF
             return childrenInVoxel;
         }
 
-        public int ReturnFirstChild(HierachicalObjects parent, int[] indexs, ref HierachicalObjects child, ref ShapeHandeler shapes)
+        public int ReturnFirstChild(HierarchicalObjects parent, int[] indexs, ref HierarchicalObjects child, ref ShapeHandler shapes)
         {
             for (int index = 0; index < indexs.Length; index++)
             {

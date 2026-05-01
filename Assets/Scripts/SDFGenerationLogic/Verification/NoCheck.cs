@@ -1,4 +1,4 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 
 public class NoCheck : IVerification
 {
@@ -15,7 +15,7 @@ public class NoCheck : IVerification
         // Do Nothing
     }
 
-    public int Verify(ref ShapeHandeler shapes)
+    public int Verify(ref ShapeHandler shapes)
     {
         return subProcessToReturn;
     }

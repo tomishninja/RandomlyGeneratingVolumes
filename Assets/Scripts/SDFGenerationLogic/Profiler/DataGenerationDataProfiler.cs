@@ -19,7 +19,7 @@ namespace profiler{
         public const string TOO_MANY_LARGE_ARTIFICATS = "Too Many Large Artifacts";
         public const string TOO_FAILED_SECOND_CHECK = "Failed Second Check";
 
-        public const string ITTERATION = "Itteration";
+        public const string ITTERATION = "Iteration";
         public const string STARTTIME = "Start Time";
         public const string ENDTIME = "End Time";
         public const string TIMETAKEN = "End Time";

@@ -1,32 +1,31 @@
-﻿using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using System;
 using UnityEngine;
 
-public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
+public class DemoVisualizer : MonoBehaviour, VisualizationAdapter
 {
-    public const string DEPTH_PERCEPTION_TASK_IDENTIFYER = "Depth Perception";
-
-    [SerializeField] public AbstractGeometricShape[] shapes;
-    
+    public HierarchicalObjects[] volumeParameters;
     [SerializeField] public Material mat;
 
     /// Needs to be updated for final study
-    [SerializeField] VisulizationHandeler[] visulizations;
+    [SerializeField] VisualizationHandler[] visualizations;
 
-    [SerializeField] MeshRenderer renderer;
+    // the object used to render this shape
+    [SerializeField] public MeshRenderer renderer;
 
-    public int AmountOfShapes { get => shapes.Length; }
+    public int AmountOfShapes { get => volumeParameters.Length; }
 
     public string Condition { get; set; }
 
+    // Start is called before the first frame update
     void Start()
     {
-        for (int index = 0; index < visulizations.Length; index++)
+        for (int index = 0; index < visualizations.Length; index++)
         {
-            visulizations[index].Init();
+            visualizations[index].Init();
         }
 
-        if (mat != null && (shapes != null && shapes.Length > 0))
+        if (mat != null && (volumeParameters != null && volumeParameters.Length > 0))
             SetUpShader();
 
         if (renderer == null)
@@ -36,7 +35,7 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
     // Update is called once per frame
     void Update()
     {
-        if (mat != null && (shapes != null && shapes.Length > 0))
+        if (mat != null && (volumeParameters != null && volumeParameters.Length > 0))
             SetUpShader();//Maybe comment out later
     }
 
@@ -48,16 +47,19 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
     }
 
     // Sets up the varibles for the ittal condition
-    public void SetUpVisulization(ShapeHandeler shapes, string CurrentCondition = null)
+    public void SetUpVisualization(ShapeHandler shapes, string CurrentCondition = null)
     {
         // Set the amount of shapes 
-        this.shapes = shapes.GetShapesAsArray();
+        this.volumeParameters = shapes.GetShapesAsArray();
 
         // Set the material
-        this.SetMat(this.shapes.Length, Condition);
+        if (CurrentCondition == null)
+            this.SetMat(this.volumeParameters.Length, Condition);
+        else
+            this.SetMat(this.volumeParameters.Length, CurrentCondition);
 
         // Set up the hash
-        //itterationDetails.hash.SetInShader(this.mat, "_HashLineA", "_HashLineB", "_HashLineC");
+        //iterationDetails.hash.SetInShader(this.mat, "_HashLineA", "_HashLineB", "_HashLineC");
 
         // Set shader variables
         mat.SetVectorArray("_SphereDetails", this.getShapeDetailsArray());
@@ -81,11 +83,11 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
         // if condition name is set to null do nothing
         if (ConditionName == null) throw new ArgumentNullException("Condition Name was set to null");
 
-        for(int index = 0; index < visulizations.Length; index++)
+        for (int index = 0; index < visualizations.Length; index++)
         {
-            if (ConditionName.ToLower().Equals(visulizations[index].Name.ToLower()))
+            if (ConditionName.ToLower().Equals(visualizations[index].Name.ToLower()))
             {
-                this.mat = visulizations[index].GetMaterial(amountOfObjects);
+                this.mat = visualizations[index].GetMaterial(amountOfObjects);
                 renderer.material = this.mat;
             }
         }
@@ -93,11 +95,11 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
 
     private Vector4[] getShapeDetailsArray()
     {
-        Vector4[] output = new Vector4[shapes.Length];
+        Vector4[] output = new Vector4[volumeParameters.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.shapes[index].getPosAndSizeVetor4();
+            output[index] = this.volumeParameters[index].GetPositionAndSizeVector4();
         }
 
         return output;
@@ -105,11 +107,11 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
 
     private float[] getImportanceArray()
     {
-        float[] output = new float[shapes.Length];
+        float[] output = new float[volumeParameters.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.shapes[index].importance;
+            output[index] = this.volumeParameters[index].importance;
         }
 
         return output;
@@ -117,11 +119,11 @@ public class CountingSutdySDFManager : MonoBehaviour, VisulizationAdapter
 
     private Color[] getColorArray()
     {
-        Color[] output = new Color[shapes.Length];
+        Color[] output = new Color[volumeParameters.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.shapes[index].color;
+            output[index] = this.volumeParameters[index].color;
         }
 
         return output;

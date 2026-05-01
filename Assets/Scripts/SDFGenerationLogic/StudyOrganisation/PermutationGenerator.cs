@@ -13,7 +13,7 @@ public class PermutationGenerator<T>
 
     #region BalancedLatinSquare
     /// <summary>
-    /// Generates a blanced latin squared array for the given itteration of its use. 
+    /// Generates a blanced latin squared array for the given iteration of its use. 
     /// </summary>
     /// <example>
     /// How to use:
@@ -25,13 +25,13 @@ public class PermutationGenerator<T>
     /// <param name="conditions">
     /// A array of conditions required to be counterballanced
     /// </param>
-    /// <param name="itteration">
-    /// The current itteration required
+    /// <param name="iteration">
+    /// The current iteration required
     /// </param>
     /// <returns>
     /// The balanced latin square for the partipant.
     /// </returns>
-    public static T[] BalancedLatinSquare(T[] conditions, int itteration)
+    public static T[] BalancedLatinSquare(T[] conditions, int iteration)
     {
         T[] result = new T[conditions.Length];
         // Based on "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass.,.1958, 53, 525-528. "
@@ -48,12 +48,12 @@ public class PermutationGenerator<T>
                 ++h;
             }
 
-            var idx = (val + itteration) % conditions.Length;
+            var idx = (val + iteration) % conditions.Length;
             result[i] = conditions[idx];
         }
 
         // if a odd number of conditions exists and the pariticpant id is odd then reverse the order to prevent any matches.
-        if (conditions.Length % 2 != 0 && itteration % 2 != 0)
+        if (conditions.Length % 2 != 0 && iteration % 2 != 0)
         {
             System.Array.Reverse(result);
         }
@@ -68,18 +68,18 @@ public class PermutationGenerator<T>
     /// The condions to that need to be itteratiated though
     /// </param>
     /// <returns>
-    /// a double array with all of the required itterations for each participant. 
+    /// a double array with all of the required iterations for each participant. 
     /// The first element of this will be as long as the amount of partipants required
     /// (equal to the amount of conditions if equal, double of the amount if it is odd).
     /// </returns>
-    public static T[][] GetAllBalancedLatinSquareItterations(T[] conditions)
+    public static T[][] GetAllBalancedLatinSquareIterations(T[] conditions)
     {
         // Work out the length of the blanalnce latin square (the length of contditions if it is even or else double)
-        int amountOfItterationsRequired = conditions.Length % 2 == 0 ? conditions.Length : conditions.Length * 2;
-        T[][] output = new T[amountOfItterationsRequired][];
+        int amountOfIterationsRequired = conditions.Length % 2 == 0 ? conditions.Length : conditions.Length * 2;
+        T[][] output = new T[amountOfIterationsRequired][];
 
         // Computer all of the purutations
-        for(int index = 0; index < amountOfItterationsRequired; index++)
+        for(int index = 0; index < amountOfIterationsRequired; index++)
         {
             output[index] = BalancedLatinSquare(conditions, index);
         }

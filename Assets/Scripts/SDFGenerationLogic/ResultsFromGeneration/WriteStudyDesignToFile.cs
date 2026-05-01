@@ -35,9 +35,9 @@ namespace fileIO
 
             // Generate the file Name
             if (customPrepend != null)
-                output.participantID = UserStudyHelperFuncitons.GenerateParticipantID(particpantIndex, customPrepend);
+                output.participantID = UserStudyHelperFunctions.GenerateParticipantID(particpantIndex, customPrepend);
             else
-                output.participantID = UserStudyHelperFuncitons.GenerateParticipantID(particpantIndex);
+                output.participantID = UserStudyHelperFunctions.GenerateParticipantID(particpantIndex);
 
             // create a text file of the object as a object.
             string json = JsonUtility.ToJson(output, true);

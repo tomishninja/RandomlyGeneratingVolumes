@@ -1,7 +1,7 @@
 using profiler;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public abstract class AbstractAddSDFLogic
     {
@@ -25,33 +25,28 @@ namespace GenoratingRandomSDF
 
         public int AmountOfSDFsAdded { get; protected set; }
 
-        public abstract int AddSDFs(ref ShapeHandeler shapes);
+        public abstract int AddSDFs(ref ShapeHandler shapes);
 
-        public void CheckToEnsureVolumeHasAppropriateVolume(ref ShapeHandeler shapes, ref bool failed, ref int amountOfFails)
+        public void CheckToEnsureVolumeHasAppropriateVolume(ref ShapeHandler shapes, ref bool failed, ref int failCount)
         {
-            // make sure the volumes for this set are ok or else repete the process
+            // Make sure the volumes for this set are within the allowed fill percentage
             if (shapes.CurrentShape.TotalPercentOfThisVolumeThatIsFree() > parameters.maxiumSizeThatObjectsCanAccululateWithinTheVolume)
             {
                 failed = true;
                 dataProfiler.Increment(DataGenerationDataProfiler.TOO_MANY_LARGE_ARTIFICATS);
-                Debug.Log("Too full: " + shapes.CurrentShape.TotalPercentOfThisVolumeThatIsFree() + "% full");
                 shapes.Empty();
-                amountOfFails++;
+                failCount++;
 
-                // the random generator is stuggling to fit the current item
-                // this likly means a earlier one is in its road so we need to start again
-                if (amountOfFails > parameters.amountOfTimesAddingTryingToFitSDFDataBeforeHigherException)
+                // The random generator is struggling to fit the current item;
+                // an earlier one is likely blocking so we need to start again
+                if (failCount > parameters.amountOfTimesAddingTryingToFitSDFDataBeforeHigherException)
                 {
-                    amountOfFails = 0;
+                    failCount = 0;
 
                     UnityEngine.Random.InitState((int)(Time.time * 7919));
 
                     throw new RanForTooLongException("Cant fill this region up with current items");
                 }
-            }
-            else if (showOutputsOfVolumes)
-            {
-                Debug.Log("Within Range : " + shapes.CurrentShape.TotalPercentOfThisVolumeThatIsFree() + "% full");
             }
         }
     }

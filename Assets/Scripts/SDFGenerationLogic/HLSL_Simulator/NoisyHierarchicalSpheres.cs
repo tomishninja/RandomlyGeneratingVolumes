@@ -1,4 +1,4 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,16 +9,16 @@ namespace hLSL_Simulator
         readonly int randomCoords;
         //AbstractGeometricShape[] Shapes;
         HashingMatrix hashingMatrix;
-        readonly float sDFTollerance;
-        float NoiseMultipler = 1f;
-        private ShapeHandeler shapes;
+        readonly float sdfTolerance;
+        float NoiseMultiplier = 1f;
+        private ShapeHandler shapes;
 
-        public NoisyHierarchicalSpheres(ref ShapeHandeler shapes, ref HashingMatrix hashingMatrix, float SDFTollerance = 0, int randomCoords = 8)
+        public NoisyHierarchicalSpheres(ref ShapeHandler shapes, ref HashingMatrix hashingMatrix, float SDFTolerance = 0, int randomCoords = 8)
         {
             this.randomCoords = randomCoords;
             this.shapes = shapes;
             this.hashingMatrix = hashingMatrix;
-            this.sDFTollerance = SDFTollerance;
+            this.sdfTolerance = SDFTolerance;
         }
 
         public bool CheckSDFFirstLayer(Vector3 pos)
@@ -28,7 +28,7 @@ namespace hLSL_Simulator
             return d < 0;
         }
 
-        public void SetShapes(ShapeHandeler shapes)
+        public void SetShapes(ShapeHandler shapes)
         {
             this.shapes = shapes;
         }
@@ -38,7 +38,7 @@ namespace hLSL_Simulator
             this.hashingMatrix = hashingMatrix;
         }
 
-        // Cacluates the index value as well
+        // Calculates the index value as well
         public Stack<int> GetAllValidSDFs(Vector3 p)
         {
             Stack<int> output = new Stack<int>();
@@ -49,8 +49,8 @@ namespace hLSL_Simulator
             {
                 if (shapeArray[i] != null && !shapeArray[i].IsDefault() && shapeArray[i].radius > 0.01)
                 {
-                    float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
-                    if (d < sDFTollerance)
+                    float d = Sphere(p, shapeArray[i].position, shapeArray[i].radius) - n;
+                    if (d < sdfTolerance)
                     {
                         output.Push(i);
                     }
@@ -63,7 +63,7 @@ namespace hLSL_Simulator
 
 
 
-        // Cacluates the index value as well
+        // Calculates the index value as well
         public Stack<int> GetAllValidSDFs(Vector3 p, float tollerance)
         {
             Stack<int> output = new Stack<int>();
@@ -74,7 +74,7 @@ namespace hLSL_Simulator
             {
                 if (shapeArray[i] != null && !shapeArray[i].IsDefault() && shapeArray[i].radius > 0.01)
                 {
-                    float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
+                    float d = Sphere(p, shapeArray[i].position, shapeArray[i].radius) - n;
                     if (d < tollerance)
                     {
                         output.Push(i);
@@ -86,7 +86,7 @@ namespace hLSL_Simulator
             return output;
         }
 
-        // Cacluates the index value as well
+        // Calculates the index value as well
         public float SDF(Vector3 p, out int index, float tollerance)
         {
             AbstractGeometricShape[] shapeArray = shapes.GetShapesAsArray();
@@ -98,14 +98,14 @@ namespace hLSL_Simulator
             }
 
             float n = Noise(p);
-            float bestDistance = Sphere(p, shapeArray[0].positon, shapeArray[0].radius) - n;
+            float bestDistance = Sphere(p, shapeArray[0].position, shapeArray[0].radius) - n;
             index = 0;
 
             for (int i = 1; i < shapeArray.Length; i++)
             {
                 if (shapeArray[i] != null)
                 {
-                    float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
+                    float d = Sphere(p, shapeArray[i].position, shapeArray[i].radius) - n;
 
                     bool isBest = d < tollerance && d > bestDistance;
 
@@ -118,7 +118,7 @@ namespace hLSL_Simulator
             return bestDistance;
         }
 
-        // Cacluates the index value as well
+        // Calculates the index value as well
         public float SDF(Vector3 p, out int index)
         {
             AbstractGeometricShape[] shapeArray = shapes.GetShapesAsArray();
@@ -130,16 +130,16 @@ namespace hLSL_Simulator
             }
 
             float n = Noise(p);
-            float bestDistance = Sphere(p, shapeArray[0].positon, shapeArray[0].radius) - n;
+            float bestDistance = Sphere(p, shapeArray[0].position, shapeArray[0].radius) - n;
             index = 0;
 
             for (int i = 1; i < shapeArray.Length; i++)
             {
                 if (shapeArray[i] != null)
                 {
-                    float d = Sphere(p, shapeArray[i].positon, shapeArray[i].radius) - n;
+                    float d = Sphere(p, shapeArray[i].position, shapeArray[i].radius) - n;
 
-                    bool isBest = d < sDFTollerance && d > bestDistance;
+                    bool isBest = d < sdfTolerance && d > bestDistance;
 
                     index = isBest ? i : index;
                     bestDistance = isBest ? d : bestDistance;
@@ -201,16 +201,12 @@ namespace hLSL_Simulator
                 u.x * u.y * (va - vb - vc + vd) +
                 u.y * u.z * (va - vc - ve + vg) +
                 u.z * u.x * (va - vb - ve + vf) +
-                u.x * u.y * u.z * (-va + vb + vc - vd + ve - vf - vg + vh)) / (randomCoords * NoiseMultipler);
+                u.x * u.y * u.z * (-va + vb + vc - vd + ve - vf - vg + vh)) / (randomCoords * NoiseMultiplier);
         }
 
         // https://www.shadertoy.com/view/4dffRH
         public Vector3 Hash(Vector3 p)
         {
-            //p = new Vector3(Mathf.Sin(Vector3.Dot(p, new Vector3(127.1f, 311.7f, 74.7f))),
-            //              Mathf.Sin(Vector3.Dot(p, new Vector3(269.5f, 183.3f, 246.1f))),
-            //              Mathf.Sin(Vector3.Dot(p, new Vector3(113.5f, 271.9f, 124.6f))));
-
             p = new Vector3(Mathf.Sin(Vector3.Dot(p, hashingMatrix.lineA)),
                          Mathf.Sin(Vector3.Dot(p, hashingMatrix.lineB)),
                           Mathf.Sin(Vector3.Dot(p, hashingMatrix.lineC)));

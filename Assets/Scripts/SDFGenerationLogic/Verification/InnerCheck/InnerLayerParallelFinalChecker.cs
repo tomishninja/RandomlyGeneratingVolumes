@@ -4,29 +4,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
-    public class InnerLayerParrellelFinalChecker : LinniarInnerChecker
+    public class InnerLayerParallelFinalChecker : LinearInnerChecker
     {
 
-        public override int Verify(ref ShapeHandeler shapes)
+        public override int Verify(ref ShapeHandler shapes)
         {
             int result = RunValidation(shapes);
 
             if (result == int.MinValue)
             {
                 // The result was succesful
-                return ItterationCheckWasSuccessful(ref shapes);
+                return IterationCheckWasSuccessful(ref shapes);
             }
             else
             {
                 profiler.Increment(DataGenerationDataProfiler.TOO_FAILED_SECOND_CHECK);
                 // The result was a failure reset the volume and start again
-                return this.ItterationCheckFailed(result, ref shapes);
+                return this.IterationCheckFailed(result, ref shapes);
             }
         }
 
-        protected override int RunValidation(ShapeHandeler shapes)
+        protected override int RunValidation(ShapeHandler shapes)
         {
             float yPercenatge = 0;
             float zPercenatge = ((float)incrementor / (float)resolutionToCheckVolumeAt);
@@ -58,7 +58,7 @@ namespace GenoratingRandomSDF
                     int index = -1;
                     float d = shaderSimulator.SDF(pos, out index);
 
-                    if (d < this.SDFTollerance)
+                    if (d < this.SDFTolerance)
                     {
                         // Objects must be inside of boudning box
                         if (IsEdge(x, y, incrementor, resolutionToCheckVolumeAt))

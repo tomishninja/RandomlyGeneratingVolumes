@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls per-participant condition ordering for the user study.
+/// Uses a Latin-square, permutation, or shuffle strategy (configurable via Inspector)
+/// to produce a balanced sequence of <see cref="SphericalVolumeHierarchyLevelDetails"/>
+/// conditions across participants.
+/// </summary>
 [System.Serializable]
 public class StudyGenerationPlanner
 {
@@ -30,15 +36,15 @@ public class StudyGenerationPlanner
     public int ParticipantID { get => participantID; set => participantID = value; }
 
     // Helper Classes
-    ItterationOrderHandeler<string> ConditionPermutationsHandeler = null;
-    ItterationOrderHandeler<SphericalVolumeHierarchyLevelDetails> LevelPermutationsHandeler = null;
+    IterationOrderHandler<string> ConditionPermutationsHandler = null;
+    IterationOrderHandler<SphericalVolumeHierarchyLevelDetails> LevelPermutationsHandler = null;
 
     // Obsolute code that needs to be removed
     [SerializeField] SphericalVolumeHierarchyLevelDetails[] levelDetails;
     SphericalVolumeHierarchyLevelDetails[] PermutatedlevelDetails;
     public SphericalVolumeHierarchyLevelDetails[] LevelDetails { get => levelDetails; }
 
-    public SphericalVolumeHierarchyLevelDetails CurrentItteration { get => PermutatedlevelDetails[levelDetailIndex]; }
+    public SphericalVolumeHierarchyLevelDetails CurrentIteration { get => PermutatedlevelDetails[levelDetailIndex]; }
 
     [Header("File IO For Saving Generation Settings")]
     [SerializeField] Filebehaviour filebehaviour = Filebehaviour.None;
@@ -66,7 +72,7 @@ public class StudyGenerationPlanner
 
                 // Set permuations to match the next veriation
                 permutationrepeatIndex++;
-                PermutatedlevelDetails = LevelPermutationsHandeler.Get(permutationrepeatIndex);
+                PermutatedlevelDetails = LevelPermutationsHandler.Get(permutationrepeatIndex);
 
                 if (repetingIndex >= repeats)
                 {
@@ -77,7 +83,7 @@ public class StudyGenerationPlanner
 
             currentIndex++;
 
-            Debug.LogWarning("Logic Itteration: " + levelDetailIndex);
+            Debug.LogWarning("Logic Iteration: " + levelDetailIndex);
 
             return levelDetails[levelDetailIndex];
         }
@@ -139,12 +145,12 @@ public class StudyGenerationPlanner
     public void Init(int participantID)
     {
         // Set the peruation logic for the various classes
-        ConditionPermutationsHandeler = new PermutationFactory<string>().BuildPermuationCreator(typeOfPermutationForConditions, this.conditions);
+        ConditionPermutationsHandler = new PermutationFactory<string>().BuildPermuationCreator(typeOfPermutationForConditions, this.conditions);
 
-        LevelPermutationsHandeler = new PermutationFactory<SphericalVolumeHierarchyLevelDetails>().BuildPermuationCreator(typeOfPermutationForDifferentVarients, this.levelDetails);
+        LevelPermutationsHandler = new PermutationFactory<SphericalVolumeHierarchyLevelDetails>().BuildPermuationCreator(typeOfPermutationForDifferentVarients, this.levelDetails);
 
         // Set the current condition order
-        currentConditions = ConditionPermutationsHandeler.Get(participantID);
+        currentConditions = ConditionPermutationsHandler.Get(participantID);
 
         SetPerumationDetails(participantID);
 
@@ -173,6 +179,6 @@ public class StudyGenerationPlanner
         permutationrepeatIndex = conditions.Length * repeats * participantID;
 
         // Get the first set of permutated level details
-        PermutatedlevelDetails = LevelPermutationsHandeler.Get(permutationrepeatIndex);
+        PermutatedlevelDetails = LevelPermutationsHandler.Get(permutationrepeatIndex);
     }
 }

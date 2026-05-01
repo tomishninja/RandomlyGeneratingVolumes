@@ -10,16 +10,16 @@ public enum PermutationType
 [System.Serializable]
 public class PermutationFactory<T> : MonoBehaviour
 {
-    public ItterationOrderHandeler<T> BuildPermuationCreator(PermutationType type, T[] conditions)
+    public IterationOrderHandler<T> BuildPermuationCreator(PermutationType type, T[] conditions)
     {
         switch (type)
         {
             case PermutationType.Permeation:
-                return new PermutationsHandeler<T>(conditions);
+                return new PermutationsHandler<T>(conditions);
             case PermutationType.BallancedLatinSquare:
-                return new LatinBallanceSquareHandeler<T>(conditions);
+                return new LatinBalanceSquareHandler<T>(conditions);
             case PermutationType.Shuffle:
-                return new ShufflingHandeler<T>(conditions);
+                return new ShufflingHandler<T>(conditions);
             default:
                 return null;
         }

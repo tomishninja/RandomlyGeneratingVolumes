@@ -10,7 +10,7 @@ public class RandomChildGeneratorFactory
         ExistingSystems = new List<RandomChildrenAllocationSystem>();
     }
 
-    public RandomChildrenAllocationSystem GetChildGenoratorFor(int min, int max, int parentsAvalible)
+    public RandomChildrenAllocationSystem GetChildGeneratorFor(int min, int max, int parentsAvalible)
     {
         for (int index = 0; index < ExistingSystems.Count; index++)
         {

@@ -1,7 +1,7 @@
 using profiler;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     [System.Serializable]
     public class AddSDFsToContainingItem : AbstractAddSDFLogic
@@ -16,10 +16,10 @@ namespace GenoratingRandomSDF
             this.showOutputsOfVolumes = showOutputs;
         }
 
-        public override int AddSDFs(ref ShapeHandeler shapes)
+        public override int AddSDFs(ref ShapeHandler shapes)
         {
             // Veribles that control if veriables don't work out and how long to try for
-            int amountOfFails = 0;
+            int failCount = 0;
             bool failed = false;
 
             do
@@ -29,14 +29,14 @@ namespace GenoratingRandomSDF
 
                 try
                 {
-                    int itteration = 0;
+                    int iteration = 0;
 
-                    for (; itteration < shapes.CurrentShape.Children.Length; itteration++)
+                    for (; iteration < shapes.CurrentShape.Children.Length; iteration++)
                     {
                         int index = 0;
 
                         // Work out where we should be in the shape array
-                        if (shapes.CurrentShape.Children[itteration] == null || shapes.CurrentShape.Children[itteration].IsDefault())
+                        if (shapes.CurrentShape.Children[iteration] == null || shapes.CurrentShape.Children[iteration].IsDefault())
                         {
                             for (; index < shapes.Length; index++)
                             {
@@ -49,28 +49,28 @@ namespace GenoratingRandomSDF
                             // if we are removing a existing child then we need to find the matching one in the other array
                             for (; index < shapes.Length; index++)
                             {
-                                if (shapes.CurrentShape.Children[itteration].Equals(shapes.Get(index)))
+                                if (shapes.CurrentShape.Children[iteration].Equals(shapes.Get(index)))
                                     break;
                             }
                         }
 
                         // create the shape we are trying to create
-                        HierachicalObjects shape = null;
+                        HierarchicalObjects shape = null;
 
                         // create the new child and take a guess of some maybe appropriate parameters
-                        shape = shapes.CurrentShape.DraftNewChild(itteration, currentLevel.CountableRadiusRange, parameters.AmountOfRandomPointsToGenerate, shapes.CurrentShape.Children.Length, 0, SphereTolerance: parameters.sphereTollerance);
+                        shape = shapes.CurrentShape.DraftNewChild(iteration, currentLevel.CountableRadiusRange, parameters.AmountOfRandomPointsToGenerate, shapes.CurrentShape.Children.Length, 0, SphereTolerance: parameters.sphereTolerance);
 
                         // fill in the information that was missed before
                         shape.importance = currentLevel.CountableImportance;
                         shape.color = currentLevel.CountableColor;
 
-                        shape.Children = new HierachicalObjects[0];
+                        shape.Children = new HierarchicalObjects[0];
 
                         shapes.Set(index, shape);
                     }
 
                     // make sure the volumes for this set are ok or else repete the process
-                    CheckToEnsureVolumeHasAppropriateVolume(ref shapes, ref failed, ref amountOfFails);
+                    CheckToEnsureVolumeHasAppropriateVolume(ref shapes, ref failed, ref failCount);
 
                 }
                 catch (RanForTooLongException)
@@ -82,9 +82,9 @@ namespace GenoratingRandomSDF
 
                     // the random generator is stuggling to fit the current item
                     // this likly means a earlier one is in its road so we need to start again
-                    if (amountOfFails > parameters.amountOfTimesAddingTryingToFitSDFDataBeforeHigherException)
+                    if (failCount > parameters.amountOfTimesAddingTryingToFitSDFDataBeforeHigherException)
                     {
-                        amountOfFails = 0;
+                        failCount = 0;
 
                         UnityEngine.Random.InitState((int)(Time.time * 7919));
 
@@ -93,7 +93,7 @@ namespace GenoratingRandomSDF
 
                     // repeat the loop
                     failed = true;
-                    amountOfFails++;
+                    failCount++;
                 }
                 catch (System.Exception ex)
                 {
@@ -102,9 +102,9 @@ namespace GenoratingRandomSDF
                     dataProfiler.Increment(DataGenerationDataProfiler.UNEXPECTED_ERROR);
 
                     if (shapes.CurrentShape.Children != null)
-                        shapes.CurrentShape.Children = new HierachicalObjects[shapes.CurrentShape.Children.Length];
+                        shapes.CurrentShape.Children = new HierarchicalObjects[shapes.CurrentShape.Children.Length];
                     else
-                        shapes.CurrentShape.Children = new HierachicalObjects[0];
+                        shapes.CurrentShape.Children = new HierarchicalObjects[0];
 
                     // This is normally caused by a unforseen error so it it happens I want to get out of this loop as fast as possible
                 }

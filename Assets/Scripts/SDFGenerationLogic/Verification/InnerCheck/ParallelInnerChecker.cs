@@ -1,4 +1,4 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using hLSL_Simulator;
 using profiler;
 using System.Collections.Generic;
@@ -6,11 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
-    public class ParrellInnerChecker : LinniarInnerChecker
+    public class ParallelInnerChecker : LinearInnerChecker
     {
-        protected override int RunValidation(ShapeHandeler shapes)
+        protected override int RunValidation(ShapeHandler shapes)
         {
             float yPercenatge = 0;
             float zPercenatge = ((float)incrementor / (float)resolutionToCheckVolumeAt);
@@ -43,7 +43,7 @@ namespace GenoratingRandomSDF
                     int index = -1;
                     float d = shaderSimulator.SDF(pos, out index);
 
-                    if (d < this.SDFTollerance)
+                    if (d < this.SDFTolerance)
                     {
                         // Objects must be inside of boudning box
                         if (IsEdge(x, y, incrementor, resolutionToCheckVolumeAt))
@@ -86,7 +86,7 @@ namespace GenoratingRandomSDF
                             }
                         }
 
-                        HierachicalObjects child = null;
+                        HierarchicalObjects child = null;
                         int childIndex = ReturnFirstChild(shapes.CurrentShape, allSDFs, ref child, ref shapes);
                         if (child != null && !parentExists)
                         {
@@ -100,7 +100,7 @@ namespace GenoratingRandomSDF
                         }
 
                         //
-                        // Cacluate components like area and such
+                        // Calculate components like area and such
                         //
                         if (amountOfChildren == 0 && parentExists)
                         {

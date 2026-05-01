@@ -1,4 +1,4 @@
-public static class UserStudyHelperFuncitons
+public static class UserStudyHelperFunctions
 {
     public static string GenerateParticipantID(int index, string prepend = "")
     {

@@ -1,9 +1,9 @@
 
-public class PermutationsHandeler<T> : ItterationOrderHandeler<T>
+public class PermutationsHandler<T> : IterationOrderHandler<T>
 {
     T[][] permutations;
 
-    public PermutationsHandeler(T[] conditions)
+    public PermutationsHandler(T[] conditions)
     {
         var temp = PermutationGenerator<T>.Permute(conditions);
         permutations = new T[temp.Count][];
@@ -15,8 +15,8 @@ public class PermutationsHandeler<T> : ItterationOrderHandeler<T>
         }
     }
 
-    public override T[] Get(int itteration)
+    public override T[] Get(int iteration)
     {
-        return this.permutations[itteration % this.permutations.Length];
+        return this.permutations[iteration % this.permutations.Length];
     }
 }

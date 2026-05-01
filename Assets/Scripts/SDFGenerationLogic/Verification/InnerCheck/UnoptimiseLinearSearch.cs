@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using profiler;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
-    public class UnoptimiseLinearSearch : LinniarInnerChecker
+    public class UnoptimiseLinearSearch : LinearInnerChecker
     {
-        protected override int RunValidation(ShapeHandeler shapes)
+        protected override int RunValidation(ShapeHandler shapes)
         {
             float xPercenatge = 0;
             float yPercenatge = 0;
@@ -38,7 +38,7 @@ namespace GenoratingRandomSDF
                     int index = -1;
                     float d = shaderSimulator.SDF(pos, out index);
 
-                    if (d < this.SDFTollerance)
+                    if (d < this.SDFTolerance)
                     {
                         // Objects must be inside of boudning box
                         if (IsEdge(x, y, incrementor, resolutionToCheckVolumeAt))
@@ -72,7 +72,7 @@ namespace GenoratingRandomSDF
                                 {
                                     for (float smallerX = xPercenatge - percentageResultionOffSetOff; smallerX < xPercenatge + percentageResultionOffSetOff; smallerX += smallerMovementIncrementer)
                                     {
-                                        Stack<int> smallerSDFsFoundAtVoxel = shaderSimulator.GetAllValidSDFs(pos, smallerSDFTollerance);
+                                        Stack<int> smallerSDFsFoundAtVoxel = shaderSimulator.GetAllValidSDFs(pos, smallerSDFTolerance);
                                         int[] smallerSDFArray = smallerSDFsFoundAtVoxel.ToArray();
 
                                         amountOfChildren = CountChildrenInStack(shapes.CurrentShape, smallerSDFsFoundAtVoxel, ref shapes);
@@ -115,7 +115,7 @@ namespace GenoratingRandomSDF
                             }
                         }
 
-                        HierachicalObjects child = null;
+                        HierarchicalObjects child = null;
                         int childIndex = ReturnFirstChild(shapes.CurrentShape, allSDFs, ref child, ref shapes);
                         if (child != null && !parentExists)
                         {
@@ -128,7 +128,7 @@ namespace GenoratingRandomSDF
                         }
 
                         //
-                        // Cacluate components like area and such
+                        // Calculate components like area and such
                         //
                         if (amountOfChildren == 0 && parentExists)
                         {
@@ -141,24 +141,10 @@ namespace GenoratingRandomSDF
                             child.AmountOfVoxelsWithin++;
                             child.AABB_Min = Vector3.Min(child.AABB_Min, pos);
                             child.AABB_Max = Vector3.Max(child.AABB_Max, pos);
-
-                            //if (currentShapeIndex != 0)
-                            //{
-                            //    Debug.Log("Has Children");
-                            //}
-
-                            //this.Shapes[childIndex].AmountOfVoxelsWithin++;
-                            //this.Shapes[childIndex].AABB_Min = Vector3.Max(child.AABB_Min, pos);
-                            //this.Shapes[childIndex].AABB_Max = Vector3.Min(child.AABB_Max, pos);
                         }
                     }
                 }
             }
-
-            //for (int index = 0; index < parent.Children.Length; index++)
-            //{
-            //    Debug.Log(parent.Children[index].AABB_Max + "And" + parent.Children[index].AABB_Min);
-            //}
 
             profiler.Increment(DataGenerationDataProfiler.SUCCESS);
 

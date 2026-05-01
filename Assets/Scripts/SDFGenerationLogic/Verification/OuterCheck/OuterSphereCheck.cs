@@ -1,7 +1,7 @@
 using hLSL_Simulator;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public class OuterSphereCheck : IVerification
     {
@@ -35,12 +35,12 @@ namespace GenoratingRandomSDF
             this.layerManager = layerManager;
         }
 
-        public int Verify(ref ShapeHandeler shapes)
+        public int Verify(ref ShapeHandler shapes)
         {
             // calculate the amount of points to check
             int samples = (resolutionToCheckVolumeAt ^ 2) * 2;
 
-            // Cacluate the golden angle in randians
+            // Calculate the golden angle in randians
             float phi = System.Convert.ToSingle(System.Math.PI * (3.0 - System.Math.Sqrt(5.0)));
 
             for (int index = 0; index < samples; index++)

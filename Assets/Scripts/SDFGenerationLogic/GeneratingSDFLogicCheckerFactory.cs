@@ -1,6 +1,11 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using UnityEngine;
 
+/// <summary>
+/// Factory that creates the concrete <see cref="IVerification"/> strategy instances
+/// (outer check, container check, inner check) used by <see cref="CheckingStateController"/>.
+/// All configuration is driven by Unity's Inspector.
+/// </summary>
 [System.Serializable]
 public class GeneratingSDFLogicCheckerFactory
 {
@@ -22,7 +27,7 @@ public class GeneratingSDFLogicCheckerFactory
 
     [Header("Inner layer parameters")]
     [SerializeField] int Resolution = 128;
-    [SerializeField] int ResultionMulitiplierForSmallerTolerance = 4;
+    [SerializeField] int ResolutionMultiplierForSmallerTolerance = 4;
 
     [Header("Oct Tree Parameters")]
     [SerializeField] InnerOctTreeCheck octTreeObject;
@@ -30,7 +35,7 @@ public class GeneratingSDFLogicCheckerFactory
     [Header("Debug Options")]
     bool showOutputsOfVolumes = false;
 
-    public void Init(ref profiler.AbstractProfiler dataProfiler, ref ShapeHandeler shapes, ref HashingMatrix hasingMaxtrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
+    public void Init(ref profiler.AbstractProfiler dataProfiler, ref ShapeHandler shapes, ref HashingMatrix hasingMaxtrix, SphericalVolumeHierarchyLevelDetails conditionDetails)
     {
         this.shaderSimulator = new hLSL_Simulator.NoisyHierarchicalSpheres(ref shapes, ref hasingMaxtrix);
         this.dataProfiler = dataProfiler;
@@ -40,60 +45,60 @@ public class GeneratingSDFLogicCheckerFactory
 
     public virtual AddLargeSphereToOuter GetAddLargeSphereLogic()
     {
-        return new GenoratingRandomSDF.AddLargeSphereToOuter(ref conditionDetails, ref randomChildGeneratorFactory);
+        return new GeneratingRandomSDF.AddLargeSphereToOuter(ref conditionDetails, ref randomChildGeneratorFactory);
     }
 
     public virtual AddMiddleLayerSDFs GetAddMiddleLayerSDFLogic()
     {
-        return new GenoratingRandomSDF.AddMiddleLayerSDFs(ref conditionDetails, ref dataProfiler, ref parametersForAddingSDFs,  ref randomChildGeneratorFactory);
+        return new GeneratingRandomSDF.AddMiddleLayerSDFs(ref conditionDetails, ref dataProfiler, ref parametersForAddingSDFs,  ref randomChildGeneratorFactory);
     }
 
     public virtual AddSDFsToContainingItem GetAddSmallSDFsToInnerLogic()
     {
-        return new GenoratingRandomSDF.AddSDFsToContainingItem(ref conditionDetails, ref dataProfiler, ref parametersForAddingSDFs, ref randomChildGeneratorFactory);
+        return new GeneratingRandomSDF.AddSDFsToContainingItem(ref conditionDetails, ref dataProfiler, ref parametersForAddingSDFs, ref randomChildGeneratorFactory);
     }
 
-    public virtual GenoratingRandomSDF.OuterSphereCheck GetOuterSphericalCheck()
+    public virtual GeneratingRandomSDF.OuterSphereCheck GetOuterSphericalCheck()
     {
-        return new GenoratingRandomSDF.OuterSphereCheck(shaderSimulator, radiusOfOuterSphere, amountToShrink, cordOffset);
+        return new GeneratingRandomSDF.OuterSphereCheck(shaderSimulator, radiusOfOuterSphere, amountToShrink, cordOffset);
     }
 
-    public virtual GenoratingRandomSDF.OuterBoxCheck GetOuterBoxCheck()
+    public virtual GeneratingRandomSDF.OuterBoxCheck GetOuterBoxCheck()
     {
-        return new GenoratingRandomSDF.OuterBoxCheck(shaderSimulator, cordOffset, amountToShrink);
+        return new GeneratingRandomSDF.OuterBoxCheck(shaderSimulator, cordOffset, amountToShrink);
     }
 
-    public virtual GenoratingRandomSDF.LinniarInnerChecker GetLinniarInnerChecker()
+    public virtual GeneratingRandomSDF.LinearInnerChecker GetLinearInnerChecker()
     {
-        InnerLayerParrellelFinalChecker output = new InnerLayerParrellelFinalChecker();
+        InnerLayerParallelFinalChecker output = new InnerLayerParallelFinalChecker();
 
-        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResultionMulitiplierForSmallerTolerance);
+        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResolutionMultiplierForSmallerTolerance);
 
         return output;
     }
 
-    public virtual GenoratingRandomSDF.UnoptimiseLinearSearch GetUnoptimiseLinearSearch()
+    public virtual GeneratingRandomSDF.UnoptimiseLinearSearch GetUnoptimiseLinearSearch()
     {
         UnoptimiseLinearSearch output = new UnoptimiseLinearSearch();
 
-        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResultionMulitiplierForSmallerTolerance);
+        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResolutionMultiplierForSmallerTolerance);
 
         return output;
     }
-    public virtual GenoratingRandomSDF.InnerLayerParrellelFinalChecker GetParrellelFinalChecker()
+    public virtual GeneratingRandomSDF.InnerLayerParallelFinalChecker GetParrellelFinalChecker()
     {
-        InnerLayerParrellelFinalChecker output = new InnerLayerParrellelFinalChecker();
+        InnerLayerParallelFinalChecker output = new InnerLayerParallelFinalChecker();
 
-        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResultionMulitiplierForSmallerTolerance);
+        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResolutionMultiplierForSmallerTolerance);
 
         return output;
     }
 
-    public virtual ParrellInnerChecker GetParrellInnerChecker()
+    public virtual ParallelInnerChecker GetParallelInnerChecker()
     {
-        ParrellInnerChecker output = new ParrellInnerChecker();
+        ParallelInnerChecker output = new ParallelInnerChecker();
 
-        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResultionMulitiplierForSmallerTolerance);
+        output.Init(ref shaderSimulator, ref dataProfiler, Resolution, cordOffset, ResolutionMultiplierForSmallerTolerance);
 
         return output;
     }

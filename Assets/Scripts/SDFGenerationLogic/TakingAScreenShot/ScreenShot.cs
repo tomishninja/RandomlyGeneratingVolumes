@@ -22,23 +22,23 @@ public class ScreenShot
         takeImageThisFrame = false;
     }
 
-    public void AttemptToTakeScreenShot(int participantID, int currentItteration)
+    public void AttemptToTakeScreenShot(int participantID, int currentIteration)
     {
         if (takeImages && takeImageThisFrame)
         {
-            TakeScreenShot(participantID, currentItteration);
+            TakeScreenShot(participantID, currentIteration);
             takeImageThisFrame = false;
         }
     }
 
-    private void TakeScreenShot(int currentParticipant, int currentItteration)
+    private void TakeScreenShot(int currentParticipant, int currentIteration)
     {
         string fileNameForImage = pathForImages;
 
         // Add the folder for the participant if required
         if (createANewFolderForEachParticipant)
         {
-            fileNameForImage += "/" + PREPEND_FOR_FILE_NAME_OF_PHOTOS_FOLDER + UserStudyHelperFuncitons.GenerateParticipantID(currentParticipant, prependForOutputFile) + "/";
+            fileNameForImage += "/" + PREPEND_FOR_FILE_NAME_OF_PHOTOS_FOLDER + UserStudyHelperFunctions.GenerateParticipantID(currentParticipant, prependForOutputFile) + "/";
         }
 
         try
@@ -53,12 +53,12 @@ public class ScreenShot
             fileNameForImage += prependForImages;
             fileNameForImage += "Participant";
             fileNameForImage += currentParticipant;
-            fileNameForImage += "_Itteration";
-            fileNameForImage += currentItteration;
+            fileNameForImage += "_Iteration";
+            fileNameForImage += currentIteration;
             fileNameForImage += ".png";
 
             if (writeMessageWhenSuccsessful)
-                Debug.Log("ScreenShot Taken: " + currentItteration);
+                Debug.Log("ScreenShot Taken: " + currentIteration);
 
             // take the image
             ScreenCapture.CaptureScreenshot(fileNameForImage, ScreenShotUpresScaling);

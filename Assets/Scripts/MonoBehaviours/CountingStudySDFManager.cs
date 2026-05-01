@@ -1,31 +1,32 @@
-using GenoratingRandomSDF;
+﻿using GeneratingRandomSDF;
 using System;
 using UnityEngine;
 
-public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
+public class CountingStudySDFManager : MonoBehaviour, VisualizationAdapter
 {
-    public HierachicalObjects[] volumeParameters;
+    public const string DEPTH_PERCEPTION_TASK_IDENTIFYER = "Depth Perception";
+
+    [SerializeField] public AbstractGeometricShape[] shapes;
+    
     [SerializeField] public Material mat;
 
     /// Needs to be updated for final study
-    [SerializeField] VisulizationHandeler[] visulizations;
+    [SerializeField] VisualizationHandler[] visualizations;
 
-    // the object used to render this shape
-    [SerializeField] public MeshRenderer renderer;
+    [SerializeField] MeshRenderer renderer;
 
-    public int AmountOfShapes { get => volumeParameters.Length; }
+    public int AmountOfShapes { get => shapes.Length; }
 
     public string Condition { get; set; }
 
-    // Start is called before the first frame update
     void Start()
     {
-        for (int index = 0; index < visulizations.Length; index++)
+        for (int index = 0; index < visualizations.Length; index++)
         {
-            visulizations[index].Init();
+            visualizations[index].Init();
         }
 
-        if (mat != null && (volumeParameters != null && volumeParameters.Length > 0))
+        if (mat != null && (shapes != null && shapes.Length > 0))
             SetUpShader();
 
         if (renderer == null)
@@ -35,7 +36,7 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
     // Update is called once per frame
     void Update()
     {
-        if (mat != null && (volumeParameters != null && volumeParameters.Length > 0))
+        if (mat != null && (shapes != null && shapes.Length > 0))
             SetUpShader();//Maybe comment out later
     }
 
@@ -47,19 +48,16 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
     }
 
     // Sets up the varibles for the ittal condition
-    public void SetUpVisulization(ShapeHandeler shapes, string CurrentCondition = null)
+    public void SetUpVisualization(ShapeHandler shapes, string CurrentCondition = null)
     {
         // Set the amount of shapes 
-        this.volumeParameters = shapes.GetShapesAsArray();
+        this.shapes = shapes.GetShapesAsArray();
 
         // Set the material
-        if (CurrentCondition == null)
-            this.SetMat(this.volumeParameters.Length, Condition);
-        else
-            this.SetMat(this.volumeParameters.Length, CurrentCondition);
+        this.SetMat(this.shapes.Length, Condition);
 
         // Set up the hash
-        //itterationDetails.hash.SetInShader(this.mat, "_HashLineA", "_HashLineB", "_HashLineC");
+        //iterationDetails.hash.SetInShader(this.mat, "_HashLineA", "_HashLineB", "_HashLineC");
 
         // Set shader variables
         mat.SetVectorArray("_SphereDetails", this.getShapeDetailsArray());
@@ -83,11 +81,11 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
         // if condition name is set to null do nothing
         if (ConditionName == null) throw new ArgumentNullException("Condition Name was set to null");
 
-        for (int index = 0; index < visulizations.Length; index++)
+        for(int index = 0; index < visualizations.Length; index++)
         {
-            if (ConditionName.ToLower().Equals(visulizations[index].Name.ToLower()))
+            if (ConditionName.ToLower().Equals(visualizations[index].Name.ToLower()))
             {
-                this.mat = visulizations[index].GetMaterial(amountOfObjects);
+                this.mat = visualizations[index].GetMaterial(amountOfObjects);
                 renderer.material = this.mat;
             }
         }
@@ -95,11 +93,11 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
 
     private Vector4[] getShapeDetailsArray()
     {
-        Vector4[] output = new Vector4[volumeParameters.Length];
+        Vector4[] output = new Vector4[shapes.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.volumeParameters[index].getPosAndSizeVetor4();
+            output[index] = this.shapes[index].GetPositionAndSizeVector4();
         }
 
         return output;
@@ -107,11 +105,11 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
 
     private float[] getImportanceArray()
     {
-        float[] output = new float[volumeParameters.Length];
+        float[] output = new float[shapes.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.volumeParameters[index].importance;
+            output[index] = this.shapes[index].importance;
         }
 
         return output;
@@ -119,11 +117,11 @@ public class DemoVisulizer : MonoBehaviour, VisulizationAdapter
 
     private Color[] getColorArray()
     {
-        Color[] output = new Color[volumeParameters.Length];
+        Color[] output = new Color[shapes.Length];
 
         for (int index = 0; index < output.Length; index++)
         {
-            output[index] = this.volumeParameters[index].color;
+            output[index] = this.shapes[index].color;
         }
 
         return output;

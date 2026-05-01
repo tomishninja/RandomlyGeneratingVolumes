@@ -1,4 +1,4 @@
-using GenoratingRandomSDF;
+using GeneratingRandomSDF;
 using profiler;
 using UnityEngine;
 
@@ -14,11 +14,11 @@ public class GenerateRandomSDFs : MonoBehaviour
     [SerializeField] GeneratingSDFLogicBuilder builder;
 
     [SerializeField] fileIO.WriteStudyDesignToFile fileWriter;
-    [SerializeField] ErrorHandelerFacade errorHandelerStats;
-    [SerializeField] ShapeHandeler shapes;
+    [SerializeField] ErrorHandlerFacade errorHandlerStats;
+    [SerializeField] ShapeHandler shapes;
     [SerializeField] HashingMatrix hashingMatrix;
 
-    private SDFGenorator mainLogicOperator;
+    private SDFGenerator mainLogicOperator;
 
     [SerializeField] float NoiseMultiplier = 0.1f;
 
@@ -27,7 +27,7 @@ public class GenerateRandomSDFs : MonoBehaviour
     int amountOfFilesCreated = 0;
     private int CurrentParticipant { get => startingParticipant + amountOfFilesCreated; }
 
-    [SerializeField] DemoVisulizer[] DemoVisulizers;
+    [SerializeField] DemoVisualizer[] DemoVisualizers;
 
     private void Awake()
     {
@@ -37,59 +37,50 @@ public class GenerateRandomSDFs : MonoBehaviour
     void Start()
     {
         profiler.ClearAndInitProfiler();
-        shapes = new ShapeHandeler();
+        shapes = new ShapeHandler();
         hashingMatrix = HashingMatrix.InitalizeRandomHashingMatrix();
 
-        // Set the condition details to the intial values
-        conditionDetails.Init(CurrentParticipant);
-
         // Build the main objects
-        builder.Init(ref profiler, ref shapes, ref hashingMatrix, conditionDetails.CurrentItteration);
+        builder.Init(ref profiler, ref shapes, ref hashingMatrix, conditionDetails.CurrentIteration);
         var controllerForAddingSDFs = builder.BuildControllerForAddingSDFs();
         var controllerForCheckingVolumes = builder.BuildControllerForCheckingVolumes();
         LayerManager layerManager = builder.CreateAndSetLayerMangerFor(ref controllerForCheckingVolumes, ref controllerForAddingSDFs);
 
-        // Set the condition details to the intial values
+        // Initialise condition details once, after the builder has been configured
         conditionDetails.Init(CurrentParticipant);
 
-        mainLogicOperator = new SDFGenorator(
-            ref conditionDetails, 
-            ref profiler, 
-            fileWriter, 
+        mainLogicOperator = new SDFGenerator(
+            ref conditionDetails,
+            ref profiler,
+            fileWriter,
             ref controllerForCheckingVolumes,
             ref controllerForAddingSDFs,
             ref hashingMatrix,
-            ref errorHandelerStats, 
-            shapes, 
+            ref errorHandlerStats,
+            shapes,
             NoiseMultiplier,
             builder.CreateFinalCheckLogic(),
-            DemoVisulizers
+            DemoVisualizers
             );
     }
 
     // Update is called once per frame
     void Update()
     {
-        int outputFromMainProcess = -1;
+        ProcessResult outputFromMainProcess = ProcessResult.InProgress;
         try
         {
             outputFromMainProcess = mainLogicOperator.Process();
         }
-        catch(RanForTooLongException ex)
+        catch (RanForTooLongException ex)
         {
             Debug.LogError(ex.Message);
         }
-        /*catch(System.Exception ex)
-        {
-            Debug.LogError(ex.Message);
-            Debug.LogError(ex.StackTrace);
-            this.enabled = false;
-        }*/
 
-        // If the main process has finished then we can move onto the next participant
-        if (outputFromMainProcess == 1)
+        // If the main process has finished then take a screenshot for post-processing
+        if (outputFromMainProcess == ProcessResult.VisualizationReady)
         {
-            screenShot.AttemptToTakeScreenShot(CurrentParticipant, mainLogicOperator.StudyDesignIndex);
+            screenShot.AttemptToTakeScreenShot(CurrentParticipant, mainLogicOperator.CurrentParticipantConditionIndex);
         }
     }
 

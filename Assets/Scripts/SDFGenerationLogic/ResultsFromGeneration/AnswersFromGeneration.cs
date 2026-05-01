@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AnswersFromGeneration
 {
-    public static AnswersFromGeneration GenerateAnswers(HierachicalObjects[] inputData, SphericalVolumeHierarchyLevelDetails[] levelInfo)
+    public static AnswersFromGeneration GenerateAnswers(HierarchicalObjects[] inputData, SphericalVolumeHierarchyLevelDetails[] levelInfo)
     {
         AnswersFromGeneration output = new AnswersFromGeneration(inputData.Length, levelInfo.Length);
         Dictionary<Color, ColorDetails> colorDictionary = new Dictionary<Color, ColorDetails>();
@@ -62,7 +62,7 @@ public class AnswersFromGeneration
         return output;
     }
 
-    public static AnswersFromGeneration GenerateAnswers(HierachicalObjects[] inputData, SphericalVolumeHierarchyLevelDetails levelInfo, int amountContained, int amountUncontained, int amountOfContainers, int amountOfOuters, int amountOfCountables)
+    public static AnswersFromGeneration GenerateAnswers(HierarchicalObjects[] inputData, SphericalVolumeHierarchyLevelDetails levelInfo, int amountContained, int amountUncontained, int amountOfContainers, int amountOfOuters, int amountOfCountables)
     {
         AnswersFromGeneration output = new AnswersFromGeneration(inputData.Length, 3, amountContained, amountUncontained, amountOfContainers, amountOfOuters, amountOfCountables);
         Dictionary<Color, ColorDetails> colorDictionary = new Dictionary<Color, ColorDetails>();
@@ -144,8 +144,8 @@ public class AnswersFromGeneration
         [SerializeField] int level;
         [SerializeField] public int voxelsUsed = 0;
         [SerializeField] Color color;
-        [SerializeField] public HierachicalObjects smallestRegion;
-        [SerializeField] public HierachicalObjects largestRegion;
+        [SerializeField] public HierarchicalObjects smallestRegion;
+        [SerializeField] public HierarchicalObjects largestRegion;
     }
 
     [System.Serializable]
@@ -169,7 +169,7 @@ public class AnswersFromGeneration
         [SerializeField] public DepthInformationShapeInfo[] faceFirstDepthPerceptionIndexs = null;
         [SerializeField] public DepthInformationShapeInfo[] centerfirstDepthPerceptionIndexs = null;
 
-        public DepthInformation(HierachicalObjects[] data, Transform objectsTransform)
+        public DepthInformation(HierarchicalObjects[] data, Transform objectsTransform)
         {
             faceFirstDepthPerceptionIndexs = new DepthInformationShapeInfo[data.Length];
             centerfirstDepthPerceptionIndexs = new DepthInformationShapeInfo[data.Length];
@@ -185,13 +185,13 @@ public class AnswersFromGeneration
         }
 
         [System.Serializable]
-        public class DepthInformationShapeInfo : HierachicalObjects
+        public class DepthInformationShapeInfo : HierarchicalObjects
         {
             [SerializeField] public int originalIndex = -1;
 
             protected Transform transform;
 
-            public DepthInformationShapeInfo(HierachicalObjects shapeInfo, int index, Transform transform)
+            public DepthInformationShapeInfo(HierarchicalObjects shapeInfo, int index, Transform transform)
             {
                 this.originalIndex = index;
                 this.AABB_Max = shapeInfo.AABB_Max;
@@ -200,7 +200,7 @@ public class AnswersFromGeneration
                 this.Parent = shapeInfo.Parent;
                 this.Children = shapeInfo.Children;
                 this.importance = shapeInfo.importance;
-                this.positon = shapeInfo.positon;
+                this.position = shapeInfo.position;
                 this.radius = shapeInfo.radius;
                 this.color = shapeInfo.color;
                 this.transform = transform;
@@ -231,13 +231,13 @@ public class AnswersFromGeneration
                 }
             }
 
-            public override HierachicalObjects DraftNewChild(int childIndex, MinAndMaxFloat minAndMaxRadiusMultipler)
+            public override HierarchicalObjects DraftNewChild(int childIndex, MinAndMaxFloat minAndMaxRadiusMultipler)
             {
                 // should never be called
                 throw new NotImplementedException();
             }
 
-            public override HierachicalObjects DraftNewChild(int childIndex, MinAndMaxFloat containableRadiusRange, int AmountOfTimesToLookForABetterObject = 50, int StartingIndexToLookForBestRandomlyGeneratedPoint = 1, int StartingIndexToLookCheckForBestPositionAgainst = 0, float SphereTolerance = 0)
+            public override HierarchicalObjects DraftNewChild(int childIndex, MinAndMaxFloat containableRadiusRange, int AmountOfTimesToLookForABetterObject = 50, int StartingIndexToLookForBestRandomlyGeneratedPoint = 1, int StartingIndexToLookCheckForBestPositionAgainst = 0, float SphereTolerance = 0)
             {
                 // should never be called
                 throw new NotImplementedException();
@@ -248,7 +248,7 @@ public class AnswersFromGeneration
                 return 0.0f;
             }
 
-            public override bool HasAncestor(HierachicalObjects possibleAncestor)
+            public override bool HasAncestor(HierarchicalObjects possibleAncestor)
             {
                 return (this.Parent != null);
             }
@@ -259,7 +259,7 @@ public class AnswersFromGeneration
                 return false;
             }
 
-            public override HierachicalObjects MoveChild(int childIndex)
+            public override HierarchicalObjects MoveChild(int childIndex)
             {
                 // should never be called
                 throw new NotImplementedException();
@@ -275,7 +275,7 @@ public class AnswersFromGeneration
         [System.Serializable]
         public class FaceFirstDepthInfo : DepthInformationShapeInfo, IComparer, IComparable
         {
-            public FaceFirstDepthInfo(HierachicalObjects shapeInfo, int index, Transform transform)
+            public FaceFirstDepthInfo(HierarchicalObjects shapeInfo, int index, Transform transform)
                 : base(shapeInfo, index, transform) { }
 
             public int Compare(object x, object y)
@@ -358,7 +358,7 @@ public class AnswersFromGeneration
         [System.Serializable]
         public class CentralDepthInfo : DepthInformationShapeInfo, IComparer, IComparable
         {
-            public CentralDepthInfo(HierachicalObjects shapeInfo, int index, Transform transform)
+            public CentralDepthInfo(HierarchicalObjects shapeInfo, int index, Transform transform)
                    : base(shapeInfo, index, transform) { }
 
             public int Compare(object x, object y)
@@ -368,11 +368,11 @@ public class AnswersFromGeneration
                     CentralDepthInfo lhs = (CentralDepthInfo)x;
                     CentralDepthInfo rhs = (CentralDepthInfo)y;
 
-                    if (lhs.positon.z < rhs.positon.z)
+                    if (lhs.position.z < rhs.position.z)
                     {
                         return -1;
                     }
-                    else if (lhs.positon.z > rhs.positon.z)
+                    else if (lhs.position.z > rhs.position.z)
                     {
                         return 1;
                     }
@@ -393,11 +393,11 @@ public class AnswersFromGeneration
                 {
                     CentralDepthInfo rhs = (CentralDepthInfo)obj;
 
-                    if (this.positon.z < rhs.positon.z)
+                    if (this.position.z < rhs.position.z)
                     {
                         return -1;
                     }
-                    else if (this.positon.z > rhs.positon.z)
+                    else if (this.position.z > rhs.position.z)
                     {
                         return 1;
                     }

@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     [System.Serializable]
     public class ParametersForAddIngSDFs
     {
         // Objects created via the input
-        [SerializeField] internal float sphereTollerance;
+        [SerializeField] internal float sphereTolerance;
         [SerializeField] internal bool showOutputsOfVolumes;
 
         [SerializeField] internal int amountOfTimesAddingTryingToFitSDFDataBeforeHigherException = 100;

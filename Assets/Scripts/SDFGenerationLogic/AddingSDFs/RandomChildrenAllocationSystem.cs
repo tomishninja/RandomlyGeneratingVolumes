@@ -59,7 +59,7 @@ public class RandomChildrenAllocationSystem
     /// Use the Depersist Method to stop chose a new random number if you wish to persist the value
     /// </param>
     /// <returns></returns>
-    public int GenerateARadomAmountOfChildren(bool persistQueue = false)
+    public int GenerateARandomAmountOfChildren(bool persistQueue = false)
     {
         if (persistQueue == true && IsPossible(currentRandomValue))
         {
@@ -79,7 +79,7 @@ public class RandomChildrenAllocationSystem
         return output;
     }
 
-    public void DepersistsRandomValue()
+    public void DepersistRandomValue()
     {
         currentRandomValue = minAmountOfChildrenPossible;
         do
@@ -118,7 +118,7 @@ public class RandomChildrenAllocationSystem
         // loop though all of the data
         for (int index = minChildren; index < maxChildren; index++)
         {
-            // each itteration update the data set value
+            // each iteration update the data set value
             currentDataSet[currentParentIndex] = index;
 
             // check if this is a leaf item

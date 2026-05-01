@@ -1,8 +1,8 @@
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
     public static class ShapeArrayFriendlyFunctions
     {
-        public static void EmptyShapeArrayOfChildrenOfCurrent(HierachicalObjects[] shapes, int currentShapeIndex)
+        public static void EmptyShapeArrayOfChildrenOfCurrent(HierarchicalObjects[] shapes, int currentShapeIndex)
         {
             if (shapes != null && currentShapeIndex >= 0 && currentShapeIndex < shapes.Length && shapes[currentShapeIndex].Children != null)
             {
@@ -21,9 +21,9 @@ namespace GenoratingRandomSDF
 
                 // Clear the parent array
                 if (shapes[currentShapeIndex].Children != null)
-                    shapes[currentShapeIndex].Children = new HierachicalObjects[shapes[currentShapeIndex].Children.Length];
+                    shapes[currentShapeIndex].Children = new HierarchicalObjects[shapes[currentShapeIndex].Children.Length];
                 else
-                    shapes[currentShapeIndex].Children = new HierachicalObjects[0];
+                    shapes[currentShapeIndex].Children = new HierarchicalObjects[0];
             }
         }
     }

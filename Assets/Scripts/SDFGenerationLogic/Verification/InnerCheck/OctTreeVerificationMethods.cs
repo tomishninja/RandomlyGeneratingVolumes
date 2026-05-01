@@ -7,7 +7,7 @@ using UnityEngine;
 using hLSL_Simulator;
 using profiler;
 
-namespace GenoratingRandomSDF
+namespace GeneratingRandomSDF
 {
 
     /// <summary>
@@ -21,7 +21,7 @@ namespace GenoratingRandomSDF
         /// </summary>
         hLSL_Simulator.NoisyHierarchicalSpheres shaderSimulator;
 
-        ShapeHandeler shapes;
+        ShapeHandler shapes;
 
         profiler.AbstractProfiler dataProfiler;
 
@@ -54,7 +54,7 @@ namespace GenoratingRandomSDF
         /// <param name="node">The node to verify.</param>
         /// <param name="outputValue">The output value to return if verification fails.</param>
         /// <returns>The output value or the maximum SDF ID found.</returns>
-        public int LinearVerifyInnerAtPositionForOctTree(OctreeNode node, ShapeHandeler shapes, int outputValue = int.MinValue)
+        public int LinearVerifyInnerAtPositionForOctTree(OctreeNode node, ShapeHandler shapes, int outputValue = int.MinValue)
         {
             Vector3 pos = node.Center;
 
@@ -78,7 +78,7 @@ namespace GenoratingRandomSDF
                 }
             }
 
-            HierachicalObjects child = null;
+            HierarchicalObjects child = null;
             int childIndex = this.verificationMethods.ReturnFirstChild(shapes.CurrentShape, allSDFs, ref child, ref shapes);
             if (child != null && !parentExists)
             {
@@ -107,7 +107,7 @@ namespace GenoratingRandomSDF
             }
 
             //
-            // Cacluate components like area and such
+            // Calculate components like area and such
             //
             // Amuount of voxels this takes up
             int amouontOfVoxelsThisIs = node.AmountOfLeaves_AssumesCube;
@@ -153,7 +153,7 @@ namespace GenoratingRandomSDF
                 }
             }
 
-            HierachicalObjects child = null;
+            HierarchicalObjects child = null;
             int childIndex = this.verificationMethods.ReturnFirstChild(shapes.CurrentShape, allSDFs, ref child, ref shapes);
             if (child != null && !parentExists)
             {
@@ -184,7 +184,7 @@ namespace GenoratingRandomSDF
             }
 
             //
-            // Cacluate components like area and such
+            // Calculate components like area and such
             //
             int amouontOfVoxelsThisIs = node.AmountOfLeaves_AssumesCube;
             if (amountOfChildren == 0 && parentExists)

@@ -24,29 +24,11 @@ public class TabController : MonoBehaviour
         {
             isHidden = false;
             ShowGameObjects();
-
-            // Show the hidden objects
-            // ShowGameObjects();
-            //tabPanel.SetActive(false);
-            //tabPanel.transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
-            //{
-                isHidden = false;
-                ShowGameObjects();
-            //});
-            //tabPanel.transform.DOMoveY(tabPanel.transform.position.y, 0.5f).SetEase(Ease.Linear);
         }
         else
         {
             isHidden = true;
             HideGameObjects();
-
-            //HideGameObjects();
-            //tabPanel.SetActive(true);
-            //tabPanel.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.Linear).OnComplete(() =>
-            //{
-                isHidden = true;
-                HideGameObjects();
-            //});
         }
     }
 
